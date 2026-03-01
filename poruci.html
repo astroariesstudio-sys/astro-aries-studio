@@ -37,7 +37,6 @@
   <!-- HERO -->
   <section class="hero">
     <div class="heroCard">
-
       <svg class="sparkles" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <defs>
           <radialGradient id="sp" cx="50%" cy="50%" r="50%">
@@ -71,7 +70,7 @@
       <hr class="hr-astro" />
       <h1>Knjiga o tebi — Lična astro mapa</h1>
       <p class="subhead">
-        Izaberi uslugu, unesi podatke, potvrdi — dobijaš profesionalan PDF na email.
+        Izaberi uslugu → (ako treba) izaberi pitanja → unesi podatke → pošalji porudžbinu.
       </p>
 
       <div class="badges">
@@ -88,14 +87,12 @@
       <div>
         <div class="kicker">KONFIGURATOR</div>
         <h2 style="margin:8px 0 0">Porudžbina — PRO</h2>
-        <p class="small" style="margin:8px 0 0">
-          1) Usluga • 2) Detalji • 3) Podaci • 4) Slanje
-        </p>
+        <p class="small" style="margin:8px 0 0">1) Usluga • 2) Pitanja • 3) Podaci • 4) Slanje</p>
       </div>
 
       <div class="steps" aria-hidden="true">
         <div class="stepPill active" id="pill1">1) Usluga</div>
-        <div class="stepPill" id="pill2">2) Detalji</div>
+        <div class="stepPill" id="pill2">2) Pitanja</div>
         <div class="stepPill" id="pill3">3) Podaci</div>
       </div>
     </div>
@@ -109,7 +106,7 @@
         <div class="fieldset" id="stepService">
           <div class="legend">
             <b>1) Izaberi uslugu</b>
-            <span class="hint">jasno i bez konfuzije</span>
+            <span class="hint">jednostavno</span>
           </div>
 
           <div class="sepTitle">Knjiga o tebi — Lična astro mapa</div>
@@ -148,18 +145,18 @@
             </label>
           </div>
 
-          <div class="sepTitle">Kreiraj svoju knjigu — Po temama (84 baza)</div>
+          <div class="sepTitle">Kreiraj svoju knjigu — Odaberi pitanja (84)</div>
           <div class="radioGrid">
             <label class="radioCard" data-service="custom">
               <input type="radio" name="service" value="custom" />
               <div class="radioTop">
-                <div class="radioName">Knjiga po temama (Fokus izdanje)</div>
-                <span class="badgeGold">PRO</span>
+                <div class="radioName">Odaberi pitanja (mini-knjiga)</div>
+                <span class="badgeGold">3/5/10</span>
               </div>
               <div class="radioDesc">
-                Izaberi paket (3/5/10), označi teme koje želiš i napiši fokus. Ne moraš znati brojeve pitanja.
+                Prvo izaberi paket (3/5/10), zatim označi tačno toliko pitanja u “knjizi”, potvrdi izbor — pa ideš na podatke.
               </div>
-              <div class="radioPrice">Paketi: 3 / 5 / 10 pitanja</div>
+              <div class="radioPrice">3 pitanja: 900 • 5: 1.400 • 10: 2.400 RSD</div>
             </label>
           </div>
 
@@ -171,23 +168,21 @@
                 <div class="radioName">Sinastrija (odnos)</div>
                 <span class="badgeGold">Tip odnosa</span>
               </div>
-              <div class="radioDesc">
-                Dinamika odnosa + potencijal + smernice. Tip odnosa je obavezan.
-              </div>
+              <div class="radioDesc">Dinamika odnosa + potencijal + smernice. Tip odnosa je obavezan.</div>
               <div class="radioPrice">3.500 RSD</div>
             </label>
           </div>
 
           <div class="miniNote">
-            <b>Najbrže:</b> “Natal + Predikcije” ako želiš tajming i periode. “Knjiga po temama” ako želiš fokus na više oblasti odjednom.
+            <b>Napomena:</b> “Odaberi pitanja” je idealno ako želiš fokus (npr. posao + ljubav + novac), ali želiš da ti odgovori budu strukturisani kao mala knjiga.
           </div>
         </div>
 
-        <!-- STEP 2: CUSTOM DETAILS -->
+        <!-- STEP 2: CUSTOM PACK + OPEN BOOK -->
         <div class="fieldset" id="customSection" style="display:none; margin-top:12px">
           <div class="legend">
-            <b>2) Kreiraj svoju knjigu — teme i fokus</b>
-            <span class="hint">može više tema (bez ograničenja)</span>
+            <b>2) Odaberi paket i pitanja</b>
+            <span class="hint">prvo paket → onda knjiga</span>
           </div>
 
           <div class="radioGrid" id="qPackGrid">
@@ -197,7 +192,7 @@
                 <div class="radioName">3 pitanja</div>
                 <span class="badgeGold">brzi fokus</span>
               </div>
-              <div class="radioDesc">Za jednu dilemu ili brzi pregled.</div>
+              <div class="radioDesc">Za jednu dilemu / brzi pregled.</div>
               <div class="radioPrice">900 RSD</div>
             </label>
 
@@ -207,7 +202,7 @@
                 <div class="radioName">5 pitanja</div>
                 <span class="badgeGold">najtraženije</span>
               </div>
-              <div class="radioDesc">Balans: više oblasti i jasne smernice.</div>
+              <div class="radioDesc">Najbolji balans (više oblasti).</div>
               <div class="radioPrice">1.400 RSD</div>
             </label>
 
@@ -217,43 +212,29 @@
                 <div class="radioName">10 pitanja</div>
                 <span class="badgeGold">dubinski</span>
               </div>
-              <div class="radioDesc">Širi obuhvat: više tema + detaljnije.</div>
+              <div class="radioDesc">Širi obuhvat (više tema).</div>
               <div class="radioPrice">2.400 RSD</div>
             </label>
           </div>
 
-          <div class="sepTitle">Izaberi teme (klikni sve koje želiš)</div>
-          <div class="chipRow" id="themeChips"></div>
-
-          <div style="margin-top:12px">
-            <label>Napiši fokus (2–8 rečenica)</label>
-            <textarea id="customFocus" placeholder="Npr: posao i promene u 2026, odnos i brak, finansije i stabilnost, selidba... Šta ti je najvažnije sada?"></textarea>
-            <div class="small" style="margin-top:8px">
-              Ne moraš znati brojeve pitanja — ovde opisuješ, a ja mapiram na PRO bazu (84).
-            </div>
+          <div class="actionsRow" style="margin-top:12px">
+            <button class="btn primary" id="openBookBtn" type="button">Otvori knjigu pitanja</button>
+            <button class="btn" id="clearQuestionsBtn" type="button">Očisti izbor</button>
           </div>
 
-          <div style="margin-top:12px">
-            <div class="advancedToggle" id="toggleAdvanced">
-              <span class="badgeGold">Opcionalno</span>
-              <b>Imam brojeve pitanja iz liste 84</b>
-              <span class="small">(klikni da otvoriš)</span>
-            </div>
+          <div class="small" style="margin-top:10px">
+            Izabrano: <b id="pickedInline">0</b> / <b id="pickedMaxInline">3</b>
+          </div>
 
-            <div id="advancedBox" style="display:none; margin-top:10px">
-              <label>Brojevi pitanja (ako koristiš listu 84)</label>
-              <textarea id="qNumbers" placeholder="Npr: 1, 7, 12, 31, 70 ..."></textarea>
-              <div class="small" style="margin-top:8px">
-                Ako uneseš brojeve — koristićemo ih direktno (u okviru paketa 3/5/10).
-              </div>
-            </div>
+          <div class="miniNote">
+            <b>Pravilo:</b> moraš potvrditi izbor sa tačno <b>3/5/10</b> pitanja (koliko je paket), tek onda ideš na “Podaci”.
           </div>
         </div>
 
-        <!-- STEP 2B: SYN DETAILS -->
+        <!-- STEP 2B: SINASTRIJA DETAILS -->
         <div class="fieldset" id="synSection" style="display:none; margin-top:12px">
           <div class="legend">
-            <b>2) Sinastrija — tip odnosa i fokus</b>
+            <b>2) Sinastrija — tip odnosa</b>
             <span class="hint">obavezno</span>
           </div>
 
@@ -282,47 +263,11 @@
           </div>
         </div>
 
-        <!-- STEP 3: ADDONS -->
-        <div class="fieldset" id="addonsSection" style="margin-top:12px">
-          <div class="legend">
-            <b>3) Dodaj konkretna pitanja (opciono)</b>
-            <span class="hint">500 RSD po pitanju</span>
-          </div>
-
-          <div class="toggleRow">
-            <div>
-              <div style="font-weight:900">Dodaj moja konkretna pitanja</div>
-              <div class="small">Npr: “da li menjam posao”, “da li se selim”, “kada ulazim u ozbiljnu vezu”.</div>
-            </div>
-            <div class="switch" id="customSwitch" role="switch" aria-checked="false" tabindex="0"></div>
-          </div>
-
-          <div id="customQuestionsBox" style="display:none; margin-top:10px">
-            <div class="row">
-              <div>
-                <label>Broj pitanja</label>
-                <select id="customCount">
-                  <option value="0">0</option>
-                  <option value="1">1</option>
-                  <option value="2">2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-              </div>
-              <div>
-                <label>Tvoja pitanja (upiši jasno)</label>
-                <textarea id="customText" placeholder="1) ...&#10;2) ...&#10;3) ..."></textarea>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- STEP 4: DATA -->
+        <!-- STEP 3: DATA (1 person) -->
         <div class="fieldset" id="clientOneSection" style="margin-top:12px">
           <div class="legend">
-            <b>4) Podaci (kontakt + rođenje)</b>
-            <span class="hint">za sve osim sinastrije (koja traži 2 osobe)</span>
+            <b>3) Podaci (kontakt + rođenje)</b>
+            <span class="hint">za natal/predikcije/odabir pitanja</span>
           </div>
 
           <div class="row">
@@ -364,10 +309,10 @@
           </div>
         </div>
 
-        <!-- SYN: two persons -->
+        <!-- STEP 3B: SYN PEOPLE -->
         <div class="fieldset" id="synPeopleSection" style="display:none; margin-top:12px">
           <div class="legend">
-            <b>4) Podaci (2 osobe)</b>
+            <b>3) Podaci (2 osobe)</b>
             <span class="hint">sinastrija</span>
           </div>
 
@@ -404,6 +349,42 @@
           </div>
         </div>
 
+        <!-- ADDON: concrete questions -->
+        <div class="fieldset" id="addonsSection" style="margin-top:12px">
+          <div class="legend">
+            <b>+ Dodaj konkretna pitanja (opciono)</b>
+            <span class="hint">500 RSD po pitanju</span>
+          </div>
+
+          <div class="toggleRow">
+            <div>
+              <div style="font-weight:900">Dodaj moja konkretna pitanja</div>
+              <div class="small">Npr: “da li menjam posao”, “da li se selim”, “kada ulazim u ozbiljnu vezu”.</div>
+            </div>
+            <div class="switch" id="customSwitch" role="switch" aria-checked="false" tabindex="0"></div>
+          </div>
+
+          <div id="customQuestionsBox" style="display:none; margin-top:10px">
+            <div class="row">
+              <div>
+                <label>Broj pitanja</label>
+                <select id="customCount">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div>
+                <label>Tvoja pitanja (upiši jasno)</label>
+                <textarea id="customText" placeholder="1) ...&#10;2) ...&#10;3) ..."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
 
       <!-- RIGHT: SUMMARY -->
@@ -420,13 +401,13 @@
           </div>
 
           <div class="sumLine" id="qPackLine" style="display:none">
-            <span>Paket (Fokus)</span>
+            <span>Paket pitanja</span>
             <span id="qPackLabel">3 pitanja</span>
           </div>
 
-          <div class="sumLine" id="themesLine" style="display:none">
-            <span>Teme</span>
-            <span id="themesLabel">—</span>
+          <div class="sumLine" id="qPickedLine" style="display:none">
+            <span>Izabrano</span>
+            <span id="qPickedLabel">0/3</span>
           </div>
 
           <div class="sumLine" id="relTypeLine" style="display:none">
@@ -471,6 +452,56 @@
   </div>
 </footer>
 
+<!-- MODAL: BOOK QUESTIONS -->
+<div class="modalOverlay" id="bookModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Knjiga pitanja">
+    <div class="modalHeader">
+      <div>
+        <div class="modalTitle">Knjiga pitanja — izaberi tačno <span id="modalNeed">3</span></div>
+        <div class="small">Klikni pitanja, zatim “Potvrdi izbor”.</div>
+      </div>
+      <button class="modalClose" id="closeBookBtn" aria-label="Zatvori">✕</button>
+    </div>
+
+    <div class="modalBody">
+      <div class="bookSide">
+        <div style="font-weight:950">Kategorije</div>
+        <div class="chipRow" id="catChips"></div>
+
+        <div class="sepTitle">Pretraga</div>
+        <input id="qSearch" type="text" placeholder="Traži (npr: brak, posao, novac...)" />
+
+        <div class="sepTitle">Brzi unos brojeva (opciono)</div>
+        <textarea id="qNumbersInModal" placeholder="Npr: 1, 7, 12 ..."></textarea>
+        <div class="small" style="margin-top:8px">
+          Ako uneseš brojeve, čekiranje se sinhronizuje.
+        </div>
+
+        <div class="sepTitle">Kontrole</div>
+        <div class="actionsRow" style="margin-top:8px">
+          <button class="btn" id="modalClearBtn" type="button">Očisti</button>
+          <button class="btn primary" id="modalConfirmBtn" type="button" aria-disabled="true" disabled>Potvrdi izbor</button>
+        </div>
+
+        <div class="miniNote" style="margin-top:12px">
+          <b>Pravilo:</b> potvrda je moguća tek kad izabereš tačno <b id="needInline">3</b> pitanja.
+        </div>
+      </div>
+
+      <div class="bookMain">
+        <div class="qTopBar">
+          <div class="small">
+            Filtrirano: <b id="filteredCount">0</b>
+          </div>
+          <div class="qCountPill" id="pickedPill">Izabrano: 0/3</div>
+        </div>
+
+        <div class="qList" id="qList"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
   document.getElementById("y").textContent = new Date().getFullYear();
 
@@ -480,71 +511,167 @@
     addonQ: 500
   };
 
-  const THEMES = [
-    "Sudbinski pečat / Osnova",
-    "Novac / sigurnost",
-    "Posao / karijera",
-    "Ljubav / brak",
-    "Odnosi (generalno)",
-    "Dom / porodica",
-    "Zdravlje / energija",
-    "Selidba / inostranstvo",
-    "Karma / blokade",
-    "Timing / periodi",
-    "Talent / poziv",
-    "Pravo / sporovi"
+  // 84 pitanja (kratki naslovi + kategorija)
+  const QUESTIONS = [
+    {n:1,t:"Sudbinski pečat (suština)",c:"Osnova"},
+    {n:2,t:"Šta je retko i snažno u karti",c:"Osnova"},
+    {n:3,t:"Energija i prvi utisak",c:"Osnova"},
+    {n:4,t:"Psiha, emocije i karakter",c:"Osnova"},
+    {n:5,t:"Kako te menja period koji dolazi",c:"Predikcije"},
+
+    {n:6,t:"Novac, sigurnost i vrednost",c:"Novac"},
+    {n:7,t:"Gde dolazi novac / gde cure resursi",c:"Novac"},
+    {n:8,t:"Kod za materijalni uspeh",c:"Novac"},
+    {n:9,t:"Finansijske slabosti i greške",c:"Novac"},
+    {n:10,t:"Finansijski zaokreti",c:"Novac"},
+    {n:11,t:"Najbolji trenuci za ulaganja",c:"Novac"},
+
+    {n:12,t:"Ljudi oko tebe i uticaj",c:"Okruženje"},
+    {n:13,t:"Braća/sestre i okruženje",c:"Okruženje"},
+    {n:14,t:"Kako učiš (znanje)",c:"Okruženje"},
+    {n:15,t:"Razmišljanje i komunikacija",c:"Okruženje"},
+    {n:16,t:"Greške u komunikaciji",c:"Okruženje"},
+
+    {n:17,t:"Priča doma i korena",c:"Dom"},
+    {n:18,t:"Dar/teret iz porodice",c:"Dom"},
+    {n:19,t:"Šta je tvoj osećaj doma",c:"Dom"},
+    {n:20,t:"Selidbe i preokreti doma",c:"Dom"},
+    {n:21,t:"Unutrašnja sigurnost",c:"Dom"},
+    {n:22,t:"Otac/majka i pečat",c:"Dom"},
+    {n:23,t:"Nekretnine i stabilnost",c:"Dom"},
+    {n:24,t:"Šta uskoro dolazi za dom",c:"Dom"},
+
+    {n:25,t:"Talenti i darovi",c:"Ljubav & radost"},
+    {n:26,t:"Radost i vitalnost",c:"Ljubav & radost"},
+    {n:27,t:"Kako voliš i šta tražiš",c:"Ljubav & radost"},
+    {n:28,t:"Ljubavne priče pre braka",c:"Ljubav & radost"},
+    {n:29,t:"Kako veze počinju/završavaju",c:"Ljubav & radost"},
+    {n:30,t:"Predispozicije za decu",c:"Ljubav & radost"},
+    {n:31,t:"Nova ljubavna priča uskoro",c:"Ljubav & radost"},
+    {n:32,t:"Razvoj sadašnje veze",c:"Ljubav & radost"},
+    {n:33,t:"Gde upoznaješ važnu osobu",c:"Ljubav & radost"},
+
+    {n:34,t:"Radne veštine",c:"Zdravlje & rad"},
+    {n:35,t:"Osetljivosti zdravlja",c:"Zdravlje & rad"},
+    {n:36,t:"Tačke opreza (telo/psiha)",c:"Zdravlje & rad"},
+    {n:37,t:"Vitalnost uskoro",c:"Zdravlje & rad"},
+    {n:38,t:"Periodi opreza za zdravlje",c:"Zdravlje & rad"},
+
+    {n:39,t:"Brak: predispozicije i kada",c:"Brak"},
+    {n:40,t:"Kakav je bračni partner",c:"Brak"},
+    {n:41,t:"Partner: utisak",c:"Brak"},
+    {n:42,t:"Čime se partner bavi",c:"Brak"},
+    {n:43,t:"Gde dolazi susret za brak",c:"Brak"},
+    {n:44,t:"Jedan brak ili više priča",c:"Brak"},
+    {n:45,t:"Razlika prvog/drugog braka",c:"Brak"},
+    {n:46,t:"Najbolji period za brak",c:"Brak"},
+    {n:47,t:"Da li osobu već poznaješ",c:"Brak"},
+
+    {n:48,t:"Jedna istina koja ‘pogađa’",c:"Osnova"},
+
+    {n:49,t:"Nasledstvo/podrška kroz druge",c:"8. kuća"},
+    {n:50,t:"Zajednički novac i pritisci",c:"8. kuća"},
+    {n:51,t:"Ko pomaže / kome si oslonac",c:"8. kuća"},
+    {n:52,t:"Veliki preokret i transformacija",c:"8. kuća"},
+    {n:53,t:"Rizici dugova/kredita",c:"8. kuća"},
+    {n:54,t:"Regeneracija posle kriza",c:"8. kuća"},
+    {n:55,t:"Šta donosi naredni period (8.)",c:"8. kuća"},
+
+    {n:56,t:"Znanje i širina (domet)",c:"9. kuća"},
+    {n:57,t:"Inostranstvo i šta donosi",c:"9. kuća"},
+    {n:58,t:"Znanje → status i uspeh",c:"9. kuća"},
+    {n:59,t:"Sporovi i pravni problemi",c:"9. kuća"},
+    {n:60,t:"Putovanja/škola/pravo uskoro",c:"9. kuća"},
+
+    {n:61,t:"Profesionalna namena i maksimum",c:"Karijera"},
+    {n:62,t:"Tip posla koji ti leži",c:"Karijera"},
+    {n:63,t:"Vrhunci karijere i domet",c:"Karijera"},
+    {n:64,t:"Autoritet — kako",c:"Karijera"},
+    {n:65,t:"Ljudi kroz posao",c:"Karijera"},
+    {n:66,t:"Odnos sa šefovima i moći",c:"Karijera"},
+    {n:67,t:"Ambicija i pogon",c:"Karijera"},
+    {n:68,t:"Profesionalni darovi",c:"Karijera"},
+    {n:69,t:"Dugoročna stabilnost",c:"Karijera"},
+    {n:70,t:"Poslovne promene uskoro",c:"Karijera"},
+
+    {n:71,t:"Mreže i prilike (11.)",c:"Mreže"},
+    {n:72,t:"Aktivacije prilika preko ljudi",c:"Mreže"},
+
+    {n:73,t:"Karmički obrasci i lekcije",c:"Karma"},
+    {n:74,t:"Svetla karma i teret",c:"Karma"},
+    {n:75,t:"Šta menjaš da rasteretiš karmu",c:"Karma"},
+    {n:76,t:"Skrivene opasnosti i oprez",c:"Karma"},
+    {n:77,t:"Tihi neprijatelji i signali",c:"Karma"},
+    {n:78,t:"Strahovi i nevidljivi pritisci",c:"Karma"},
+    {n:79,t:"Najvažnija promena za mir",c:"Karma"},
+    {n:80,t:"Pečat perioda koji dolazi",c:"Predikcije"},
+    {n:81,t:"Najvažnije predikcije ciklusa",c:"Predikcije"},
+    {n:82,t:"Timeline 12–18 meseci",c:"Predikcije"},
+    {n:83,t:"Da li se otvara sud/pravni konflikt",c:"Predikcije"},
+    {n:84,t:"Završna poruka karte (kompas)",c:"Osnova"},
   ];
 
-  // DOM
+  const CATEGORIES = ["Sve", ...Array.from(new Set(QUESTIONS.map(q=>q.c)))];
+
+  // DOM refs
   const serviceCards = document.querySelectorAll('[data-service]');
   const qpackCards = document.querySelectorAll('[data-qpack]');
-
-  const pill1 = document.getElementById('pill1');
-  const pill2 = document.getElementById('pill2');
-  const pill3 = document.getElementById('pill3');
 
   const customSection = document.getElementById('customSection');
   const synSection = document.getElementById('synSection');
   const synPeopleSection = document.getElementById('synPeopleSection');
-
   const clientOneSection = document.getElementById('clientOneSection');
   const situationBox = document.getElementById('situationBox');
 
+  const pickedInline = document.getElementById('pickedInline');
+  const pickedMaxInline = document.getElementById('pickedMaxInline');
+
   const serviceBadge = document.getElementById('serviceBadge');
   const chosenLabel = document.getElementById('chosenLabel');
-
-  const qPackLine = document.getElementById('qPackLine');
-  const qPackLabel = document.getElementById('qPackLabel');
-
-  const themesLine = document.getElementById('themesLine');
-  const themesLabel = document.getElementById('themesLabel');
-
-  const relTypeLine = document.getElementById('relTypeLine');
-  const relTypeLabel = document.getElementById('relTypeLabel');
-
   const basePriceEl = document.getElementById('basePrice');
   const customPriceEl = document.getElementById('customPrice');
   const totalPriceEl = document.getElementById('totalPrice');
 
-  // Addon
+  const qPackLine = document.getElementById('qPackLine');
+  const qPackLabel = document.getElementById('qPackLabel');
+  const qPickedLine = document.getElementById('qPickedLine');
+  const qPickedLabel = document.getElementById('qPickedLabel');
+
+  const relTypeLine = document.getElementById('relTypeLine');
+  const relTypeLabel = document.getElementById('relTypeLabel');
+
   const customSwitch = document.getElementById('customSwitch');
   const customBox = document.getElementById('customQuestionsBox');
   const customCount = document.getElementById('customCount');
   const customText = document.getElementById('customText');
 
-  // Custom focus
-  const themeChipsWrap = document.getElementById('themeChips');
-  const customFocus = document.getElementById('customFocus');
-  const toggleAdvanced = document.getElementById('toggleAdvanced');
-  const advancedBox = document.getElementById('advancedBox');
-  const qNumbers = document.getElementById('qNumbers');
+  const pill1 = document.getElementById('pill1');
+  const pill2 = document.getElementById('pill2');
+  const pill3 = document.getElementById('pill3');
 
-  // Syn
   const relationType = document.getElementById('relationType');
   const relationOther = document.getElementById('relationOther');
-  const relFocus = document.getElementById('relFocus');
 
   const sendBtn = document.getElementById('sendBtn');
+
+  // Modal refs
+  const bookModal = document.getElementById('bookModal');
+  const openBookBtn = document.getElementById('openBookBtn');
+  const closeBookBtn = document.getElementById('closeBookBtn');
+  const modalClearBtn = document.getElementById('modalClearBtn');
+  const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+  const clearQuestionsBtn = document.getElementById('clearQuestionsBtn');
+
+  const catChips = document.getElementById('catChips');
+  const qList = document.getElementById('qList');
+  const pickedPill = document.getElementById('pickedPill');
+  const filteredCount = document.getElementById('filteredCount');
+
+  const modalNeed = document.getElementById('modalNeed');
+  const needInline = document.getElementById('needInline');
+
+  const qSearch = document.getElementById('qSearch');
+  const qNumbersInModal = document.getElementById('qNumbersInModal');
 
   // State
   let state = {
@@ -552,21 +679,19 @@
     qpack: '3',
     addonOn: false,
     addonCount: 0,
-    selectedThemes: new Set(),
-    advancedOpen: false
+    selectedQ: new Set(),
+    cat: 'Sve',
+    search: ''
   };
 
-  function fmtRSD(n){
-    if(!n) return "0 RSD";
-    return n.toLocaleString('sr-RS') + " RSD";
-  }
+  function fmtRSD(n){ return (n||0).toLocaleString('sr-RS') + " RSD"; }
   function req(v){ return (v || '').trim(); }
 
   function serviceName(s){
     if(s==='natal') return "Knjiga o tebi — Natal izdanje";
     if(s==='full')  return "Knjiga o tebi — Natal + Predikcije";
     if(s==='pred')  return "Knjiga o tebi — Samo predikcije";
-    if(s==='custom')return "Kreiraj svoju knjigu — Knjiga po temama (Fokus izdanje)";
+    if(s==='custom')return "Kreiraj svoju knjigu — Odaberi pitanja (84)";
     if(s==='syn')   return "Knjiga o vama — Mapa odnosa (Sinastrija)";
     return "Usluga";
   }
@@ -591,82 +716,56 @@
     if(state.service === 'custom') return PRICES.qpacks[state.qpack];
     return PRICES.services[state.service];
   }
-  function addonPrice(){
-    return state.addonOn ? (Number(state.addonCount) * PRICES.addonQ) : 0;
-  }
+  function addonPrice(){ return state.addonOn ? (Number(state.addonCount) * PRICES.addonQ) : 0; }
 
-  function renderThemeChips(){
-    themeChipsWrap.innerHTML = "";
-    THEMES.forEach(t=>{
-      const b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'chip' + (state.selectedThemes.has(t) ? ' active' : '');
-      b.textContent = t;
-      b.addEventListener('click', ()=>{
-        if(state.selectedThemes.has(t)) state.selectedThemes.delete(t);
-        else state.selectedThemes.add(t);
-        renderThemeChips();
-        calc();
-      });
-      themeChipsWrap.appendChild(b);
-    });
+  function updatePickedInline(){
+    const max = Number(state.qpack);
+    pickedInline.textContent = String(state.selectedQ.size);
+    pickedMaxInline.textContent = String(max);
   }
 
   function updateUI(){
-    // sections visibility
     customSection.style.display = (state.service === 'custom') ? '' : 'none';
     synSection.style.display = (state.service === 'syn') ? '' : 'none';
     synPeopleSection.style.display = (state.service === 'syn') ? '' : 'none';
     clientOneSection.style.display = (state.service === 'syn') ? 'none' : '';
-
-    // predikcije situation
     situationBox.style.display = (state.service === 'full') ? '' : 'none';
 
-    // badges
     serviceBadge.textContent =
       (state.service === 'full') ? 'Top' :
-      (state.service === 'custom') ? 'Fokus' :
+      (state.service === 'custom') ? '3/5/10' :
       (state.service === 'syn') ? 'Odnosi' : 'PDF';
 
     chosenLabel.textContent = serviceName(state.service);
 
-    // qpack + themes in summary
     if(state.service === 'custom'){
       qPackLine.style.display = '';
-      themesLine.style.display = '';
+      qPickedLine.style.display = '';
       qPackLabel.textContent = `${state.qpack} pitanja`;
-
-      const list = Array.from(state.selectedThemes);
-      themesLabel.textContent = list.length ? `${list.slice(0,3).join(', ')}${list.length>3 ? '…' : ''}` : '—';
+      qPickedLabel.textContent = `${state.selectedQ.size}/${state.qpack}`;
+      updatePickedInline();
     } else {
       qPackLine.style.display = 'none';
-      themesLine.style.display = 'none';
+      qPickedLine.style.display = 'none';
     }
 
-    // relation summary
     if(state.service === 'syn'){
       relTypeLine.style.display = '';
       const rt = req(relationType.value);
       const other = req(relationOther.value);
-      const shown = (rt === 'Drugo') ? (other || 'Drugo') : (rt || '—');
-      relTypeLabel.textContent = shown;
+      relTypeLabel.textContent = (rt === 'Drugo') ? (other || 'Drugo') : (rt || '—');
     } else {
       relTypeLine.style.display = 'none';
     }
-
-    // advanced box
-    advancedBox.style.display = state.advancedOpen ? '' : 'none';
   }
 
   function calc(){
     const base = basePrice();
     const add = addonPrice();
     const total = base + add;
-
     basePriceEl.textContent = fmtRSD(base);
     customPriceEl.textContent = fmtRSD(add);
     totalPriceEl.textContent = fmtRSD(total);
-
     updateUI();
   }
 
@@ -683,86 +782,234 @@
     }
     calc();
   }
-
   customSwitch.addEventListener('click', ()=> toggleAddon(!state.addonOn));
   customSwitch.addEventListener('keydown', (e)=>{
-    if(e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      toggleAddon(!state.addonOn);
+    if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleAddon(!state.addonOn); }
+  });
+  customCount.addEventListener('change', ()=>{ state.addonCount = Number(customCount.value); calc(); });
+
+  // Modal helpers
+  function showModal(){
+    const need = Number(state.qpack);
+    modalNeed.textContent = String(need);
+    needInline.textContent = String(need);
+    pickedPill.textContent = `Izabrano: ${state.selectedQ.size}/${need}`;
+    modalConfirmBtn.disabled = (state.selectedQ.size !== need);
+    modalConfirmBtn.setAttribute('aria-disabled', modalConfirmBtn.disabled ? 'true' : 'false');
+
+    bookModal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+    renderChips();
+    renderQuestions();
+  }
+  function hideModal(){
+    bookModal.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  function matchesFilter(q){
+    const catOk = (state.cat === 'Sve') || (q.c === state.cat);
+    const s = state.search.trim().toLowerCase();
+    const searchOk = !s || (String(q.n).includes(s) || q.t.toLowerCase().includes(s) || q.c.toLowerCase().includes(s));
+    return catOk && searchOk;
+  }
+
+  function renderChips(){
+    catChips.innerHTML = "";
+    CATEGORIES.forEach(cat=>{
+      const el = document.createElement('button');
+      el.type = 'button';
+      el.className = 'chip' + (state.cat === cat ? ' active' : '');
+      el.textContent = cat;
+      el.addEventListener('click', ()=>{
+        state.cat = cat;
+        renderChips();
+        renderQuestions();
+      });
+      catChips.appendChild(el);
+    });
+  }
+
+  function renderQuestions(){
+    const need = Number(state.qpack);
+    pickedPill.textContent = `Izabrano: ${state.selectedQ.size}/${need}`;
+
+    const filtered = QUESTIONS.filter(matchesFilter);
+    filteredCount.textContent = String(filtered.length);
+
+    qList.innerHTML = "";
+    filtered.forEach(q=>{
+      const item = document.createElement('label');
+      item.className = 'qItem';
+
+      const cb = document.createElement('input');
+      cb.type = 'checkbox';
+      cb.checked = state.selectedQ.has(q.n);
+
+      cb.addEventListener('change', ()=>{
+        if(cb.checked){
+          if(state.selectedQ.size >= need){
+            cb.checked = false;
+            alert(`Možeš izabrati tačno ${need} pitanja u ovom paketu.`);
+            return;
+          }
+          state.selectedQ.add(q.n);
+        } else {
+          state.selectedQ.delete(q.n);
+        }
+        qNumbersInModal.value = Array.from(state.selectedQ).sort((a,b)=>a-b).join(', ');
+        updatePickedInline();
+        calc();
+
+        // enable confirm only when exact
+        modalConfirmBtn.disabled = (state.selectedQ.size !== need);
+        modalConfirmBtn.setAttribute('aria-disabled', modalConfirmBtn.disabled ? 'true' : 'false');
+        pickedPill.textContent = `Izabrano: ${state.selectedQ.size}/${need}`;
+      });
+
+      const wrap = document.createElement('div');
+      const title = document.createElement('div');
+      title.className = 'qText';
+      title.innerHTML = `<span class="qNum">${q.n})</span> ${q.t}`;
+      const hint = document.createElement('div');
+      hint.className = 'qHint';
+      hint.textContent = q.c;
+
+      wrap.appendChild(title);
+      wrap.appendChild(hint);
+
+      item.appendChild(cb);
+      item.appendChild(wrap);
+      qList.appendChild(item);
+    });
+
+    // keep numbers textarea synced
+    qNumbersInModal.value = Array.from(state.selectedQ).sort((a,b)=>a-b).join(', ');
+    modalConfirmBtn.disabled = (state.selectedQ.size !== need);
+    modalConfirmBtn.setAttribute('aria-disabled', modalConfirmBtn.disabled ? 'true' : 'false');
+  }
+
+  function clearSelected(){
+    state.selectedQ = new Set();
+    qNumbersInModal.value = "";
+    updatePickedInline();
+    calc();
+    renderQuestions();
+  }
+
+  function parseNumbers(str){
+    return (str || '')
+      .split(/[^0-9]+/g)
+      .map(x=>Number(x))
+      .filter(n=>Number.isFinite(n) && n>=1 && n<=84);
+  }
+
+  qSearch.addEventListener('input', ()=>{
+    state.search = qSearch.value || '';
+    renderQuestions();
+  });
+
+  qNumbersInModal.addEventListener('input', ()=>{
+    const need = Number(state.qpack);
+    const nums = Array.from(new Set(parseNumbers(qNumbersInModal.value))).slice(0, need);
+    state.selectedQ = new Set(nums);
+    updatePickedInline();
+    calc();
+    renderQuestions();
+  });
+
+  openBookBtn.addEventListener('click', ()=>{
+    // otvorimo modal tek nakon izbora paketa (uvek postoji default 3)
+    showModal();
+  });
+
+  closeBookBtn.addEventListener('click', hideModal);
+  bookModal.addEventListener('click', (e)=>{ if(e.target === bookModal) hideModal(); });
+
+  modalClearBtn.addEventListener('click', clearSelected);
+  clearQuestionsBtn.addEventListener('click', clearSelected);
+
+  modalConfirmBtn.addEventListener('click', ()=>{
+    const need = Number(state.qpack);
+    if(state.selectedQ.size !== need){
+      alert(`Potvrda je moguća tek kad izabereš tačno ${need} pitanja.`);
+      return;
     }
+    hideModal();
+    // skok na podatke
+    stepTo(3);
+    setTimeout(()=> clientOneSection.scrollIntoView({behavior:'smooth', block:'start'}), 80);
   });
 
-  customCount.addEventListener('change', ()=>{
-    state.addonCount = Number(customCount.value);
-    calc();
-  });
-
-  // Advanced toggle
-  toggleAdvanced.addEventListener('click', ()=>{
-    state.advancedOpen = !state.advancedOpen;
-    calc();
-  });
-
-  // Service click
+  // Service selection (važan flow!)
   serviceCards.forEach(card=>{
     card.addEventListener('click', ()=>{
       state.service = card.getAttribute('data-service');
       setActive(serviceCards, 'service', state.service);
 
-      // when switching away from custom, keep themes (no harm)
+      // reset filters in modal on service change
+      state.cat = 'Sve';
+      state.search = '';
+      qSearch.value = '';
+
       calc();
 
-      // guided scroll
       if(state.service === 'custom'){
+        // ide na korak 2 (paket + otvori knjigu), NE na podatke
         stepTo(2);
-        setTimeout(()=> customSection.scrollIntoView({behavior:'smooth', block:'start'}), 60);
+        setTimeout(()=> customSection.scrollIntoView({behavior:'smooth', block:'start'}), 80);
         return;
       }
+
       if(state.service === 'syn'){
         stepTo(2);
-        setTimeout(()=> synSection.scrollIntoView({behavior:'smooth', block:'start'}), 60);
+        setTimeout(()=> synSection.scrollIntoView({behavior:'smooth', block:'start'}), 80);
         return;
       }
 
       stepTo(3);
-      setTimeout(()=> clientOneSection.scrollIntoView({behavior:'smooth', block:'start'}), 60);
+      setTimeout(()=> clientOneSection.scrollIntoView({behavior:'smooth', block:'start'}), 80);
     });
   });
 
-  // QPack click
+  // QPack selection enforces selection cap (ako smanji paket)
   qpackCards.forEach(card=>{
     card.addEventListener('click', ()=>{
       state.qpack = card.getAttribute('data-qpack');
       setActive(qpackCards, 'qpack', state.qpack);
+
+      const need = Number(state.qpack);
+      if(state.selectedQ.size > need){
+        // trim (highest numbers removed)
+        const sorted = Array.from(state.selectedQ).sort((a,b)=>a-b).slice(0, need);
+        state.selectedQ = new Set(sorted);
+      }
+      updatePickedInline();
       calc();
     });
   });
 
-  // Syn updates summary
+  // relation type summary updates
   relationType.addEventListener('change', calc);
   relationOther.addEventListener('input', calc);
 
-  // Validation
+  // SEND
   function validate(){
-    // service-specific requirements
+    // custom: must confirm exact number before sending
+    if(state.service === 'custom'){
+      const need = Number(state.qpack);
+      if(state.selectedQ.size !== need){
+        alert(`Za “Odaberi pitanja” moraš izabrati tačno ${need} pitanja i potvrditi izbor.`);
+        return false;
+      }
+    }
+
     if(state.service === 'full'){
       const sit = req(document.getElementById('situation').value);
       if(!sit){
         alert("Za “Natal + Predikcije” je obavezan kratak opis situacije (4–6 rečenica).");
         return false;
       }
-    }
-
-    if(state.service === 'custom'){
-      const focus = req(customFocus.value);
-      const themesCount = state.selectedThemes.size;
-      const nums = req(qNumbers.value);
-
-      if(!focus && themesCount === 0 && !nums){
-        alert("Za “Knjiga po temama” izaberi bar jednu temu ili napiši fokus (ili unesi brojeve).");
-        return false;
-      }
-      // NO LIMIT on number of themes (as you asked)
     }
 
     if(state.service === 'syn'){
@@ -788,7 +1035,6 @@
         alert("Za sinastriju su obavezni podaci za obe osobe (ime/inicijali, datum, vreme, mesto).");
         return false;
       }
-
       return true;
     }
 
@@ -802,19 +1048,24 @@
     return true;
   }
 
-  // Send
+  function pickedQuestionsText(){
+    const nums = Array.from(state.selectedQ).sort((a,b)=>a-b);
+    const map = new Map(QUESTIONS.map(q=>[q.n,q]));
+    return nums.map(n=>{
+      const q = map.get(n);
+      return q ? `${q.n}) ${q.t} [${q.c}]` : `${n})`;
+    }).join("\n");
+  }
+
   sendBtn.addEventListener('click', (e)=>{
     e.preventDefault();
-    stepTo(3);
-
     if(!validate()) return;
 
     const base = basePrice();
     const add = addonPrice();
     const total = base + add;
 
-    let subject = `${serviceName(state.service)} — ${fmtRSD(total)}`;
-
+    const subject = `${serviceName(state.service)} — ${fmtRSD(total)}`;
     const lines = [];
     lines.push("ASTRO ARIES STUDIO — PORUDŽBINA");
     lines.push("");
@@ -823,18 +1074,9 @@
     if(state.service === 'custom'){
       lines.push(`Paket: ${state.qpack} pitanja`);
       lines.push("");
-      lines.push("Izabrane teme:");
-      const list = Array.from(state.selectedThemes);
-      lines.push(list.length ? ("- " + list.join("\n- ")) : "-");
+      lines.push(`Izabrana pitanja (${state.selectedQ.size}/${state.qpack}):`);
+      lines.push(pickedQuestionsText() || "-");
       lines.push("");
-      lines.push("Fokus (opis):");
-      lines.push(req(customFocus.value) || "-");
-      lines.push("");
-      if(req(qNumbers.value)){
-        lines.push("Brojevi pitanja (opciono):");
-        lines.push(req(qNumbers.value));
-        lines.push("");
-      }
     }
 
     if(state.service === 'syn'){
@@ -864,7 +1106,7 @@
       lines.push("");
 
       lines.push("Fokus odnosa:");
-      lines.push(req(relFocus.value) || "-");
+      lines.push(req(document.getElementById('relFocus').value) || "-");
       lines.push("");
     } else {
       lines.push("");
@@ -908,19 +1150,17 @@
     lines.push("Poslato sa sajta Astro Aries Studio.");
 
     const body = encodeURIComponent(lines.join("\n"));
-    const mailto = `mailto:astroariesstudio@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-    window.location.href = mailto;
+    window.location.href = `mailto:astroariesstudio@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
   });
 
   // init
   setActive(serviceCards, 'service', state.service);
   setActive(qpackCards, 'qpack', state.qpack);
-  renderThemeChips();
-
-  // addon init
   toggleAddon(false);
   calc();
-  stepTo(1);
+
+  // build chips initially
+  // (chips are rendered in showModal)
 </script>
 
 </body>
