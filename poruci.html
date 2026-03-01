@@ -1045,27 +1045,26 @@
 
   // ===== IPS QR generisanje =====
   function normalizeAccount(acc){
+    // Ukloni sve osim cifara — NBS format: 18 cifara bez crtica
     return (acc || "").replace(/\D/g, "");
   }
 
-  function formatAmountRSD(n){
-    return "RSD" + (Number(n) || 0).toFixed(2).replace(".", ",");
-  }
-
-  function buildIpsPayload({account, payeeName, amountRsd, purpose, reference}){
-    // NBS IPS QR standard
-    const lines = [
+  function buildIpsPayload({account, payeeName, amountRsd, purpose}){
+    // NBS IPS QR standard — https://www.nbs.rs/sr_Cyrl/payment-systems/ips/
+    // Decimalni separator: ZAREZ (ne tačka)
+    // RO polje je OPCIONO — izostaviti jer model 97 zahteva MOD97 validaciju
+    const iznos = "RSD" + (Number(amountRsd) || 0).toFixed(2).replace(".", ",");
+    const fields = [
       "K:PR",
       "V:01",
       "C:1",
       "R:" + account,
-      "N:" + payeeName,
-      "I:" + formatAmountRSD(amountRsd),
+      "N:" + payeeName.substring(0, 70),
+      "I:" + iznos,
       "SF:289",
-      "S:" + purpose,
-      "RO:97" + reference.replace(/\D/g,"")
+      "S:" + purpose.substring(0, 35)
     ];
-    return lines.join("|");
+    return fields.join("|");
   }
 
   function generateQR(totalRsd, orderId){
@@ -1078,8 +1077,7 @@
         account,
         payeeName: BANK.recipient,
         amountRsd: totalRsd,
-        purpose: BANK.purpose,
-        reference: orderId
+        purpose: BANK.purpose
       });
 
       // Koristimo qrserver.com API - bez JS biblioteke, bez CDN problema
