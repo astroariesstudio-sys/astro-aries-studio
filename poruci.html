@@ -13,7 +13,7 @@
   <link rel="stylesheet" href="assets/style.css" />
 
   <!-- EmailJS — auto-email klijentu (besplatno, 200/mesec) -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script>
     window.EMAILJS_PUBLIC_KEY  = "FBVIVb3WRJKwjdxRK";
     window.EMAILJS_SERVICE_ID  = "service_xo0mo4z";
@@ -1125,23 +1125,23 @@ Nakon uplate, pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
       }
     }
     if(state.service === "syn"){
-      const synEmail = req(document.getElementById("synEmail").value);
-      const aName = req(document.getElementById("aName").value);
-      const aDate = req(document.getElementById("aDate").value);
-      const aTime = req(document.getElementById("aTime").value);
-      const aPlace = req(document.getElementById("aPlace").value);
-      const bName = req(document.getElementById("bName").value);
-      const bDate = req(document.getElementById("bDate").value);
-      const bTime = req(document.getElementById("bTime").value);
-      const bPlace = req(document.getElementById("bPlace").value);
+      const synEmail = req(document.getElementById("synEmail")?.value);
+      const aName = req(document.getElementById("aName")?.value);
+      const aDate = req(document.getElementById("aDate")?.value);
+      const aTime = req(document.getElementById("aTime")?.value);
+      const aPlace = req(document.getElementById("aPlace")?.value);
+      const bName = req(document.getElementById("bName")?.value);
+      const bDate = req(document.getElementById("bDate")?.value);
+      const bTime = req(document.getElementById("bTime")?.value);
+      const bPlace = req(document.getElementById("bPlace")?.value);
       if(!(synEmail && aName && aDate && aTime && aPlace && bName && bDate && bTime && bPlace)){
         alert("Za sinastriju su obavezni podaci za obe osobe (ime/inicijali, datum, vreme, mesto).");
         return false;
       }
       return true;
     }
-    const fullName = req(document.getElementById("fullName").value);
-    const email = req(document.getElementById("email").value);
+    const fullName = req(document.getElementById("fullName")?.value);
+    const email = req(document.getElementById("email")?.value);
     if(!fullName || !email){
       alert("Molim te unesi ime i email.");
       return false;
@@ -1201,8 +1201,8 @@ Nakon uplate, pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
 
     // Email klijenta (natal/custom/pred = email, syn = synEmail)
     const clientEmail = (state.service === "syn")
-      ? req(document.getElementById("synEmail").value)
-      : req(document.getElementById("email").value);
+      ? req(document.getElementById("synEmail")?.value)
+      : req(document.getElementById("email")?.value);
 
     const payload = {
       // Formspree auto-reply — klijent dobija email potvrdu automatski
@@ -1215,12 +1215,12 @@ Nakon uplate, pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
       "Iznos": fmtRSD(total),
 
       // Kontakt i licni podaci
-      "Ime i prezime": req(document.getElementById("fullName").value),
+      "Ime i prezime": req(document.getElementById("fullName")?.value),
       "Email": clientEmail,
-      "Datum rodjenja": req(document.getElementById("birthDate").value),
-      "Vreme rodjenja": req(document.getElementById("birthTime").value),
-      "Mesto rodjenja": req(document.getElementById("birthPlace").value),
-      "Trenutno mesto": req(document.getElementById("currentPlace").value),
+      "Datum rodjenja": req(document.getElementById("birthDate")?.value),
+      "Vreme rodjenja": req(document.getElementById("birthTime")?.value),
+      "Mesto rodjenja": req(document.getElementById("birthPlace")?.value),
+      "Trenutno mesto": req(document.getElementById("currentPlace")?.value),
       "Opis situacije": req(document.getElementById("situation")?.value),
 
       // Odabrana pitanja (custom paket)
@@ -1228,17 +1228,17 @@ Nakon uplate, pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
       "Odabrana pitanja": (state.service === "custom") ? pickedQuestionsText() : "",
 
       // Sinastrija
-      "Ime narucioca": req(document.getElementById("synOrderName").value),
-      "Tip odnosa": req(document.getElementById("relationType").value),
-      "Fokus odnosa": req(document.getElementById("relFocus").value),
-      "Osoba A": req(document.getElementById("aName").value),
-      "Datum rodjenja A": req(document.getElementById("aDate").value),
-      "Vreme rodjenja A": req(document.getElementById("aTime").value),
-      "Mesto rodjenja A": req(document.getElementById("aPlace").value),
-      "Osoba B": req(document.getElementById("bName").value),
-      "Datum rodjenja B": req(document.getElementById("bDate").value),
-      "Vreme rodjenja B": req(document.getElementById("bTime").value),
-      "Mesto rodjenja B": req(document.getElementById("bPlace").value),
+      "Ime narucioca": req(document.getElementById("synOrderName")?.value),
+      "Tip odnosa": req(document.getElementById("relationType")?.value),
+      "Fokus odnosa": req(document.getElementById("relFocus")?.value),
+      "Osoba A": req(document.getElementById("aName")?.value),
+      "Datum rodjenja A": req(document.getElementById("aDate")?.value),
+      "Vreme rodjenja A": req(document.getElementById("aTime")?.value),
+      "Mesto rodjenja A": req(document.getElementById("aPlace")?.value),
+      "Osoba B": req(document.getElementById("bName")?.value),
+      "Datum rodjenja B": req(document.getElementById("bDate")?.value),
+      "Vreme rodjenja B": req(document.getElementById("bTime")?.value),
+      "Mesto rodjenja B": req(document.getElementById("bPlace")?.value),
 
       // Konkretna pitanja (addon)
       "Konkretna pitanja": state.addonOn ? req(customText.value) : "",
@@ -1268,19 +1268,19 @@ Nakon uplate, pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
       // Pošalji auto-email klijentu (EmailJS)
       sendClientEmail({
         clientEmail: clientEmail,
-        fullName:    req(document.getElementById("fullName").value),
-        synOrderName: req(document.getElementById("synOrderName").value),
+        fullName:    req(document.getElementById("fullName")?.value),
+        synOrderName: req(document.getElementById("synOrderName")?.value),
         service:     serviceName(state.service),
         totalRsd:    total,
-        birthDate:   req(document.getElementById("birthDate").value),
-        birthTime:   req(document.getElementById("birthTime").value),
-        birthPlace:  req(document.getElementById("birthPlace").value),
-        aDate:       req(document.getElementById("aDate").value),
-        aTime:       req(document.getElementById("aTime").value),
-        aPlace:      req(document.getElementById("aPlace").value),
-        bDate:       req(document.getElementById("bDate").value),
-        bTime:       req(document.getElementById("bTime").value),
-        bPlace:      req(document.getElementById("bPlace").value),
+        birthDate:   req(document.getElementById("birthDate")?.value),
+        birthTime:   req(document.getElementById("birthTime")?.value),
+        birthPlace:  req(document.getElementById("birthPlace")?.value),
+        aDate:       req(document.getElementById("aDate")?.value),
+        aTime:       req(document.getElementById("aTime")?.value),
+        aPlace:      req(document.getElementById("aPlace")?.value),
+        bDate:       req(document.getElementById("bDate")?.value),
+        bTime:       req(document.getElementById("bTime")?.value),
+        bPlace:      req(document.getElementById("bPlace")?.value),
         selectedQuestions: (state.service === "custom") ? pickedQuestionsText() : "",
         addonText:   state.addonOn ? req(customText.value) : "",
       });
