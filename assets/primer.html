@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Primer — Astro Aries Studio</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="Astro Aries Studio logo" />
+      <div class="title">ASTRO <span>ARIES</span> STUDIO</div>
+    </a>
+
+    <nav class="navlinks">
+      <a href="index.html">Početna</a>
+      <a href="knjiga.html">Knjiga o Vama</a>
+      <a href="usluge.html">Usluge</a>
+      <a href="metod.html">Metod</a>
+      <a href="primer.html">Primer</a>
+      <a href="poruci.html">Poruči</a>
+    </nav>
+
+    <div class="cta">
+      <a class="btn" href="primer.html">Primer PDF</a>
+      <a class="btn primary" href="poruci.html">Poruči</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="heroCard">
+      <div class="kicker">UZORAK</div>
+      <hr class="hr-astro" />
+      <h1>Primer izveštaja (PDF).<br/>Stil, dizajn i struktura.</h1>
+      <p class="subhead">
+        Vaš izveštaj je 100% personalizovan — ovo je samo primer formata i načina pisanja.
+      </p>
+
+      <div class="heroActions" style="margin-top:14px">
+        <a class="btn primary" href="assets/primer.pdf" target="_blank" rel="noopener">Otvori PDF</a>
+        <a class="btn" href="assets/primer.pdf" download>Preuzmi</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="card" style="padding:0; overflow:hidden">
+      <div style="padding:14px 16px; border-bottom:1px solid rgba(255,255,255,.10)">
+        <b>Ugrađen pregled</b> <span class="small">— ako browser podržava</span>
+      </div>
+
+      <div style="height:78vh; min-height:520px">
+        <iframe
+          src="assets/primer.pdf"
+          title="Primer PDF"
+          style="width:100%; height:100%; border:0; background:rgba(255,255,255,.03)"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <div>© <span id="y"></span> Astro Aries Studio</div>
+    <div><a href="mailto:astroariesstudio@gmail.com">astroariesstudio@gmail.com</a></div>
+  </div>
+</footer>
+
+<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>
