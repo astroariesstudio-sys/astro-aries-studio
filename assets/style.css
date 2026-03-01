@@ -217,6 +217,94 @@ footer{
   .pricing{grid-template-columns:repeat(2,1fr)}
   .grid{grid-template-columns:1fr}
   .split{grid-template-columns:1fr}
+  /* --- ASTRO ARIES STUDIO signature overlays --- */
+
+/* Starfield layer */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.55;
+  background:
+    radial-gradient(1px 1px at 12% 18%, rgba(255,255,255,.70), transparent 55%),
+    radial-gradient(1px 1px at 22% 78%, rgba(255,255,255,.55), transparent 55%),
+    radial-gradient(1px 1px at 38% 34%, rgba(255,255,255,.60), transparent 55%),
+    radial-gradient(1px 1px at 55% 12%, rgba(255,255,255,.55), transparent 55%),
+    radial-gradient(1px 1px at 72% 42%, rgba(255,255,255,.62), transparent 55%),
+    radial-gradient(1px 1px at 88% 22%, rgba(255,255,255,.50), transparent 55%),
+    radial-gradient(1px 1px at 82% 78%, rgba(255,255,255,.58), transparent 55%),
+    radial-gradient(1px 1px at 8% 55%, rgba(255,255,255,.45), transparent 55%),
+    radial-gradient(2px 2px at 64% 66%, rgba(198,169,107,.35), transparent 55%),
+    radial-gradient(2px 2px at 44% 82%, rgba(160,120,255,.22), transparent 55%);
+  mix-blend-mode: screen;
+}
+
+/* Constellation / line overlay (very subtle) */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.18;
+  background:
+    linear-gradient(115deg, transparent 0 30%, rgba(255,255,255,.12) 30% 31%, transparent 31% 100%),
+    linear-gradient(25deg, transparent 0 62%, rgba(198,169,107,.18) 62% 63%, transparent 63% 100%),
+    linear-gradient(160deg, transparent 0 48%, rgba(160,120,255,.12) 48% 49%, transparent 49% 100%);
+  filter: blur(.2px);
+}
+
+/* Hero card astro glyph band */
+.heroCard{
+  position:relative;
+}
+.heroCard::before{
+  content:"☉ ☽ ☿ ♀ ♂ ♃ ♄ ♅ ♆ ♇ ☊ ☋ ✶ ✷ ✦";
+  position:absolute;
+  left:18px; right:18px; top:14px;
+  font-size:.78rem;
+  letter-spacing:.45em;
+  color:rgba(234,234,240,.26);
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:clip;
+}
+
+/* Gold dust / nebula in hero (extra signature) */
+.heroCard::after{
+  content:"";
+  position:absolute;
+  inset:-120px -160px auto auto;
+  width:520px;height:520px;border-radius:50%;
+  background:
+    radial-gradient(circle at 35% 35%, rgba(198,169,107,.30), transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(255,255,255,.10), transparent 65%),
+    radial-gradient(circle at 55% 20%, rgba(160,120,255,.16), transparent 60%);
+  filter: blur(18px);
+  opacity:.70;
+  pointer-events:none;
+}
+
+/* Signature title glow */
+h1{
+  text-shadow:
+    0 0 20px rgba(198,169,107,.20),
+    0 0 42px rgba(160,120,255,.12);
+}
+
+/* Softer card borders + astro vibe */
+.card, .price, .form, .heroCard{
+  border-color: rgba(255,255,255,.12);
+}
+
+/* Tiny accent rule (divider) */
+.hr-astro{
+  height:1px;
+  background: linear-gradient(90deg, transparent, rgba(198,169,107,.55), transparent);
+  opacity:.55;
+  border:0;
+  margin:24px 0;
+}
   .badges{grid-template-columns:1fr}
   .row{grid-template-columns:1fr}
 }
