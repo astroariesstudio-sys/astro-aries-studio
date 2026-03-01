@@ -823,23 +823,31 @@
   });
 
   // ----- Service selection -----
-  serviceCards.forEach(card=>{
-    card.addEventListener('click', ()=>{
-      state.service = card.getAttribute('data-service');
-      setActive(serviceCards, 'service', state.service);
+serviceCards.forEach(card=>{
+  card.addEventListener('click', ()=>{
+    state.service = card.getAttribute('data-service');
+    setActive(serviceCards, 'service', state.service);
 
-      // When switching away from custom, keep selectedQ but hide (doesn't hurt)
-      // When switching away from syn, hide syn
-      calc();
+    calc();
 
-      // Scroll guidance
-      stepTo(2);
+    // Scroll guidance (service-specific)
+    if(state.service === 'custom'){
+      // ostajemo u koraku 1 (1B), jer prvo biraju paket + pitanja
+      stepTo(1);
       setTimeout(()=>{
-        const target = (state.service === 'syn') ? synSection : clientOneSection;
-        target.scrollIntoView({behavior:'smooth', block:'start'});
+        customSection.scrollIntoView({behavior:'smooth', block:'start'});
       }, 60);
-    });
+      return;
+    }
+
+    // syn i ostale idu na podatke
+    stepTo(2);
+    setTimeout(()=>{
+      const target = (state.service === 'syn') ? synSection : clientOneSection;
+      target.scrollIntoView({behavior:'smooth', block:'start'});
+    }, 60);
   });
+});
 
   // ----- QPack selection -----
   qpackCards.forEach(card=>{
