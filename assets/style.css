@@ -691,3 +691,50 @@ footer{
   color: rgba(240,240,246,.88);
   font-size:.94rem;
 }
+/* ---- PRO: Theme chips + advanced toggle ---- */
+.chipRow{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:10px;
+}
+.chip{
+  padding:10px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.03);
+  color: rgba(240,240,246,.86);
+  font-size:.90rem;
+  cursor:pointer;
+  transition:.18s ease;
+}
+.chip:hover{ transform: translateY(-1px); border-color: rgba(198,169,107,.28); }
+.chip.active{
+  border-color: rgba(198,169,107,.45);
+  background: rgba(198,169,107,.10);
+  box-shadow: 0 0 0 3px rgba(198,169,107,.08);
+  color: rgba(245,226,182,.95);
+}
+
+.advancedToggle{
+  display:inline-flex;
+  gap:10px;
+  align-items:center;
+  cursor:pointer;
+  user-select:none;
+  padding:10px 12px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.12);
+  background: rgba(255,255,255,.03);
+}
+.advancedToggle:hover{ border-color: rgba(198,169,107,.25); }
+
+.miniNote{
+  margin-top:10px;
+  border:1px dashed rgba(198,169,107,.45);
+  background: rgba(198,169,107,.06);
+  padding:12px;
+  border-radius:16px;
+  color: rgba(240,240,246,.88);
+  font-size:.94rem;
+}
