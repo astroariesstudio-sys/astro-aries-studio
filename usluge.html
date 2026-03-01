@@ -3,93 +3,230 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Usluge — Astro Aries Studio</title>
+  <title>Usluge i cene — Astro Aries Studio</title>
+  <meta name="description" content="Natalna knjiga, predikcije, sinastrija i mini-knjiga sa pitanjima. Profesionalni PDF izveštaji od 1.500 do 3.500 RSD." />
+  <meta property="og:title" content="Usluge i cene — Astro Aries Studio" />
+  <meta property="og:description" content="Natalna knjiga, predikcije, sinastrija. Profesionalni PDF izveštaji." />
+  <meta property="og:url" content="https://astro-aries-studio.vercel.app/usluge.html" />
+  <meta property="og:image" content="https://astro-aries-studio.vercel.app/assets/logo.png" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070711'/><text y='.9em' font-size='80' x='10'>♈</text></svg>" />
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
 
+<div class="shooting-star"></div>
+
 <header>
   <div class="container nav">
     <a class="brand" href="index.html">
-      <img src="assets/logo.png" alt="Astro Aries Studio logo" />
+      <img src="assets/logo.png" alt="Astro Aries Studio logo" loading="lazy" />
       <div class="title">ASTRO <span>ARIES</span> STUDIO</div>
     </a>
-
     <nav class="navlinks">
       <a href="index.html">Početna</a>
       <a href="knjiga.html">Knjiga o Vama</a>
-      <a href="usluge.html">Usluge</a>
+      <a href="usluge.html" class="active" aria-current="page">Usluge</a>
       <a href="metod.html">Metod</a>
-      <a href="primer.html">Primer</a>
       <a href="poruci.html">Poruči</a>
     </nav>
-
     <div class="cta">
-      <a class="btn" href="primer.html">Primer PDF</a>
       <a class="btn primary" href="poruci.html">Poruči</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Otvori meni" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+  <nav class="mobileNav" id="mobileNav">
+    <a href="index.html">Početna</a>
+    <a href="knjiga.html">Knjiga o Vama</a>
+    <a href="usluge.html" class="active">Usluge</a>
+    <a href="metod.html">Metod</a>
+    <a href="poruci.html">Poruči</a>
+    <div class="mobileCtaRow">
+      <a class="btn primary" href="poruci.html" style="flex:1;justify-content:center">Poruči analizu</a>
+    </div>
+  </nav>
 </header>
 
 <main class="container">
   <section class="hero">
     <div class="heroCard">
+      <svg class="sparkles" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><radialGradient id="sp" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient></defs>
+        <circle cx="60" cy="40" r="1.4" fill="rgba(255,255,255,.55)"/>
+        <circle cx="200" cy="60" r="1.6" fill="rgba(198,169,107,.35)"/>
+        <circle cx="400" cy="30" r="1.2" fill="rgba(160,120,255,.22)"/>
+        <circle cx="540" cy="80" r="1.4" fill="rgba(255,255,255,.38)"/>
+        <circle cx="150" cy="160" r="22" fill="url(#sp)" opacity=".22"/>
+        <circle cx="430" cy="170" r="28" fill="url(#sp)" opacity=".16"/>
+      </svg>
+      <svg class="zodiacRing" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle class="ringOuter" cx="300" cy="300" r="245" fill="none"/>
+        <circle class="ringMid"   cx="300" cy="300" r="210" fill="none"/>
+        <circle class="ringInner" cx="300" cy="300" r="175" fill="none"/>
+        <g text-anchor="middle" dominant-baseline="middle" font-size="22">
+          <text class="glyph" x="392" y="138">♉</text>
+          <text class="glyph" x="468" y="388">♌</text>
+          <text class="glyph" x="210" y="464">♏</text>
+          <text class="glyph" x="134" y="214">♒</text>
+        </g>
+        <circle class="pulseStar" cx="300" cy="300" r="6" fill="rgba(245,226,182,.95)"/>
+      </svg>
+
       <div class="kicker">USLUGE</div>
       <hr class="hr-astro" />
-      <h1>Izaberite paket.<br/>Mi ga pretvaramo u jasnu mapu života.</h1>
-      <p class="subhead">Sve isporuke su u PDF formatu, čitljivo i profesionalno dizajnirano.</p>
-      <div class="heroActions" style="margin-top:14px">
-        <a class="btn primary" href="poruci.html">Poruči</a>
-        <a class="btn" href="primer.html">Primer</a>
+      <h1>Izaberite paket.<br/><em>Mi ga pretvaramo u vašu knjigu.</em></h1>
+      <p class="subhead">Sve isporuke su u PDF formatu — čitljivo i profesionalno dizajnirano. Isporuka za 3–5 radnih dana.</p>
+      <div class="heroActions" style="margin-top:18px">
+        <a class="btn primary" href="poruci.html">Poruči odmah</a>
+        <a class="btn" href="metod.html">Kako radimo</a>
       </div>
     </div>
   </section>
 
   <section class="section">
+    <div class="sectionTitle">
+      <div class="kicker">PAKETI</div>
+      <h2>Cene i paketi</h2>
+      <p class="small">Svaki paket dolazi kao profesionalno dizajniran PDF — vaša lična astro knjiga.</p>
+    </div>
+    <div class="sectionDivider"><span>✦</span></div>
+
     <div class="pricing">
       <div class="price">
         <div class="name">Natalna knjiga</div>
         <div class="amount">2.000 RSD</div>
-        <div class="desc">Dubinska natalna analiza u formi profesionalne knjige (PDF).</div>
+        <div class="desc">Dubinska natalna analiza u formi profesionalne knjige (PDF). Pečat karte + kuće 1–12 + zaključak i smernice.</div>
         <div class="actions"><a class="btn" href="poruci.html">Poruči</a></div>
       </div>
-
       <div class="price featured">
         <div class="name">Natal + Predikcije <span class="tag">Top</span></div>
         <div class="amount">3.500 RSD</div>
-        <div class="desc">Natal + ključni periodi i aktivacije. Najkompletnija opcija.</div>
+        <div class="desc">Natal + ključni periodi i aktivacije. Najkompletnija opcija — sve u jednoj knjizi. Potreban kratak opis situacije.</div>
         <div class="actions"><a class="btn primary" href="poruci.html">Poruči</a></div>
       </div>
-
       <div class="price">
         <div class="name">Samo predikcije</div>
         <div class="amount">1.500 RSD</div>
-        <div class="desc">Fokus na periodima (ako natal već imate).</div>
+        <div class="desc">Fokus na periodima (ako natal već imate). Šta dolazi, kada i kako da se pripremite.</div>
         <div class="actions"><a class="btn" href="poruci.html">Poruči</a></div>
       </div>
-
       <div class="price">
         <div class="name">Sinastrija</div>
         <div class="amount">3.500 RSD</div>
-        <div class="desc">Dinamika odnosa, kompatibilnost, okidači i potencijal veze.</div>
+        <div class="desc">Dinamika odnosa, kompatibilnost, okidači i potencijal veze. Za dvoje — ljubavni, bračni ili poslovni odnos.</div>
         <div class="actions"><a class="btn" href="poruci.html">Poruči</a></div>
       </div>
     </div>
 
-    <div style="margin-top:14px" class="note">
-      <b>Važno:</b> Kod “Natal + Predikcije” napišite kratko: posao/veza, promene, dileme —
-      da predikcije budu vezane za realan život.
+    <div style="margin-top:16px" class="note">
+      <b>Napomena:</b> Kod "Natal + Predikcije" napišite kratko: posao/veza, promene, dileme —
+      da predikcije budu vezane za realan život, a ne generičke.
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sectionTitle">
+      <div class="kicker">ISPORUKA</div>
+      <h2>Šta dobijate i kada</h2>
+    </div>
+    <div class="sectionDivider"><span>♌</span></div>
+
+    <div class="howSteps">
+      <div class="howStep">
+        <div class="stepNum">I</div>
+        <h4>Poručite online</h4>
+        <p>Popunite formu, unesite podatke i pošaljite porudžbinu.</p>
+      </div>
+      <div class="howStep">
+        <div class="stepNum">II</div>
+        <h4>Platite uplatom</h4>
+        <p>IPS QR kod ili uplata na račun. Pošaljite potvrdu uplate.</p>
+      </div>
+      <div class="howStep">
+        <div class="stepNum">III</div>
+        <h4>Analiza se radi</h4>
+        <p>Ručno, sistematski — 80+ tačaka analize za svaku kartu.</p>
+      </div>
+      <div class="howStep">
+        <div class="stepNum">IV</div>
+        <h4>PDF za 3–5 dana</h4>
+        <p>Dobijate profesionalno dizajniran PDF na email adresu.</p>
+      </div>
+    </div>
+
+    <div class="deliveryBanner" style="margin-top:24px">
+      <div class="dIcon">⏱</div>
+      <div class="dText">
+        <strong>Isporuka za 3–5 radnih dana</strong>
+        <span>Svaka analiza se radi ručno i sistematski. Kvalitet je prioritet, ne brzina.</span>
+      </div>
+      <a class="btn primary" href="poruci.html">Poruči sada</a>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
-    <div>© <span id="y"></span> Astro Aries Studio</div>
-    <div><a href="mailto:astroariesstudio@gmail.com">astroariesstudio@gmail.com</a></div>
+  <div class="container">
+    <div class="footerGrid">
+      <div class="footerBrand">
+        <div class="title">ASTRO <span>ARIES</span> STUDIO</div>
+        <p>Personalizovana astrološka analiza u formi knjige. Vaša lična mapa života — zasnovana na sistemu, ne na intuiciji.</p>
+        <div class="socialLinks">
+          <a class="socialLink" href="mailto:astroariesstudio@gmail.com" title="Email" aria-label="Email">✉</a>
+          <a class="socialLink" href="https://instagram.com" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">📷</a>
+        </div>
+      </div>
+      <div class="footerCol">
+        <h5>Stranice</h5>
+        <ul>
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="knjiga.html">Knjiga o Vama</a></li>
+          <li><a href="usluge.html">Usluge i cene</a></li>
+          <li><a href="metod.html">Metod analize</a></li>
+          <li><a href="poruci.html">Poruči</a></li>
+        </ul>
+      </div>
+      <div class="footerCol">
+        <h5>Usluge</h5>
+        <ul>
+          <li><a href="poruci.html">Natalna knjiga — 2.000 RSD</a></li>
+          <li><a href="poruci.html">Natal + Predikcije — 3.500 RSD</a></li>
+          <li><a href="poruci.html">Samo predikcije — 1.500 RSD</a></li>
+          <li><a href="poruci.html">Sinastrija — 3.500 RSD</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footerBottom">
+      <div>© <span id="y"></span> Astro Aries Studio. Sva prava zadržana.</div>
+      <div><a href="mailto:astroariesstudio@gmail.com">astroariesstudio@gmail.com</a></div>
+    </div>
   </div>
 </footer>
 
-<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+<button class="scrollTop" id="scrollTop" aria-label="Nazad na vrh">↑</button>
+<div class="stickyMobileCta">
+  <a class="btn primary" href="poruci.html">✦ Poruči svoju astro knjigu</a>
+</div>
+
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+  const hamburger = document.getElementById("hamburger");
+  const mobileNav = document.getElementById("mobileNav");
+  hamburger.addEventListener("click", () => {
+    const open = mobileNav.classList.toggle("open");
+    hamburger.classList.toggle("open", open);
+    hamburger.setAttribute("aria-expanded", open);
+  });
+  mobileNav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+    mobileNav.classList.remove("open"); hamburger.classList.remove("open");
+    hamburger.setAttribute("aria-expanded","false");
+  }));
+  const scrollTopBtn = document.getElementById("scrollTop");
+  window.addEventListener("scroll", () => scrollTopBtn.classList.toggle("visible", window.scrollY > 320));
+  scrollTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+</script>
 </body>
 </html>
