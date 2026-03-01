@@ -4,31 +4,48 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Knjiga o Vama — Astro Aries Studio</title>
+  <meta name="description" content="12 kuća kao 12 poglavlja vašeg života. Personalizovana astrološka knjiga — pečat karte, kuće 1–12, periodi i aktivacije." />
+  <meta property="og:title" content="Knjiga o Vama — Astro Aries Studio" />
+  <meta property="og:description" content="12 kuća kao 12 poglavlja vašeg života. Personalizovana astrološka knjiga." />
+  <meta property="og:url" content="https://astro-aries-studio.vercel.app/knjiga.html" />
+  <meta property="og:image" content="https://astro-aries-studio.vercel.app/assets/logo.png" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070711'/><text y='.9em' font-size='80' x='10'>♈</text></svg>" />
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
 
+<div class="shooting-star"></div>
+
 <header>
   <div class="container nav">
     <a class="brand" href="index.html">
-      <img src="assets/logo.png" alt="Astro Aries Studio logo" />
+      <img src="assets/logo.png" alt="Astro Aries Studio logo" loading="lazy" />
       <div class="title">ASTRO <span>ARIES</span> STUDIO</div>
     </a>
-
     <nav class="navlinks">
       <a href="index.html">Početna</a>
-      <a href="knjiga.html">Knjiga o Vama</a>
+      <a href="knjiga.html" class="active" aria-current="page">Knjiga o Vama</a>
       <a href="usluge.html">Usluge</a>
       <a href="metod.html">Metod</a>
-      <a href="primer.html">Primer</a>
       <a href="poruci.html">Poruči</a>
     </nav>
-
     <div class="cta">
-      <a class="btn" href="primer.html">Primer PDF</a>
       <a class="btn primary" href="poruci.html">Poruči</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Otvori meni" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+  <nav class="mobileNav" id="mobileNav">
+    <a href="index.html">Početna</a>
+    <a href="knjiga.html" class="active">Knjiga o Vama</a>
+    <a href="usluge.html">Usluge</a>
+    <a href="metod.html">Metod</a>
+    <a href="poruci.html">Poruči</a>
+    <div class="mobileCtaRow">
+      <a class="btn primary" href="poruci.html" style="flex:1;justify-content:center">Poruči analizu</a>
+    </div>
+  </nav>
 </header>
 
 <main class="container">
@@ -39,37 +56,40 @@
           <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
         </radialGradient></defs>
         <circle cx="40" cy="30" r="1.4" fill="rgba(255,255,255,.55)"/>
+        <circle cx="160" cy="40" r="1.6" fill="rgba(198,169,107,.35)"/>
+        <circle cx="380" cy="80" r="1.4" fill="rgba(160,120,255,.22)"/>
+        <circle cx="520" cy="50" r="1.2" fill="rgba(255,255,255,.38)"/>
         <circle cx="170" cy="160" r="20" fill="url(#sp)" opacity=".25"/>
+        <circle cx="450" cy="170" r="26" fill="url(#sp)" opacity=".18"/>
       </svg>
-
       <svg class="zodiacRing" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <circle class="ringOuter" cx="300" cy="300" r="245" fill="none"/>
         <circle class="ringMid"   cx="300" cy="300" r="210" fill="none"/>
         <circle class="ringInner" cx="300" cy="300" r="175" fill="none"/>
         <g text-anchor="middle" dominant-baseline="middle" font-size="22">
           <text class="glyph" x="300" y="112">♈</text><text class="glyph" x="468" y="214">♊</text>
-          <text class="glyph" x="300" y="490">♎</text><text class="glyph" x="134" y="388">♐</text>
+          <text class="glyph" x="492" y="300">♋</text><text class="glyph" x="300" y="490">♎</text>
+          <text class="glyph" x="134" y="388">♐</text><text class="glyph" x="110" y="300">♑</text>
         </g>
+        <circle class="pulseStar" cx="300" cy="300" r="6" fill="rgba(245,226,182,.95)"/>
       </svg>
 
       <div class="kicker">FORMAT KNJIGE</div>
       <hr class="hr-astro" />
-      <h1>Knjiga o Vama —<br/>12 kuća kao 12 poglavlja života.</h1>
-
+      <h1>Knjiga o Vama —<br/><em>12 kuća kao 12 poglavlja života.</em></h1>
       <p class="subhead">
-        Ovo nije “horoskop”. Ovo je struktura: ko ste, gde ste najjači, gde život traži korekciju,
-        i koji periodi otvaraju teme (posao, ljubav, finansije, dom, zdravlje).
+        Ovo nije "horoskop". Ovo je struktura: ko ste, gde ste najjači, gde život traži korekciju,
+        i koji periodi otvaraju teme — posao, ljubav, finansije, dom, zdravlje.
       </p>
-
       <div class="badges">
-        <div class="badge">✔ Kuće 1–12: jasna poglavlja</div>
-        <div class="badge">✔ Pečat karte + dispozitori</div>
-        <div class="badge">✔ Periodi: zašto baš sada</div>
+        <div class="badge">✦ Kuće 1–12: jasna poglavlja</div>
+        <div class="badge">✦ Pečat karte + dispozitori</div>
+        <div class="badge">✦ Periodi: zašto baš sada</div>
+        <div class="badge">✦ PDF knjiga, ne lista simbola</div>
       </div>
-
-      <div class="heroActions" style="margin-top:14px">
+      <div class="heroActions" style="margin-top:18px">
         <a class="btn primary" href="poruci.html">Poruči svoju knjigu</a>
-        <a class="btn" href="primer.html">Pogledaj primer</a>
+        <a class="btn" href="usluge.html">Pogledaj cene</a>
       </div>
     </div>
   </section>
@@ -78,33 +98,115 @@
     <div class="sectionTitle">
       <div class="kicker">ŠTA DOBIJATE</div>
       <h2>Struktura koja se čita kao knjiga</h2>
-      <p class="small">Brzo razumete “suštinu”, a zatim idete u dubinu po oblastima.</p>
+      <p class="small">Brzo razumete "suštinu", a zatim idete u dubinu po oblastima.</p>
     </div>
+    <div class="sectionDivider"><span>✦</span></div>
 
     <div class="grid">
       <div class="card">
-        <h3>Pečat karte</h3>
-        <p>Asc/Desc osa, vladar Asc, Mes. čvorovi, “velika trojka” — osnova identiteta.</p>
+        <h3>🔮 Pečat karte</h3>
+        <p>Asc/Desc osa, vladar Asc, Mes. čvorovi, "velika trojka" — osnova identiteta i sudbinski pečat ličnosti.</p>
       </div>
       <div class="card">
-        <h3>Kuće 1–12</h3>
-        <p>Svaka kuća kao životna tema: odnosi, karijera, novac, dom, zdravlje, smisao.</p>
+        <h3>🏠 Kuće 1–12</h3>
+        <p>Svaka kuća kao životna tema: odnosi, karijera, novac, dom, zdravlje, smisao. Jasna poglavlja, jasni zaključci.</p>
       </div>
       <div class="card">
-        <h3>Periodi i aktivacije</h3>
-        <p>Vremenski prozori + objašnjenje uzroka (okidači, tranziti, ciklusi).</p>
+        <h3>⏳ Periodi i aktivacije</h3>
+        <p>Vremenski prozori + objašnjenje uzroka (okidači, tranziti, ciklusi). Šta dolazi i kako da se pripremite.</p>
       </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sectionTitle">
+      <div class="kicker">ZAŠTO KNJIGA</div>
+      <h2>Razlika između horoskopa i knjige</h2>
+      <p class="small">Generički tekst vs. vaša lična mapa.</p>
+    </div>
+    <div class="sectionDivider"><span>♎</span></div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>❌ Generički horoskop</h3>
+        <p style="color:rgba(240,240,246,.55)">Isti tekst za sve Ovnove. Opšte fraze. Nema veze sa vašim životom, situacijom ni trenutnim periodom.</p>
+      </div>
+      <div class="card" style="border-color:rgba(198,169,107,.28)">
+        <h3>✅ Knjiga o Vama</h3>
+        <p>Jedinstven dokument baziran na vašem tačnom datumu, vremenu i mestu rođenja. Vezano za vaš realan život.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:24px" class="deliveryBanner">
+      <div class="dIcon">📖</div>
+      <div class="dText">
+        <strong>Svaka knjiga je jedinstvena</strong>
+        <span>Analiza se radi ručno, sistematski — isporuka za 3–5 radnih dana.</span>
+      </div>
+      <a class="btn primary" href="poruci.html">Poruči sada</a>
     </div>
   </section>
 </main>
 
 <footer>
-  <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
-    <div>© <span id="y"></span> Astro Aries Studio</div>
-    <div><a href="mailto:astroariesstudio@gmail.com">astroariesstudio@gmail.com</a></div>
+  <div class="container">
+    <div class="footerGrid">
+      <div class="footerBrand">
+        <div class="title">ASTRO <span>ARIES</span> STUDIO</div>
+        <p>Personalizovana astrološka analiza u formi knjige. Vaša lična mapa života — zasnovana na sistemu, ne na intuiciji.</p>
+        <div class="socialLinks">
+          <a class="socialLink" href="mailto:astroariesstudio@gmail.com" title="Email" aria-label="Email">✉</a>
+          <a class="socialLink" href="https://instagram.com" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">📷</a>
+        </div>
+      </div>
+      <div class="footerCol">
+        <h5>Stranice</h5>
+        <ul>
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="knjiga.html">Knjiga o Vama</a></li>
+          <li><a href="usluge.html">Usluge i cene</a></li>
+          <li><a href="metod.html">Metod analize</a></li>
+          <li><a href="poruci.html">Poruči</a></li>
+        </ul>
+      </div>
+      <div class="footerCol">
+        <h5>Usluge</h5>
+        <ul>
+          <li><a href="poruci.html">Natalna knjiga — 2.000 RSD</a></li>
+          <li><a href="poruci.html">Natal + Predikcije — 3.500 RSD</a></li>
+          <li><a href="poruci.html">Samo predikcije — 1.500 RSD</a></li>
+          <li><a href="poruci.html">Sinastrija — 3.500 RSD</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footerBottom">
+      <div>© <span id="y"></span> Astro Aries Studio. Sva prava zadržana.</div>
+      <div><a href="mailto:astroariesstudio@gmail.com">astroariesstudio@gmail.com</a></div>
+    </div>
   </div>
 </footer>
 
-<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+<button class="scrollTop" id="scrollTop" aria-label="Nazad na vrh">↑</button>
+<div class="stickyMobileCta">
+  <a class="btn primary" href="poruci.html">✦ Poruči svoju astro knjigu</a>
+</div>
+
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+  const hamburger = document.getElementById("hamburger");
+  const mobileNav = document.getElementById("mobileNav");
+  hamburger.addEventListener("click", () => {
+    const open = mobileNav.classList.toggle("open");
+    hamburger.classList.toggle("open", open);
+    hamburger.setAttribute("aria-expanded", open);
+  });
+  mobileNav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+    mobileNav.classList.remove("open"); hamburger.classList.remove("open");
+    hamburger.setAttribute("aria-expanded","false");
+  }));
+  const scrollTopBtn = document.getElementById("scrollTop");
+  window.addEventListener("scroll", () => scrollTopBtn.classList.toggle("visible", window.scrollY > 320));
+  scrollTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+</script>
 </body>
 </html>
