@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Metod — Astro Aries Studio</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="Astro Aries Studio logo" />
+      <div class="title">ASTRO <span>ARIES</span> STUDIO</div>
+    </a>
+
+    <nav class="navlinks">
+      <a href="index.html">Početna</a>
+      <a href="knjiga.html">Knjiga o Vama</a>
+      <a href="usluge.html">Usluge</a>
+      <a href="metod.html">Metod</a>
+      <a href="primer.html">Primer</a>
+      <a href="poruci.html">Poruči</a>
+    </nav>
+
+    <div class="cta">
+      <a class="btn" href="primer.html">Primer PDF</a>
+      <a class="btn primary" href="poruci.html">Poruči</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="heroCard">
+      <div class="kicker">METOD</div>
+      <hr class="hr-astro" />
+      <h1>Struktura > intuicija.<br/>Zato dobijate stabilan rezultat.</h1>
+      <p class="subhead">
+        Analiza je rađena sistematski: kuće, vladari, dispozitori, aspekti i vremenski ciklusi.
+        Cilj: da se poruka “prevede” u realne teme i praktične smernice.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sectionTitle">
+      <div class="kicker">KAKO RADIMO</div>
+      <h2>PRO sistem (80+ tačaka)</h2>
+      <p class="small">Ne dobijate generičan tekst, nego mapu sa uzrokom i posledicom.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Osnova karte</h3>
+        <p>Ascendent + vladar, Sunce/Mesec, čvorovi, dominantne teme i “pečat” ličnosti.</p>
+      </div>
+      <div class="card">
+        <h3>Kuće 1–12</h3>
+        <p>Svaka oblast života ima poglavlje: kako funkcioniše, gde su blokade, gde je rast.</p>
+      </div>
+      <div class="card">
+        <h3>Vremenski sloj</h3>
+        <p>Periodi i aktivacije uz objašnjenje: šta pokreće promenu i kako da je iskoristite.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:14px" class="note">
+      <b>Napomena:</b> Ako imate nejasno vreme rođenja, napišite to u opisu —
+      predložiću najbolji pristup (procena, fokus na tranzite, itd.).
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <div>© <span id="y"></span> Astro Aries Studio</div>
+    <div><a href="mailto:astroariesstudio@gmail.com">astroariesstudio@gmail.com</a></div>
+  </div>
+</footer>
+
+<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>
