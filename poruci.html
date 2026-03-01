@@ -11,6 +11,15 @@
   <meta property="og:image" content="https://astro-aries-studio.vercel.app/assets/logo.png" />
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070711'/><text y='.9em' font-size='80' x='10'>♈</text></svg>" />
   <link rel="stylesheet" href="assets/style.css" />
+
+  <!-- EmailJS SDK — za automatski email klijentu -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    // ⚙️ PODESI: Zameni sa tvojim EmailJS Public Key
+    (function(){
+      if(window.emailjs) emailjs.init({ publicKey: "TVOJ_EMAILJS_PUBLIC_KEY" });
+    })();
+  </script>
 </head>
 <body>
 
@@ -528,9 +537,9 @@
           Otvori mBanking → IPS Skeniraj → skeniraj QR kod ispod.
         </div>
 
-        <!-- QR wrapper - canvas se generiše ovde -->
+        <!-- QR wrapper - slika se generiše via qrserver.com API -->
         <div class="qrWrap" id="qrWrap">
-          <canvas id="ipsQrCanvas"></canvas>
+          <img id="ipsQrImg" src="" alt="IPS QR kod" style="width:240px;height:240px;border-radius:8px;display:none;background:#fff" />
           <div class="qrLabel" id="qrLabel">Generisanje QR koda...</div>
         </div>
 
@@ -551,12 +560,15 @@
   </div>
 </div>
 
-<!-- QR lib -->
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
-
 <script>
   // ====== Formspree ======
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdalvlgg";
+
+  // ====== EmailJS konfiguracija ======
+  // ⚙️ PODESI: Zameni sa tvojim Service ID i Template ID iz EmailJS dashboarda
+  const EMAILJS_SERVICE_ID  = "TVOJ_SERVICE_ID";   // npr. "service_abc123"
+  const EMAILJS_TEMPLATE_ID = "TVOJ_TEMPLATE_ID";  // npr. "template_xyz789"
+  // Public Key se podešava u <head> iznad
 
   // ====== Bank data ======
   const BANK = {
@@ -725,7 +737,7 @@
   const copyPayBtn = document.getElementById("copyPayBtn");
   const payText = document.getElementById("payText");
   const payHint = document.getElementById("payHint");
-  const ipsQrCanvas = document.getElementById("ipsQrCanvas");
+  const ipsQrImg = document.getElementById("ipsQrImg");
   const qrLabel = document.getElementById("qrLabel");
 
   // ===== State =====
@@ -1056,20 +1068,9 @@
     return lines.join("|");
   }
 
-  async function generateQR(totalRsd, orderId){
+  function generateQR(totalRsd, orderId){
     qrLabel.textContent = "Generisanje QR koda...";
-
-    // Čekaj da QRCode lib bude dostupna
-    let attempts = 0;
-    while(!window.QRCode && attempts < 20){
-      await new Promise(r => setTimeout(r, 100));
-      attempts++;
-    }
-
-    if(!window.QRCode){
-      qrLabel.textContent = "QR kod nije dostupan (nema interneta ili CDN blokiran).";
-      return;
-    }
+    ipsQrImg.style.display = "none";
 
     try{
       const account = normalizeAccount(BANK.account);
@@ -1081,39 +1082,21 @@
         reference: orderId
       });
 
-      // Koristimo QRCode.toCanvas direktno na canvas element
-      await QRCode.toCanvas(ipsQrCanvas, payload, {
-        width: 240,
-        margin: 2,
-        color: {
-          dark: "#000000",
-          light: "#ffffff"
-        },
-        errorCorrectionLevel: "M"
-      });
+      // Koristimo qrserver.com API - bez JS biblioteke, bez CDN problema
+      const qrUrl = "https://api.qrserver.com/v1/create-qr-code/?size=260x260&ecc=M&margin=10&data=" + encodeURIComponent(payload);
 
-      qrLabel.textContent = "Skeniraj QR kodom u mBanking aplikaciji";
+      ipsQrImg.onload = function(){
+        ipsQrImg.style.display = "block";
+        qrLabel.textContent = "Skeniraj QR kodom u mBanking aplikaciji";
+      };
+      ipsQrImg.onerror = function(){
+        qrLabel.textContent = "QR kod nije dostupan. Koristite instrukcije za ručnu uplatu ispod.";
+      };
+      ipsQrImg.src = qrUrl;
+
     } catch(err){
       console.error("QR greška:", err);
-      // Fallback: pokušaj sa toDataURL
-      try{
-        const account = normalizeAccount(BANK.account);
-        const payload = buildIpsPayload({
-          account,
-          payeeName: BANK.recipient,
-          amountRsd: totalRsd,
-          purpose: BANK.purpose,
-          reference: orderId
-        });
-        const dataUrl = await QRCode.toDataURL(payload, { width: 240, margin: 2 });
-        const img = document.createElement("img");
-        img.src = dataUrl;
-        img.style.cssText = "width:240px;height:240px;border-radius:8px;display:block";
-        ipsQrCanvas.replaceWith(img);
-        qrLabel.textContent = "Skeniraj QR kodom u mBanking aplikaciji";
-      } catch(err2){
-        qrLabel.textContent = "Greška pri generisanju QR koda. Koristite instrukcije za ručnu uplatu.";
-      }
+      qrLabel.textContent = "Greška pri generisanju QR koda. Koristite instrukcije za ručnu uplatu.";
     }
   }
 
@@ -1170,6 +1153,46 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
       return false;
     }
     return true;
+  }
+
+  // ===== Auto-email klijentu (EmailJS) =====
+  async function sendClientEmail(data){
+    // Ako EmailJS nije podešen, preskoči tiho
+    if(!window.emailjs || EMAILJS_SERVICE_ID === "TVOJ_SERVICE_ID") return;
+
+    const clientEmail = data.email || data.synEmail || "";
+    if(!clientEmail) return;
+
+    const templateParams = {
+      to_email:    clientEmail,
+      to_name:     data.fullName || data.synOrderName || "Klijente",
+      order_id:    data.orderId,
+      service:     data.service,
+      total_rsd:   data.totalRsd.toLocaleString("sr-RS") + " RSD",
+      bank_account: BANK.account,
+      bank_name:   BANK.bank,
+      recipient:   BANK.recipient,
+      purpose:     BANK.purpose,
+      // Detalji za natal/predikcije
+      birth_date:  data.birthDate || "—",
+      birth_time:  data.birthTime || "—",
+      birth_place: data.birthPlace || "—",
+      // Detalji za sinastriju
+      person_a:    data.aName ? `${data.aName} (${data.aDate}, ${data.aTime}, ${data.aPlace})` : "—",
+      person_b:    data.bName ? `${data.bName} (${data.bDate}, ${data.bTime}, ${data.bPlace})` : "—",
+      // Odabrana pitanja
+      questions:   data.selectedQuestions || "—",
+      // Addon
+      addon_text:  data.addonText || "—",
+    };
+
+    try{
+      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
+      console.log("✅ Email potvrda poslata klijentu.");
+    } catch(err){
+      // Ne blokiraj korisnika ako email ne uspe
+      console.warn("EmailJS greška (nije kritično):", err);
+    }
   }
 
   // ===== SEND =====
@@ -1230,6 +1253,9 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
 
       // Generiši QR NAKON što je modal otvoren (mali delay da se DOM renderuje)
       setTimeout(() => generateQR(total, orderId), 150);
+
+      // Pošalji automatski email potvrdu klijentu
+      sendClientEmail({...payload, totalRsd: total});
 
     } catch(err){
       console.error(err);
