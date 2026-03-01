@@ -226,7 +226,7 @@
           </div>
         </div>
 
-        <!-- STEP 2B: SINASTRIJA DETAILS -->
+        <!-- STEP 2B: SINASTRIJA -->
         <div class="fieldset" id="synSection" style="display:none; margin-top:12px">
           <div class="legend">
             <b>2) Sinastrija — tip odnosa</b>
@@ -344,7 +344,7 @@
           </div>
         </div>
 
-        <!-- PAYMENT INFO (Srbija) -->
+        <!-- PAYMENT NOTE -->
         <div class="fieldset" id="paySection" style="margin-top:12px">
           <div class="legend">
             <b>Plaćanje (Srbija)</b>
@@ -393,17 +393,17 @@
 
       </div>
 
-      <!-- RIGHT -->
+      <!-- RIGHT SUMMARY -->
       <aside class="summary">
         <div class="sumBox">
           <div class="sumTitle">
             <b>Pregled porudžbine</b>
-            <span class="badgeGold" id="serviceBadge">Natal</span>
+            <span class="badgeGold" id="serviceBadge">PDF</span>
           </div>
 
           <div class="sumLine">
             <span>Usluga</span>
-            <span id="chosenLabel">Knjiga o tebi — Natal</span>
+            <span id="chosenLabel">Knjiga o tebi — Natal izdanje</span>
           </div>
 
           <div class="sumLine" id="qPackLine" style="display:none">
@@ -442,7 +442,7 @@
           </div>
 
           <div class="small" style="margin-top:10px">
-            Porudžbina se šalje direktno (Formspree). Instrukcije + IPS QR dobijaš odmah.
+            Porudžbina ide direktno na email (Formspree). Instrukcije + IPS QR dobijaš odmah.
           </div>
         </div>
       </aside>
@@ -458,7 +458,7 @@
   </div>
 </footer>
 
-<!-- MODAL: BOOK QUESTIONS -->
+<!-- MODAL: BOOK -->
 <div class="modalOverlay" id="bookModal">
   <div class="modal" role="dialog" aria-modal="true" aria-label="Knjiga pitanja">
     <div class="modalHeader">
@@ -479,9 +479,6 @@
 
         <div class="sepTitle">Brzi unos brojeva (opciono)</div>
         <textarea id="qNumbersInModal" placeholder="Npr: 1, 7, 12 ..."></textarea>
-        <div class="small" style="margin-top:8px">
-          Ako uneseš brojeve, čekiranje se sinhronizuje (ograničeno na paket).
-        </div>
 
         <div class="sepTitle">Kontrole</div>
         <div class="actionsRow" style="margin-top:8px">
@@ -505,7 +502,7 @@
   </div>
 </div>
 
-<!-- MODAL: SUCCESS + PAYMENT -->
+<!-- MODAL: SUCCESS -->
 <div class="modalOverlay" id="successModal">
   <div class="modal" role="dialog" aria-modal="true" aria-label="Porudžbina poslata">
     <div class="modalHeader">
@@ -542,6 +539,9 @@
   </div>
 </div>
 
+<!-- QR lib (mora pre glavnog JS-a) -->
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
 <script>
   // ====== Formspree ======
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdalvlgg";
@@ -554,7 +554,6 @@
     purpose: "Astro Aries Studio — izveštaj",
   };
 
-  // Footer year
   document.getElementById("y").textContent = new Date().getFullYear();
 
   const PRICES = {
@@ -563,7 +562,6 @@
     addonQ: 500
   };
 
-  // (skraćeni naslovi, dovoljno za selekciju)
   const QUESTIONS = [
     {n:1,t:"Sudbinski pečat (suština)",c:"Osnova"},
     {n:2,t:"Šta je retko i snažno u karti",c:"Osnova"},
@@ -694,38 +692,7 @@
 
   const sendBtn = document.getElementById("sendBtn");
 
-  // Success modal
-  const successModal = document.getElementById("successModal");
-  const closeSuccessBtn = document.getElementById("closeSuccessBtn");
-  const copyPayBtn = document.getElementById("copyPayBtn");
-  const payText = document.getElementById("payText");
-  const payHint = document.getElementById("payHint");
-  const ipsQrImg = document.getElementById("ipsQrImg");
-
-  function openSuccessModal(hint, text){
-    payHint.textContent = hint;
-    payText.value = text;
-    successModal.classList.add("show");
-    document.body.style.overflow = "hidden";
-  }
-  function closeSuccessModal(){
-    successModal.classList.remove("show");
-    document.body.style.overflow = "";
-  }
-  closeSuccessBtn.addEventListener("click", closeSuccessModal);
-  successModal.addEventListener("click", (e)=>{ if(e.target === successModal) closeSuccessModal(); });
-
-  copyPayBtn.addEventListener("click", async ()=>{
-    try{
-      await navigator.clipboard.writeText(payText.value);
-      copyPayBtn.textContent = "Kopirano ✅";
-      setTimeout(()=> copyPayBtn.textContent = "Kopiraj instrukcije", 1200);
-    } catch(e){
-      alert("Ne mogu da kopiram automatski. Ručno selektuj i kopiraj tekst.");
-    }
-  });
-
-  // Book modal
+  // Modals
   const bookModal = document.getElementById("bookModal");
   const openBookBtn = document.getElementById("openBookBtn");
   const closeBookBtn = document.getElementById("closeBookBtn");
@@ -737,16 +704,21 @@
   const qList = document.getElementById("qList");
   const pickedPill = document.getElementById("pickedPill");
   const filteredCount = document.getElementById("filteredCount");
-
   const modalNeed = document.getElementById("modalNeed");
   const needInline = document.getElementById("needInline");
-
   const qSearch = document.getElementById("qSearch");
   const qNumbersInModal = document.getElementById("qNumbersInModal");
 
+  const successModal = document.getElementById("successModal");
+  const closeSuccessBtn = document.getElementById("closeSuccessBtn");
+  const copyPayBtn = document.getElementById("copyPayBtn");
+  const payText = document.getElementById("payText");
+  const payHint = document.getElementById("payHint");
+  const ipsQrImg = document.getElementById("ipsQrImg");
+
   // ===== State =====
   let state = {
-    service: "natal", // natal | full | pred | custom | syn
+    service: "natal",
     qpack: "3",
     addonOn: false,
     addonCount: 0,
@@ -842,7 +814,7 @@
     updateUI();
   }
 
-  // Addon switch
+  // ===== Addon switch =====
   function toggleAddon(on){
     state.addonOn = on;
     customSwitch.classList.toggle("on", on);
@@ -857,17 +829,11 @@
   }
   customSwitch.addEventListener("click", ()=> toggleAddon(!state.addonOn));
   customSwitch.addEventListener("keydown", (e)=>{
-    if(e.key === "Enter" || e.key === " "){
-      e.preventDefault();
-      toggleAddon(!state.addonOn);
-    }
+    if(e.key === "Enter" || e.key === " "){ e.preventDefault(); toggleAddon(!state.addonOn); }
   });
-  customCount.addEventListener("change", ()=>{
-    state.addonCount = Number(customCount.value);
-    calc();
-  });
+  customCount.addEventListener("change", ()=>{ state.addonCount = Number(customCount.value); calc(); });
 
-  // ===== Book modal logic =====
+  // ===== Book modal =====
   function showModal(){
     const need = Number(state.qpack);
     modalNeed.textContent = String(need);
@@ -875,7 +841,6 @@
     pickedPill.textContent = `Izabrano: ${state.selectedQ.size}/${need}`;
     modalConfirmBtn.disabled = (state.selectedQ.size !== need);
     modalConfirmBtn.setAttribute("aria-disabled", modalConfirmBtn.disabled ? "true" : "false");
-
     bookModal.classList.add("show");
     document.body.style.overflow = "hidden";
     renderChips();
@@ -936,11 +901,9 @@
         } else {
           state.selectedQ.delete(q.n);
         }
-
         qNumbersInModal.value = Array.from(state.selectedQ).sort((a,b)=>a-b).join(", ");
         updatePickedInline();
         calc();
-
         modalConfirmBtn.disabled = (state.selectedQ.size !== need);
         modalConfirmBtn.setAttribute("aria-disabled", modalConfirmBtn.disabled ? "true" : "false");
         pickedPill.textContent = `Izabrano: ${state.selectedQ.size}/${need}`;
@@ -956,7 +919,6 @@
 
       wrap.appendChild(title);
       wrap.appendChild(hint);
-
       item.appendChild(cb);
       item.appendChild(wrap);
       qList.appendChild(item);
@@ -976,16 +938,10 @@
   }
 
   function parseNumbers(str){
-    return (str || "")
-      .split(/[^0-9]+/g)
-      .map(x=>Number(x))
-      .filter(n=>Number.isFinite(n) && n>=1 && n<=84);
+    return (str || "").split(/[^0-9]+/g).map(x=>Number(x)).filter(n=>Number.isFinite(n) && n>=1 && n<=84);
   }
 
-  qSearch.addEventListener("input", ()=>{
-    state.search = qSearch.value || "";
-    renderQuestions();
-  });
+  qSearch.addEventListener("input", ()=>{ state.search = qSearch.value || ""; renderQuestions(); });
 
   qNumbersInModal.addEventListener("input", ()=>{
     const need = Number(state.qpack);
@@ -1014,13 +970,13 @@
     setTimeout(()=> clientOneSection.scrollIntoView({behavior:"smooth", block:"start"}), 80);
   });
 
-  // Service selection
+  // ===== Service click (ovo vraća cene!) =====
   serviceCards.forEach(card=>{
     card.addEventListener("click", ()=>{
       state.service = card.getAttribute("data-service");
       setActive(serviceCards, "service", state.service);
 
-      // reset modal filters
+      // reset filters
       state.cat = "Sve";
       state.search = "";
       qSearch.value = "";
@@ -1043,7 +999,6 @@
     });
   });
 
-  // Qpack selection
   qpackCards.forEach(card=>{
     card.addEventListener("click", ()=>{
       state.qpack = card.getAttribute("data-qpack");
@@ -1059,76 +1014,64 @@
     });
   });
 
-  // relation summary updates
   relationType.addEventListener("change", calc);
   relationOther.addEventListener("input", calc);
 
-  // ===== IPS QR helpers =====
+  // ===== Success modal =====
+  function openSuccessModal(hint, text){
+    payHint.textContent = hint;
+    payText.value = text;
+    successModal.classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
+  function closeSuccessModal(){
+    successModal.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+  closeSuccessBtn.addEventListener("click", closeSuccessModal);
+  successModal.addEventListener("click", (e)=>{ if(e.target === successModal) closeSuccessModal(); });
+
+  copyPayBtn.addEventListener("click", async ()=>{
+    try{
+      await navigator.clipboard.writeText(payText.value);
+      copyPayBtn.textContent = "Kopirano ✅";
+      setTimeout(()=> copyPayBtn.textContent = "Kopiraj instrukcije", 1200);
+    } catch(e){
+      alert("Ne mogu da kopiram automatski. Ručno selektuj i kopiraj tekst.");
+    }
+  });
+
+  // ===== IPS QR (local) =====
   function normalizeAccountTo18Digits(acc){
     const digits = (acc || "").replace(/\D/g, "");
-    if(digits.length !== 18) return null;
-    return digits;
+    return digits.length === 18 ? digits : null;
   }
-
   function formatAmountRSD(n){
     const fixed = (Number(n) || 0).toFixed(2).replace(".", ",");
     return "RSD" + fixed;
   }
-
- function normalizeAccountTo18Digits(acc){
-  const digits = (acc || "").replace(/\D/g, "");
-  return digits.length === 18 ? digits : null;
-}
-
-function formatAmountRSD(n){
-  // IPS format: RSD1234,00
-  const fixed = (Number(n) || 0).toFixed(2).replace(".", ",");
-  return "RSD" + fixed;
-}
-
-function buildIpsPayloadString({account18, payeeName, amountRsd, purpose, reference}){
-  // IPS payload string (radi za mBanking sken)
-  // ključ: vrednost, razdvojeno sa |
-  // Bitno: bez specijalnih znakova koji lome QR (ć,č obično prolaze, ali ako bude problema – prebacimo u latinicu bez dijakritike)
-  return [
-    "K:PR",
-    "V:01",
-    "C:1",
-    `R:${account18}`,
-    `N:${payeeName}`,
-    `I:${formatAmountRSD(amountRsd)}`,
-    "SF:289",
-    `S:${purpose}`,
-    `RO:${reference}`
-  ].join("|");
-}
-
-async function renderIpsQrLocal({imgEl, account18, payeeName, amountRsd, purpose, reference}){
-  if(!window.QRCode){
-    throw new Error("QRCode lib nije učitana (nema interneta / CDN blokiran).");
+  function buildIpsPayloadString({account18, payeeName, amountRsd, purpose, reference}){
+    return [
+      "K:PR",
+      "V:01",
+      "C:1",
+      `R:${account18}`,
+      `N:${payeeName}`,
+      `I:${formatAmountRSD(amountRsd)}`,
+      "SF:289",
+      `S:${purpose}`,
+      `RO:${reference}`
+    ].join("|");
   }
-  const payload = buildIpsPayloadString({account18, payeeName, amountRsd, purpose, reference});
-  const dataUrl = await QRCode.toDataURL(payload, { width: 320, margin: 1 });
-  imgEl.src = dataUrl;
-}
-    };
-
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {"Content-Type":"application/json","Accept":"image/png"},
-      body: JSON.stringify(body)
-    });
-
-    if(!res.ok) throw new Error("NBS QR API error");
-    const blob = await res.blob();
-    return URL.createObjectURL(blob);
+  async function renderIpsQrLocal({imgEl, account18, payeeName, amountRsd, purpose, reference}){
+    if(!window.QRCode) throw new Error("QRCode lib nije učitana (CDN blokiran / nema interneta).");
+    const payload = buildIpsPayloadString({account18, payeeName, amountRsd, purpose, reference});
+    const dataUrl = await QRCode.toDataURL(payload, { width: 320, margin: 1 });
+    imgEl.src = dataUrl;
   }
 
-  function getPaymentInstructions({totalRsd, orderId}) {
-    return {
-      hint: "Uplata na račun (RSD) + IPS QR",
-      text:
-`INSTRUKCIJE ZA UPLATU (RSD)
+  function getPaymentInstructions({totalRsd, orderId}){
+    return `INSTRUKCIJE ZA UPLATU (RSD)
 Primalac: ${BANK.recipient}
 Banka: ${BANK.bank}
 Račun: ${BANK.account}
@@ -1137,11 +1080,18 @@ Poziv na broj / Šifra porudžbine: ${orderId}
 
 Iznos: ${totalRsd.toLocaleString("sr-RS")} RSD
 
-Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
-    };
+Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
   }
 
-  // ===== Validation =====
+  function pickedQuestionsText(){
+    const nums = Array.from(state.selectedQ).sort((a,b)=>a-b);
+    const map = new Map(QUESTIONS.map(q=>[q.n,q]));
+    return nums.map(n=>{
+      const q = map.get(n);
+      return q ? `${q.n}) ${q.t} [${q.c}]` : `${n})`;
+    }).join("\n");
+  }
+
   function validate(){
     if(state.service === "custom"){
       const need = Number(state.qpack);
@@ -1150,7 +1100,6 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
         return false;
       }
     }
-
     if(state.service === "full"){
       const sit = req(document.getElementById("situation").value);
       if(!sit){
@@ -1158,7 +1107,6 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
         return false;
       }
     }
-
     if(state.service === "syn"){
       const rt = req(relationType.value);
       const other = req(relationOther.value);
@@ -1185,7 +1133,6 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
       return true;
     }
 
-    // non-syn
     const fullName = req(document.getElementById("fullName").value);
     const email = req(document.getElementById("email").value);
     if(!fullName || !email){
@@ -1195,16 +1142,7 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
     return true;
   }
 
-  function pickedQuestionsText(){
-    const nums = Array.from(state.selectedQ).sort((a,b)=>a-b);
-    const map = new Map(QUESTIONS.map(q=>[q.n,q]));
-    return nums.map(n=>{
-      const q = map.get(n);
-      return q ? `${q.n}) ${q.t} [${q.c}]` : `${n})`;
-    }).join("\n");
-  }
-
-  // ===== SEND (Formspree + success + QR) =====
+  // ===== SEND (Formspree) =====
   sendBtn.addEventListener("click", async (e)=>{
     e.preventDefault();
     if(!validate()) return;
@@ -1220,7 +1158,6 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
       service: serviceName(state.service),
       totalRsd: total,
 
-      // one-person
       fullName: req(document.getElementById("fullName").value),
       email: req(document.getElementById("email").value),
       birthDate: req(document.getElementById("birthDate").value),
@@ -1229,11 +1166,9 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
       currentPlace: req(document.getElementById("currentPlace").value),
       situation: req(document.getElementById("situation")?.value),
 
-      // custom
       qpack: state.qpack,
       selectedQuestions: (state.service === "custom") ? pickedQuestionsText() : "",
 
-      // sinastry
       synEmail: req(document.getElementById("synEmail").value),
       synOrderName: req(document.getElementById("synOrderName").value),
       relationType: req(document.getElementById("relationType").value),
@@ -1248,7 +1183,6 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
       bTime: req(document.getElementById("bTime").value),
       bPlace: req(document.getElementById("bPlace").value),
 
-      // addon
       addonOn: !!state.addonOn,
       addonCount: Number(customCount.value || 0),
       addonText: req(customText.value)
@@ -1264,44 +1198,23 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
         headers: { "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify(payload)
       });
-
       if(!res.ok) throw new Error("Formspree submit failed");
 
-      // Show instructions modal
-      const pi = getPaymentInstructions({totalRsd: total, orderId});
-      openSuccessModal(pi.hint, pi.text);
+      // modal text
+      openSuccessModal("Uplata na račun (RSD) + IPS QR", getPaymentInstructions({totalRsd: total, orderId}));
 
-      try{
-  const account18 = normalizeAccountTo18Digits(BANK.account);
-  if(!account18) throw new Error("Račun mora imati 18 cifara (bez crtica).");
-
-  await renderIpsQrLocal({
-    imgEl: document.getElementById("ipsQrImg"),
-    account18,
-    payeeName: BANK.recipient,
-    amountRsd: total,
-    purpose: BANK.purpose,
-    reference: orderId
-  });
-} catch(e){
-  console.log("QR error:", e);
-  // Ako QR ne uspe, instrukcije i dalje ostaju u tekstu
-}
-
-      // Generate IPS QR
+      // QR
       try{
         const account18 = normalizeAccountTo18Digits(BANK.account);
         if(!account18) throw new Error("Račun mora imati 18 cifara (bez crtica).");
-
-        const qrUrl = await generateIpsQrPng({
+        await renderIpsQrLocal({
+          imgEl: ipsQrImg,
           account18,
           payeeName: BANK.recipient,
           amountRsd: total,
           purpose: BANK.purpose,
           reference: orderId
         });
-
-        ipsQrImg.src = qrUrl;
       } catch(qe){
         console.log("QR error:", qe);
       }
@@ -1321,6 +1234,6 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
   calc();
   stepTo(1);
 </script>
-<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
 </body>
 </html>
