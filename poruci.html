@@ -12,6 +12,16 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070711'/><text y='.9em' font-size='80' x='10'>♈</text></svg>" />
   <link rel="stylesheet" href="assets/style.css" />
 
+  <!-- EmailJS — auto-email klijentu (besplatno, 200/mesec) -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    window.EMAILJS_PUBLIC_KEY  = "FBVIVb3WRJKwjdxRK";
+    window.EMAILJS_SERVICE_ID  = "service_xo0mo4z";
+    window.EMAILJS_TEMPLATE_ID = "template_e0W7yor";
+    if(window.emailjs && window.EMAILJS_PUBLIC_KEY !== "OVDE_UNESI_PUBLIC_KEY"){
+      emailjs.init({ publicKey: window.EMAILJS_PUBLIC_KEY });
+    }
+  </script>
 </head>
 <body>
 
@@ -1139,6 +1149,46 @@ Nakon uplate, pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
     return true;
   }
 
+  // ===== Auto-email klijentu (EmailJS) =====
+  async function sendClientEmail(data){
+    try{
+      // Provjeri da li su EmailJS ključevi podešeni
+      if(!window.emailjs) return;
+      if(window.EMAILJS_PUBLIC_KEY === "OVDE_UNESI_PUBLIC_KEY") return;
+
+      // Inicijalizuj ako nije već
+      emailjs.init({ publicKey: window.EMAILJS_PUBLIC_KEY });
+
+      const clientEmail = data.clientEmail || "";
+      if(!clientEmail) return;
+
+      const templateParams = {
+        to_email:    clientEmail,
+        to_name:     data.fullName || data.synOrderName || "Klijente",
+        usluga:      data.service,
+        iznos:       fmtRSD(data.totalRsd),
+        datum:       data.birthDate  || (data.aDate ? `A: ${data.aDate} / B: ${data.bDate}` : "—"),
+        vreme:       data.birthTime  || (data.aTime ? `A: ${data.aTime} / B: ${data.bTime}` : "—"),
+        mesto:       data.birthPlace || (data.aPlace ? `A: ${data.aPlace} / B: ${data.bPlace}` : "—"),
+        pitanja:     data.selectedQuestions || "—",
+        addon:       data.addonText || "—",
+        primalac:    BANK.recipient,
+        banka:       BANK.bank,
+        racun:       BANK.account,
+        svrha:       BANK.purpose,
+      };
+
+      await emailjs.send(
+        window.EMAILJS_SERVICE_ID,
+        window.EMAILJS_TEMPLATE_ID,
+        templateParams
+      );
+      console.log("✅ Email potvrda poslata klijentu:", clientEmail);
+    } catch(err){
+      console.warn("EmailJS (nije kritično):", err);
+    }
+  }
+
   // ===== SEND =====
   sendBtn.addEventListener("click", async (e)=>{
     e.preventDefault();
@@ -1214,6 +1264,26 @@ Nakon uplate, pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
 
       // Generiši QR NAKON što je modal otvoren (mali delay da se DOM renderuje)
       setTimeout(() => generateQR(total, orderId), 150);
+
+      // Pošalji auto-email klijentu (EmailJS)
+      sendClientEmail({
+        clientEmail: clientEmail,
+        fullName:    req(document.getElementById("fullName").value),
+        synOrderName: req(document.getElementById("synOrderName").value),
+        service:     serviceName(state.service),
+        totalRsd:    total,
+        birthDate:   req(document.getElementById("birthDate").value),
+        birthTime:   req(document.getElementById("birthTime").value),
+        birthPlace:  req(document.getElementById("birthPlace").value),
+        aDate:       req(document.getElementById("aDate").value),
+        aTime:       req(document.getElementById("aTime").value),
+        aPlace:      req(document.getElementById("aPlace").value),
+        bDate:       req(document.getElementById("bDate").value),
+        bTime:       req(document.getElementById("bTime").value),
+        bPlace:      req(document.getElementById("bPlace").value),
+        selectedQuestions: (state.service === "custom") ? pickedQuestionsText() : "",
+        addonText:   state.addonOn ? req(customText.value) : "",
+      });
 
 
     } catch(err){
