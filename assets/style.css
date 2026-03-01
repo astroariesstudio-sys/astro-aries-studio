@@ -550,3 +550,8 @@ footer{
   .btn{width:100%}
   .navlinks{justify-content:center}
 }
+.navlinks a.active{
+  background: rgba(198,169,107,.10);
+  border: 1px solid rgba(198,169,107,.35);
+  color: rgba(240,240,246,.92);
+}
