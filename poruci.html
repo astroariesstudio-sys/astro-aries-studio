@@ -12,14 +12,6 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070711'/><text y='.9em' font-size='80' x='10'>♈</text></svg>" />
   <link rel="stylesheet" href="assets/style.css" />
 
-  <!-- EmailJS SDK — za automatski email klijentu -->
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script>
-    // ⚙️ PODESI: Zameni sa tvojim EmailJS Public Key
-    (function(){
-      if(window.emailjs) emailjs.init({ publicKey: "TVOJ_EMAILJS_PUBLIC_KEY" });
-    })();
-  </script>
 </head>
 <body>
 
@@ -564,11 +556,6 @@
   // ====== Formspree ======
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdalvlgg";
 
-  // ====== EmailJS konfiguracija ======
-  // ⚙️ PODESI: Zameni sa tvojim Service ID i Template ID iz EmailJS dashboarda
-  const EMAILJS_SERVICE_ID  = "TVOJ_SERVICE_ID";   // npr. "service_abc123"
-  const EMAILJS_TEMPLATE_ID = "TVOJ_TEMPLATE_ID";  // npr. "template_xyz789"
-  // Public Key se podešava u <head> iznad
 
   // ====== Bank data ======
   const BANK = {
@@ -1098,17 +1085,16 @@
     }
   }
 
-  function getPaymentInstructions({totalRsd, orderId}){
+  function getPaymentInstructions({totalRsd}){
     return `INSTRUKCIJE ZA UPLATU (RSD)
 Primalac: ${BANK.recipient}
 Banka: ${BANK.bank}
 Račun: ${BANK.account}
 Svrha uplate: ${BANK.purpose}
-Poziv na broj / Šifra porudžbine: ${orderId}
 
 Iznos: ${totalRsd.toLocaleString("sr-RS")} RSD
 
-Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
+Nakon uplate, pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
   }
 
   function pickedQuestionsText(){
@@ -1153,46 +1139,6 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
     return true;
   }
 
-  // ===== Auto-email klijentu (EmailJS) =====
-  async function sendClientEmail(data){
-    // Ako EmailJS nije podešen, preskoči tiho
-    if(!window.emailjs || EMAILJS_SERVICE_ID === "TVOJ_SERVICE_ID") return;
-
-    const clientEmail = data.email || data.synEmail || "";
-    if(!clientEmail) return;
-
-    const templateParams = {
-      to_email:    clientEmail,
-      to_name:     data.fullName || data.synOrderName || "Klijente",
-      order_id:    data.orderId,
-      service:     data.service,
-      total_rsd:   data.totalRsd.toLocaleString("sr-RS") + " RSD",
-      bank_account: BANK.account,
-      bank_name:   BANK.bank,
-      recipient:   BANK.recipient,
-      purpose:     BANK.purpose,
-      // Detalji za natal/predikcije
-      birth_date:  data.birthDate || "—",
-      birth_time:  data.birthTime || "—",
-      birth_place: data.birthPlace || "—",
-      // Detalji za sinastriju
-      person_a:    data.aName ? `${data.aName} (${data.aDate}, ${data.aTime}, ${data.aPlace})` : "—",
-      person_b:    data.bName ? `${data.bName} (${data.bDate}, ${data.bTime}, ${data.bPlace})` : "—",
-      // Odabrana pitanja
-      questions:   data.selectedQuestions || "—",
-      // Addon
-      addon_text:  data.addonText || "—",
-    };
-
-    try{
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-      console.log("✅ Email potvrda poslata klijentu.");
-    } catch(err){
-      // Ne blokiraj korisnika ako email ne uspe
-      console.warn("EmailJS greška (nije kritično):", err);
-    }
-  }
-
   // ===== SEND =====
   sendBtn.addEventListener("click", async (e)=>{
     e.preventDefault();
@@ -1203,35 +1149,52 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
     const total = base + add;
     const orderId = "AA-" + Date.now().toString().slice(-8);
 
+    // Email klijenta (natal/custom/pred = email, syn = synEmail)
+    const clientEmail = (state.service === "syn")
+      ? req(document.getElementById("synEmail").value)
+      : req(document.getElementById("email").value);
+
     const payload = {
-      orderId,
-      service: serviceName(state.service),
-      totalRsd: total,
-      fullName: req(document.getElementById("fullName").value),
-      email: req(document.getElementById("email").value),
-      birthDate: req(document.getElementById("birthDate").value),
-      birthTime: req(document.getElementById("birthTime").value),
-      birthPlace: req(document.getElementById("birthPlace").value),
-      currentPlace: req(document.getElementById("currentPlace").value),
-      situation: req(document.getElementById("situation")?.value),
-      qpack: state.qpack,
-      selectedQuestions: (state.service === "custom") ? pickedQuestionsText() : "",
-      synEmail: req(document.getElementById("synEmail").value),
-      synOrderName: req(document.getElementById("synOrderName").value),
-      relationType: req(document.getElementById("relationType").value),
-      relationOther: req(document.getElementById("relationOther").value),
-      relFocus: req(document.getElementById("relFocus").value),
-      aName: req(document.getElementById("aName").value),
-      aDate: req(document.getElementById("aDate").value),
-      aTime: req(document.getElementById("aTime").value),
-      aPlace: req(document.getElementById("aPlace").value),
-      bName: req(document.getElementById("bName").value),
-      bDate: req(document.getElementById("bDate").value),
-      bTime: req(document.getElementById("bTime").value),
-      bPlace: req(document.getElementById("bPlace").value),
-      addonOn: !!state.addonOn,
-      addonCount: Number(customCount.value || 0),
-      addonText: req(customText.value)
+      // Formspree auto-reply — klijent dobija email potvrdu automatski
+      _replyto: clientEmail,
+      _subject: "Potvrda porudzbine — Astro Aries Studio",
+
+      // Podaci porudzbine
+      "Sifra porudzbine": orderId,
+      "Usluga": serviceName(state.service),
+      "Iznos": fmtRSD(total),
+
+      // Kontakt i licni podaci
+      "Ime i prezime": req(document.getElementById("fullName").value),
+      "Email": clientEmail,
+      "Datum rodjenja": req(document.getElementById("birthDate").value),
+      "Vreme rodjenja": req(document.getElementById("birthTime").value),
+      "Mesto rodjenja": req(document.getElementById("birthPlace").value),
+      "Trenutno mesto": req(document.getElementById("currentPlace").value),
+      "Opis situacije": req(document.getElementById("situation")?.value),
+
+      // Odabrana pitanja (custom paket)
+      "Paket pitanja": state.service === "custom" ? state.qpack + " pitanja" : "",
+      "Odabrana pitanja": (state.service === "custom") ? pickedQuestionsText() : "",
+
+      // Sinastrija
+      "Ime narucioca": req(document.getElementById("synOrderName").value),
+      "Tip odnosa": req(document.getElementById("relationType").value),
+      "Fokus odnosa": req(document.getElementById("relFocus").value),
+      "Osoba A": req(document.getElementById("aName").value),
+      "Datum rodjenja A": req(document.getElementById("aDate").value),
+      "Vreme rodjenja A": req(document.getElementById("aTime").value),
+      "Mesto rodjenja A": req(document.getElementById("aPlace").value),
+      "Osoba B": req(document.getElementById("bName").value),
+      "Datum rodjenja B": req(document.getElementById("bDate").value),
+      "Vreme rodjenja B": req(document.getElementById("bTime").value),
+      "Mesto rodjenja B": req(document.getElementById("bPlace").value),
+
+      // Konkretna pitanja (addon)
+      "Konkretna pitanja": state.addonOn ? req(customText.value) : "",
+
+      // Instrukcije za uplatu — klijent ih vidi u emailu
+      "INSTRUKCIJE ZA UPLATU": getPaymentInstructions({totalRsd: total}),
     };
 
     const oldText = sendBtn.textContent;
@@ -1247,13 +1210,11 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
       if(!res.ok) throw new Error("Formspree submit failed");
 
       // Otvori success modal
-      openSuccessModal("Uplata na račun (RSD) + IPS QR", getPaymentInstructions({totalRsd: total, orderId}));
+      openSuccessModal("Uplata na račun (RSD) + IPS QR", getPaymentInstructions({totalRsd: total}));
 
       // Generiši QR NAKON što je modal otvoren (mali delay da se DOM renderuje)
       setTimeout(() => generateQR(total, orderId), 150);
 
-      // Pošalji automatski email potvrdu klijentu
-      sendClientEmail({...payload, totalRsd: total});
 
     } catch(err){
       console.error(err);
