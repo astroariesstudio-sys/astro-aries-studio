@@ -1075,18 +1075,42 @@
     return "RSD" + fixed;
   }
 
-  async function generateIpsQrPng({account18, payeeName, amountRsd, purpose, reference}){
-    const url = "https://nbs.rs/QRcode/api/qr/v1/gen/320?lang=sr_RS_Latn";
-    const body = {
-      K: "PR",
-      V: "01",
-      C: "1",
-      R: account18,
-      N: payeeName,
-      I: formatAmountRSD(amountRsd),
-      SF: "289",
-      S: purpose,
-      RO: reference
+ function normalizeAccountTo18Digits(acc){
+  const digits = (acc || "").replace(/\D/g, "");
+  return digits.length === 18 ? digits : null;
+}
+
+function formatAmountRSD(n){
+  // IPS format: RSD1234,00
+  const fixed = (Number(n) || 0).toFixed(2).replace(".", ",");
+  return "RSD" + fixed;
+}
+
+function buildIpsPayloadString({account18, payeeName, amountRsd, purpose, reference}){
+  // IPS payload string (radi za mBanking sken)
+  // ključ: vrednost, razdvojeno sa |
+  // Bitno: bez specijalnih znakova koji lome QR (ć,č obično prolaze, ali ako bude problema – prebacimo u latinicu bez dijakritike)
+  return [
+    "K:PR",
+    "V:01",
+    "C:1",
+    `R:${account18}`,
+    `N:${payeeName}`,
+    `I:${formatAmountRSD(amountRsd)}`,
+    "SF:289",
+    `S:${purpose}`,
+    `RO:${reference}`
+  ].join("|");
+}
+
+async function renderIpsQrLocal({imgEl, account18, payeeName, amountRsd, purpose, reference}){
+  if(!window.QRCode){
+    throw new Error("QRCode lib nije učitana (nema interneta / CDN blokiran).");
+  }
+  const payload = buildIpsPayloadString({account18, payeeName, amountRsd, purpose, reference});
+  const dataUrl = await QRCode.toDataURL(payload, { width: 320, margin: 1 });
+  imgEl.src = dataUrl;
+}
     };
 
     const res = await fetch(url, {
@@ -1247,6 +1271,23 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
       const pi = getPaymentInstructions({totalRsd: total, orderId});
       openSuccessModal(pi.hint, pi.text);
 
+      try{
+  const account18 = normalizeAccountTo18Digits(BANK.account);
+  if(!account18) throw new Error("Račun mora imati 18 cifara (bez crtica).");
+
+  await renderIpsQrLocal({
+    imgEl: document.getElementById("ipsQrImg"),
+    account18,
+    payeeName: BANK.recipient,
+    amountRsd: total,
+    purpose: BANK.purpose,
+    reference: orderId
+  });
+} catch(e){
+  console.log("QR error:", e);
+  // Ako QR ne uspe, instrukcije i dalje ostaju u tekstu
+}
+
       // Generate IPS QR
       try{
         const account18 = normalizeAccountTo18Digits(BANK.account);
@@ -1280,6 +1321,6 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
   calc();
   stepTo(1);
 </script>
-
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 </body>
 </html>
