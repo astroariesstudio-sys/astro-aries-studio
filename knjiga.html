@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Knjiga o Vama — Astro Aries Studio</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="Astro Aries Studio logo" />
+      <div class="title">ASTRO <span>ARIES</span> STUDIO</div>
+    </a>
+
+    <nav class="navlinks">
+      <a href="index.html">Početna</a>
+      <a href="knjiga.html">Knjiga o Vama</a>
+      <a href="usluge.html">Usluge</a>
+      <a href="metod.html">Metod</a>
+      <a href="primer.html">Primer</a>
+      <a href="poruci.html">Poruči</a>
+    </nav>
+
+    <div class="cta">
+      <a class="btn" href="primer.html">Primer PDF</a>
+      <a class="btn primary" href="poruci.html">Poruči</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="heroCard">
+      <svg class="sparkles" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs><radialGradient id="sp" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(255,255,255,.9)"/><stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        </radialGradient></defs>
+        <circle cx="40" cy="30" r="1.4" fill="rgba(255,255,255,.55)"/>
+        <circle cx="170" cy="160" r="20" fill="url(#sp)" opacity=".25"/>
+      </svg>
+
+      <svg class="zodiacRing" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle class="ringOuter" cx="300" cy="300" r="245" fill="none"/>
+        <circle class="ringMid"   cx="300" cy="300" r="210" fill="none"/>
+        <circle class="ringInner" cx="300" cy="300" r="175" fill="none"/>
+        <g text-anchor="middle" dominant-baseline="middle" font-size="22">
+          <text class="glyph" x="300" y="112">♈</text><text class="glyph" x="468" y="214">♊</text>
+          <text class="glyph" x="300" y="490">♎</text><text class="glyph" x="134" y="388">♐</text>
+        </g>
+      </svg>
+
+      <div class="kicker">FORMAT KNJIGE</div>
+      <hr class="hr-astro" />
+      <h1>Knjiga o Vama —<br/>12 kuća kao 12 poglavlja života.</h1>
+
+      <p class="subhead">
+        Ovo nije “horoskop”. Ovo je struktura: ko ste, gde ste najjači, gde život traži korekciju,
+        i koji periodi otvaraju teme (posao, ljubav, finansije, dom, zdravlje).
+      </p>
+
+      <div class="badges">
+        <div class="badge">✔ Kuće 1–12: jasna poglavlja</div>
+        <div class="badge">✔ Pečat karte + dispozitori</div>
+        <div class="badge">✔ Periodi: zašto baš sada</div>
+      </div>
+
+      <div class="heroActions" style="margin-top:14px">
+        <a class="btn primary" href="poruci.html">Poruči svoju knjigu</a>
+        <a class="btn" href="primer.html">Pogledaj primer</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sectionTitle">
+      <div class="kicker">ŠTA DOBIJATE</div>
+      <h2>Struktura koja se čita kao knjiga</h2>
+      <p class="small">Brzo razumete “suštinu”, a zatim idete u dubinu po oblastima.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Pečat karte</h3>
+        <p>Asc/Desc osa, vladar Asc, Mes. čvorovi, “velika trojka” — osnova identiteta.</p>
+      </div>
+      <div class="card">
+        <h3>Kuće 1–12</h3>
+        <p>Svaka kuća kao životna tema: odnosi, karijera, novac, dom, zdravlje, smisao.</p>
+      </div>
+      <div class="card">
+        <h3>Periodi i aktivacije</h3>
+        <p>Vremenski prozori + objašnjenje uzroka (okidači, tranziti, ciklusi).</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <div>© <span id="y"></span> Astro Aries Studio</div>
+    <div><a href="mailto:astroariesstudio@gmail.com">astroariesstudio@gmail.com</a></div>
+  </div>
+</footer>
+
+<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>
