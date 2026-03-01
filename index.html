@@ -1,62 +1,140 @@
 <!DOCTYPE html>
 <html lang="sr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Astro Aries Studio</title>
-
-<style>
-body{
-font-family: Arial, sans-serif;
-background:#0b0b12;
-color:white;
-margin:0;
-text-align:center;
-}
-
-.hero{
-padding:80px 20px;
-}
-
-h1{
-font-size:48px;
-}
-
-.btn{
-background:#c6a96b;
-color:black;
-padding:15px 25px;
-text-decoration:none;
-border-radius:8px;
-font-weight:bold;
-display:inline-block;
-margin-top:20px;
-}
-
-.section{
-padding:60px 20px;
-}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astro Aries Studio — Knjiga o Vama</title>
+  <link rel="stylesheet" href="assets/style.css" />
 </head>
-
 <body>
 
-<div class="hero">
-<h1>Knjiga o Vama</h1>
-<p>Vi ste glavni glumac u režiji planeta.</p>
-<a class="btn" href="#order">Poruči analizu</a>
-</div>
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">ASTRO <span>ARIES</span> STUDIO</a>
+    <nav class="navlinks">
+      <a href="knjiga.html">Knjiga o Vama</a>
+      <a href="usluge.html">Usluge</a>
+      <a href="metod.html">Metod</a>
+      <a href="primer.html">Primer</a>
+      <a href="poruci.html">Poruči</a>
+    </nav>
+    <div class="cta">
+      <a class="btn ghost" href="primer.html">Primer PDF</a>
+      <a class="btn primary" href="poruci.html">Poruči</a>
+    </div>
+  </div>
+</header>
 
-<div class="section">
-<h2>Astro Aries Studio</h2>
-<p>Personalizovana astrološka analiza u formi profesionalne knjige.</p>
-</div>
+<main class="container">
+  <section class="hero">
+    <div class="heroGlow"></div>
+    <div class="heroCard">
+      <div class="kicker">PROFESIONALNA ASTRO KNJIGA</div>
+      <h1>Knjiga o Vama<br/>vi ste glavni glumac u režiji planeta.</h1>
+      <p class="subhead">
+        Ne dobijate generičan “horoskop”. Dobijate ličnu mapu života u formi knjige —  
+        zasnovanu na strukturisanom sistemu analize (80+ tačaka), sa fokusom na vašu trenutnu životnu fazu.
+      </p>
+      <div class="heroActions">
+        <a class="btn primary" href="poruci.html">Poruči analizu</a>
+        <a class="btn ghost" href="primer.html">Pogledaj primer</a>
+      </div>
 
-<div class="section" id="order">
-<h2>Poručivanje</h2>
-<p>Pošaljite email:</p>
-<p><b>astroariesstudio@gmail.com</b></p>
-</div>
+      <div class="badges">
+        <div class="badge">✔ Knjiga, ne tekst: čitljiv PDF dizajn</div>
+        <div class="badge">✔ Sistematski: 80+ tačaka analize</div>
+        <div class="badge">✔ Praktično: smer, teme, periodi</div>
+      </div>
+    </div>
+  </section>
 
+  <section class="section">
+    <div class="sectionTitle">
+      <div class="kicker">KONCEPT</div>
+      <h2>Šta je “Knjiga o Vama”</h2>
+      <p class="small">Format koji ostaje: poglavlja o vašem životu, jasna struktura, profesionalan stil.</p>
+    </div>
+
+    <div class="grid">
+      <div class="card">
+        <h3>Lična mapa života</h3>
+        <p>Kuće 1–12 kao poglavlja: odnos, posao, novac, dom, zdravlje, smer.</p>
+      </div>
+      <div class="card">
+        <h3>Vremenski ciklusi</h3>
+        <p>Aktivacije i periodi koji se otvaraju — uz objašnjenje “zašto baš sada”.</p>
+      </div>
+      <div class="card">
+        <h3>Konsultativni pristup <span class="tag">premium</span></h3>
+        <p>Vaša trenutna situacija je deo procesa: analiza se vezuje za realan život.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sectionTitle">
+      <div class="kicker">USLUGE</div>
+      <h2>Najtraženije</h2>
+      <p class="small">Izaberite paket — a zatim (po želji) dodajte lična pitanja.</p>
+    </div>
+
+    <div class="pricing">
+      <div class="price">
+        <div class="name">Natalna knjiga</div>
+        <div class="amount">2.000 RSD</div>
+        <div class="desc">Dubinska natalna analiza u formi profesionalne knjige (PDF).</div>
+        <div class="actions"><a class="btn ghost" href="poruci.html">Poruči</a></div>
+      </div>
+
+      <div class="price featured">
+        <div class="name">Natal + Predikcije <span class="tag">Top</span></div>
+        <div class="amount">3.500 RSD</div>
+        <div class="desc">Natal + ključni periodi i aktivacije. Najkompletnija opcija.</div>
+        <div class="actions"><a class="btn primary" href="poruci.html">Poruči</a></div>
+      </div>
+
+      <div class="price">
+        <div class="name">Samo predikcije</div>
+        <div class="amount">1.500 RSD</div>
+        <div class="desc">Fokus na vremenskim periodima (ako natal već imate).</div>
+        <div class="actions"><a class="btn ghost" href="poruci.html">Poruči</a></div>
+      </div>
+
+      <div class="price">
+        <div class="name">Sinastrija (Uporedni horoskop)</div>
+        <div class="amount">3.500 RSD</div>
+        <div class="desc">Dinamika odnosa, kompatibilnost, okidači i potencijal veze.</div>
+        <div class="actions"><a class="btn ghost" href="poruci.html">Poruči</a></div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px" class="note">
+      <b>Važno:</b> Za paket “Natal + Predikcije” potreban je kratak opis vaše trenutne situacije (brak/veza, posao, promene, dileme),
+      kako bi analiza bila precizna i vezana za realan život.
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="sectionTitle">
+      <div class="kicker">UZORAK</div>
+      <h2>Primer izveštaja</h2>
+      <p class="small">Pogledajte stil i strukturu. Vaš izveštaj je 100% personalizovan.</p>
+      <div style="margin-top:12px">
+        <a class="btn primary" href="primer.html">Otvori primer</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <div>© <span id="y"></span> Astro Aries Studio</div>
+    <div><a href="poruci.html">astroariesstudio@gmail.com</a></div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+</script>
 </body>
 </html>
