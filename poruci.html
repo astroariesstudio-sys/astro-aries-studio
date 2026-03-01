@@ -386,6 +386,32 @@
         </div>
 
       </div>
+      <div class="fieldset" id="paySection" style="margin-top:12px">
+  <div class="legend">
+    <b>Način plaćanja</b>
+    <span class="hint">instrukcije dobijaš nakon slanja</span>
+  </div>
+
+  <div class="radioGrid" id="payGrid">
+    <label class="radioCard active" data-pay="bank">
+      <input type="radio" name="pay" value="bank" checked />
+      <div class="radioTop">
+        <div class="radioName">Uplata na račun (RSD)</div>
+        <span class="badgeGold">preporučeno</span>
+      </div>
+      <div class="radioDesc">Dobijaš podatke za uplatu + poziv na broj.</div>
+    </label>
+
+    <label class="radioCard" data-pay="paypal">
+      <input type="radio" name="pay" value="paypal" />
+      <div class="radioTop">
+        <div class="radioName">PayPal (EUR)</div>
+        <span class="badgeGold">online</span>
+      </div>
+      <div class="radioDesc">Dobijaš PayPal adresu + iznos / napomenu.</div>
+    </label>
+  </div>
+</div>
 
       <!-- RIGHT: SUMMARY -->
       <aside class="summary">
