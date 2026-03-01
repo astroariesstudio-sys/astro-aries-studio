@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Poruči — Astro Aries Studio</title>
+  <meta name="description" content="Poručite personalizovanu astrološku analizu. Natalna knjiga, predikcije, sinastrija ili mini-knjiga sa pitanjima." />
+  <meta property="og:title" content="Poruči — Astro Aries Studio" />
+  <meta property="og:description" content="Poručite svoju personalnu astro knjigu." />
+  <meta property="og:url" content="https://astro-aries-studio.vercel.app/poruci.html" />
+  <meta property="og:image" content="https://astro-aries-studio.vercel.app/assets/logo.png" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070711'/><text y='.9em' font-size='80' x='10'>♈</text></svg>" />
   <link rel="stylesheet" href="assets/style.css" />
 </head>
 <body>
@@ -13,24 +19,33 @@
 <header>
   <div class="container nav">
     <a class="brand" href="index.html">
-      <img src="assets/logo.png" alt="Astro Aries Studio logo" />
+      <img src="assets/logo.png" alt="Astro Aries Studio logo" loading="lazy" />
       <div class="title">ASTRO <span>ARIES</span> STUDIO</div>
     </a>
-
     <nav class="navlinks">
       <a href="index.html">Početna</a>
       <a href="knjiga.html">Knjiga o Vama</a>
       <a href="usluge.html">Usluge</a>
       <a href="metod.html">Metod</a>
-      <a href="primer.html">Primer</a>
-      <a href="poruci.html">Poruči</a>
+      <a href="poruci.html" class="active" aria-current="page">Poruči</a>
     </nav>
-
     <div class="cta">
-      <a class="btn" href="primer.html">Primer PDF</a>
       <a class="btn primary" href="poruci.html">Poruči</a>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Otvori meni" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
+  <nav class="mobileNav" id="mobileNav">
+    <a href="index.html">Početna</a>
+    <a href="knjiga.html">Knjiga o Vama</a>
+    <a href="usluge.html">Usluge</a>
+    <a href="metod.html">Metod</a>
+    <a href="poruci.html" class="active">Poruči</a>
+    <div class="mobileCtaRow">
+      <a class="btn primary" href="poruci.html" style="flex:1;justify-content:center">Poruči analizu</a>
+    </div>
+  </nav>
 </header>
 
 <main class="container">
@@ -50,7 +65,6 @@
         <circle cx="170" cy="160" r="20" fill="url(#sp)" opacity=".25"/>
         <circle cx="420" cy="170" r="26" fill="url(#sp)" opacity=".18"/>
       </svg>
-
       <svg class="zodiacRing" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <circle class="ringOuter" cx="300" cy="300" r="245" fill="none"/>
         <circle class="ringMid"   cx="300" cy="300" r="210" fill="none"/>
@@ -68,15 +82,14 @@
 
       <div class="kicker">PORUČIVANJE</div>
       <hr class="hr-astro" />
-      <h1>Knjiga o tebi — Lična astro mapa</h1>
+      <h1>Knjiga o tebi —<br/><em>Lična astro mapa</em></h1>
       <p class="subhead">
         Izaberi uslugu → (ako treba) izaberi pitanja → unesi podatke → pošalji porudžbinu.
       </p>
-
       <div class="badges">
-        <div class="badge">✔ PDF knjiga (čitljiv dizajn)</div>
-        <div class="badge">✔ Jasne teme + smernice</div>
-        <div class="badge">✔ Profesionalna struktura</div>
+        <div class="badge">✦ PDF knjiga (čitljiv dizajn)</div>
+        <div class="badge">✦ Jasne teme + smernice</div>
+        <div class="badge">✦ Isporuka 3–5 radnih dana</div>
       </div>
     </div>
   </section>
@@ -88,7 +101,6 @@
         <h2 style="margin:8px 0 0">Porudžbina — PRO</h2>
         <p class="small" style="margin:8px 0 0">1) Usluga • 2) Pitanja • 3) Podaci • 4) Slanje</p>
       </div>
-
       <div class="steps" aria-hidden="true">
         <div class="stepPill active" id="pill1">1) Usluga</div>
         <div class="stepPill" id="pill2">2) Pitanja</div>
@@ -153,7 +165,7 @@
                 <span class="badgeGold">3/5/10</span>
               </div>
               <div class="radioDesc">
-                Prvo izaberi paket (3/5/10), zatim označi tačno toliko pitanja u “knjizi”, potvrdi izbor — pa ideš na podatke.
+                Prvo izaberi paket (3/5/10), zatim označi tačno toliko pitanja u "knjizi", potvrdi izbor — pa ideš na podatke.
               </div>
               <div class="radioPrice">3 pitanja: 900 • 5: 1.400 • 10: 2.400 RSD</div>
             </label>
@@ -187,52 +199,42 @@
                 <div class="radioName">3 pitanja</div>
                 <span class="badgeGold">brzi fokus</span>
               </div>
-              <div class="radioDesc">Za jednu dilemu / brzi pregled.</div>
+              <div class="radioDesc">Za jednu dilemu / brzi uvid.</div>
               <div class="radioPrice">900 RSD</div>
             </label>
-
             <label class="radioCard" data-qpack="5">
               <input type="radio" name="qpack" value="5" />
               <div class="radioTop">
                 <div class="radioName">5 pitanja</div>
-                <span class="badgeGold">najtraženije</span>
+                <span class="badgeGold">balans</span>
               </div>
-              <div class="radioDesc">Najbolji balans (više oblasti).</div>
+              <div class="radioDesc">Više oblasti, širi uvid.</div>
               <div class="radioPrice">1.400 RSD</div>
             </label>
-
             <label class="radioCard" data-qpack="10">
               <input type="radio" name="qpack" value="10" />
               <div class="radioTop">
                 <div class="radioName">10 pitanja</div>
-                <span class="badgeGold">dubinski</span>
+                <span class="badgeGold">dubina</span>
               </div>
-              <div class="radioDesc">Širi obuhvat (više tema).</div>
+              <div class="radioDesc">Kompletan pregled po temama.</div>
               <div class="radioPrice">2.400 RSD</div>
             </label>
           </div>
 
-          <div class="actionsRow" style="margin-top:12px">
-            <button class="btn primary" id="openBookBtn" type="button">Otvori knjigu pitanja</button>
-            <button class="btn" id="clearQuestionsBtn" type="button">Očisti izbor</button>
-          </div>
-
-          <div class="small" style="margin-top:10px">
-            Izabrano: <b id="pickedInline">0</b> / <b id="pickedMaxInline">3</b>
-          </div>
-
-          <div class="miniNote">
-            <b>Pravilo:</b> moraš potvrditi izbor sa tačno <b>3/5/10</b> pitanja (koliko je paket), tek onda ideš na “Podaci”.
+          <div class="inlineNote" style="margin-top:12px">
+            Izabrano: <b id="pickedInline">0</b> / <b id="pickedMaxInline">3</b> pitanja.
+            <button class="btn" id="openBookBtn" type="button" style="margin-left:10px">Otvori knjigu pitanja</button>
+            <button class="btn" id="clearQuestionsBtn" type="button" style="margin-left:6px">Očisti</button>
           </div>
         </div>
 
-        <!-- STEP 2B: SINASTRIJA -->
+        <!-- STEP 2B: SINASTRIJA TIP -->
         <div class="fieldset" id="synSection" style="display:none; margin-top:12px">
           <div class="legend">
             <b>2) Sinastrija — tip odnosa</b>
             <span class="hint">obavezno</span>
           </div>
-
           <div class="row">
             <div>
               <label>Tip odnosa (obavezno)</label>
@@ -247,11 +249,10 @@
               </select>
             </div>
             <div>
-              <label>Ako je “Drugo” — upiši</label>
+              <label>Ako je "Drugo" — upiši</label>
               <input id="relationOther" type="text" placeholder="Npr: ..." />
             </div>
           </div>
-
           <div style="margin-top:10px">
             <label>Fokus odnosa (preporučeno)</label>
             <textarea id="relFocus" placeholder="1–4 rečenice: šta je ključna tema odnosa sada?"></textarea>
@@ -264,7 +265,6 @@
             <b>3) Podaci (kontakt + rođenje)</b>
             <span class="hint">za natal/predikcije/odabir pitanja</span>
           </div>
-
           <div class="row">
             <div>
               <label>Ime i prezime</label>
@@ -275,7 +275,6 @@
               <input id="email" type="email" placeholder="Npr: ana@gmail.com" />
             </div>
           </div>
-
           <div class="row" style="margin-top:10px">
             <div>
               <label>Datum rođenja</label>
@@ -286,7 +285,6 @@
               <input id="birthTime" type="text" placeholder="HH:MM (npr 06:30)" />
             </div>
           </div>
-
           <div class="row" style="margin-top:10px">
             <div>
               <label>Mesto rođenja</label>
@@ -297,7 +295,6 @@
               <input id="currentPlace" type="text" placeholder="Npr: Novi Sad, RS" />
             </div>
           </div>
-
           <div id="situationBox" style="margin-top:10px; display:none">
             <label>Kratak opis situacije (obavezno za Natal + Predikcije)</label>
             <textarea id="situation" placeholder="Posao/veza/promene/dileme — 4–6 rečenica."></textarea>
@@ -310,7 +307,6 @@
             <b>3) Podaci (2 osobe)</b>
             <span class="hint">sinastrija</span>
           </div>
-
           <div class="sepTitle">Kontakt (obavezno)</div>
           <div class="row">
             <div>
@@ -322,7 +318,6 @@
               <input id="synOrderName" type="text" placeholder="Npr: Ana" />
             </div>
           </div>
-
           <div class="sepTitle">Osoba A</div>
           <div class="row">
             <div><label>Ime (ili inicijali)</label><input id="aName" type="text" placeholder="Npr: Ana" /></div>
@@ -332,7 +327,6 @@
             <div><label>Vreme rođenja</label><input id="aTime" type="text" placeholder="HH:MM" /></div>
             <div><label>Mesto rođenja</label><input id="aPlace" type="text" placeholder="Grad, država" /></div>
           </div>
-
           <div class="sepTitle">Osoba B</div>
           <div class="row">
             <div><label>Ime (ili inicijali)</label><input id="bName" type="text" placeholder="Npr: Marko" /></div>
@@ -345,13 +339,13 @@
         </div>
 
         <!-- PAYMENT NOTE -->
-        <div class="fieldset" id="paySection" style="margin-top:12px">
+        <div class="fieldset" style="margin-top:12px">
           <div class="legend">
             <b>Plaćanje (Srbija)</b>
             <span class="hint">IPS QR + uplata na račun</span>
           </div>
           <div class="miniNote" style="margin-top:0">
-            Nakon slanja porudžbine dobijaš instrukcije + IPS QR (Skeniraj i plati).
+            Nakon slanja porudžbine dobijaš instrukcije + IPS QR kod (Skeniraj i plati).
           </div>
         </div>
 
@@ -361,15 +355,13 @@
             <b>+ Dodaj konkretna pitanja (opciono)</b>
             <span class="hint">500 RSD po pitanju</span>
           </div>
-
           <div class="toggleRow">
             <div>
               <div style="font-weight:900">Dodaj moja konkretna pitanja</div>
-              <div class="small">Npr: “da li menjam posao”, “da li se selim”, “kada ulazim u ozbiljnu vezu”.</div>
+              <div class="small">Npr: "da li menjam posao", "da li se selim", "kada ulazim u ozbiljnu vezu".</div>
             </div>
             <div class="switch" id="customSwitch" role="switch" aria-checked="false" tabindex="0"></div>
           </div>
-
           <div id="customQuestionsBox" style="display:none; margin-top:10px">
             <div class="row">
               <div>
@@ -400,49 +392,40 @@
             <b>Pregled porudžbine</b>
             <span class="badgeGold" id="serviceBadge">PDF</span>
           </div>
-
           <div class="sumLine">
             <span>Usluga</span>
             <span id="chosenLabel">Knjiga o tebi — Natal izdanje</span>
           </div>
-
           <div class="sumLine" id="qPackLine" style="display:none">
             <span>Paket pitanja</span>
             <span id="qPackLabel">3 pitanja</span>
           </div>
-
           <div class="sumLine" id="qPickedLine" style="display:none">
             <span>Izabrano</span>
             <span id="qPickedLabel">0/3</span>
           </div>
-
           <div class="sumLine" id="relTypeLine" style="display:none">
             <span>Tip odnosa</span>
             <span id="relTypeLabel">—</span>
           </div>
-
           <div class="sumLine">
             <span>Osnovna cena</span>
             <span id="basePrice">2.000 RSD</span>
           </div>
-
           <div class="sumLine">
             <span>Konkretna pitanja</span>
             <span id="customPrice">0 RSD</span>
           </div>
-
           <div class="total">
             <div class="small">Ukupno</div>
             <div class="big" id="totalPrice">2.000 RSD</div>
           </div>
-
           <div class="actionsRow">
             <a class="btn primary" href="#" id="sendBtn">Pošalji porudžbinu</a>
             <a class="btn" href="index.html">Nazad</a>
           </div>
-
           <div class="small" style="margin-top:10px">
-            Porudžbina ide direktno na email (Formspree). Instrukcije + IPS QR dobijaš odmah.
+            Porudžbina ide direktno na email. Instrukcije + IPS QR dobijaš odmah.
           </div>
         </div>
       </aside>
@@ -452,9 +435,40 @@
 </main>
 
 <footer>
-  <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
-    <div>© <span id="y"></span> Astro Aries Studio</div>
-    <div><a href="mailto:astroariesstudio@gmail.com">astroariesstudio@gmail.com</a></div>
+  <div class="container">
+    <div class="footerGrid">
+      <div class="footerBrand">
+        <div class="title">ASTRO <span>ARIES</span> STUDIO</div>
+        <p>Personalizovana astrološka analiza u formi knjige. Vaša lična mapa života — zasnovana na sistemu, ne na intuiciji.</p>
+        <div class="socialLinks">
+          <a class="socialLink" href="mailto:astroariesstudio@gmail.com" title="Email" aria-label="Email">✉</a>
+          <a class="socialLink" href="https://instagram.com" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram">📷</a>
+        </div>
+      </div>
+      <div class="footerCol">
+        <h5>Stranice</h5>
+        <ul>
+          <li><a href="index.html">Početna</a></li>
+          <li><a href="knjiga.html">Knjiga o Vama</a></li>
+          <li><a href="usluge.html">Usluge i cene</a></li>
+          <li><a href="metod.html">Metod analize</a></li>
+          <li><a href="poruci.html">Poruči</a></li>
+        </ul>
+      </div>
+      <div class="footerCol">
+        <h5>Usluge</h5>
+        <ul>
+          <li><a href="poruci.html">Natalna knjiga — 2.000 RSD</a></li>
+          <li><a href="poruci.html">Natal + Predikcije — 3.500 RSD</a></li>
+          <li><a href="poruci.html">Samo predikcije — 1.500 RSD</a></li>
+          <li><a href="poruci.html">Sinastrija — 3.500 RSD</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footerBottom">
+      <div>© <span id="y"></span> Astro Aries Studio. Sva prava zadržana.</div>
+      <div><a href="mailto:astroariesstudio@gmail.com">astroariesstudio@gmail.com</a></div>
+    </div>
   </div>
 </footer>
 
@@ -464,33 +478,27 @@
     <div class="modalHeader">
       <div>
         <div class="modalTitle">Knjiga pitanja — izaberi tačno <span id="modalNeed">3</span></div>
-        <div class="small">Klikni pitanja, zatim “Potvrdi izbor”.</div>
+        <div class="small">Klikni pitanja, zatim "Potvrdi izbor".</div>
       </div>
       <button class="modalClose" id="closeBookBtn" aria-label="Zatvori">✕</button>
     </div>
-
     <div class="modalBody">
       <div class="bookSide">
         <div style="font-weight:950">Kategorije</div>
         <div class="chipRow" id="catChips"></div>
-
         <div class="sepTitle">Pretraga</div>
         <input id="qSearch" type="text" placeholder="Traži (npr: brak, posao, novac...)" />
-
         <div class="sepTitle">Brzi unos brojeva (opciono)</div>
         <textarea id="qNumbersInModal" placeholder="Npr: 1, 7, 12 ..."></textarea>
-
         <div class="sepTitle">Kontrole</div>
         <div class="actionsRow" style="margin-top:8px">
           <button class="btn" id="modalClearBtn" type="button">Očisti</button>
           <button class="btn primary" id="modalConfirmBtn" type="button" aria-disabled="true" disabled>Potvrdi izbor</button>
         </div>
-
         <div class="miniNote" style="margin-top:12px">
           <b>Pravilo:</b> potvrda je moguća tek kad izabereš tačno <b id="needInline">3</b> pitanja.
         </div>
       </div>
-
       <div class="bookMain">
         <div class="qTopBar">
           <div class="small">Filtrirano: <b id="filteredCount">0</b></div>
@@ -507,20 +515,24 @@
   <div class="modal" role="dialog" aria-modal="true" aria-label="Porudžbina poslata">
     <div class="modalHeader">
       <div>
-        <div class="modalTitle">✅ Porudžbina je poslata</div>
+        <div class="modalTitle">✅ Porudžbina je poslata!</div>
         <div class="small">Instrukcije + IPS QR su ispod. Sačuvaj ili kopiraj podatke.</div>
       </div>
       <button class="modalClose" id="closeSuccessBtn" aria-label="Zatvori">✕</button>
     </div>
-
     <div class="modalBody" style="grid-template-columns:1fr; height:auto">
       <div class="bookMain" style="max-height:72vh">
 
-        <div class="sepTitle">IPS QR (Skeniraj i plati)</div>
-        <div class="small" style="margin-bottom:10px;opacity:.9">
-          Otvori mBanking → IPS Skeniraj → skeniraj QR.
+        <div class="sepTitle">IPS QR kod (Skeniraj i plati)</div>
+        <div class="small" style="margin-bottom:12px;opacity:.9">
+          Otvori mBanking → IPS Skeniraj → skeniraj QR kod ispod.
         </div>
-        <img id="ipsQrImg" alt="IPS QR kod" style="max-width:260px;width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);padding:10px" />
+
+        <!-- QR wrapper - canvas se generiše ovde -->
+        <div class="qrWrap" id="qrWrap">
+          <canvas id="ipsQrCanvas"></canvas>
+          <div class="qrLabel" id="qrLabel">Generisanje QR koda...</div>
+        </div>
 
         <div class="sepTitle">Instrukcije za plaćanje</div>
         <div class="small" id="payHint" style="margin-bottom:10px;opacity:.9"></div>
@@ -539,19 +551,19 @@
   </div>
 </div>
 
-<!-- QR lib (mora pre glavnog JS-a) -->
+<!-- QR lib -->
 <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
 
 <script>
   // ====== Formspree ======
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdalvlgg";
 
-  // ====== Bank data (Srbija) ======
+  // ====== Bank data ======
   const BANK = {
     recipient: "Astro Aries Studio",
     bank: "OTP banka",
     account: "325-9300500194214-69",
-    purpose: "Astro Aries Studio — izveštaj",
+    purpose: "Astro Aries Studio - izvestaj",
   };
 
   document.getElementById("y").textContent = new Date().getFullYear();
@@ -610,7 +622,7 @@
     {n:45,t:"Razlika prvog/drugog braka",c:"Brak"},
     {n:46,t:"Najbolji period za brak",c:"Brak"},
     {n:47,t:"Da li osobu već poznaješ",c:"Brak"},
-    {n:48,t:"Jedna istina koja ‘pogađa’",c:"Osnova"},
+    {n:48,t:"Jedna istina koja 'pogađa'",c:"Osnova"},
     {n:49,t:"Nasledstvo/podrška kroz druge",c:"8. kuća"},
     {n:50,t:"Zajednički novac i pritisci",c:"8. kuća"},
     {n:51,t:"Ko pomaže / kome si oslonac",c:"8. kuća"},
@@ -692,7 +704,6 @@
 
   const sendBtn = document.getElementById("sendBtn");
 
-  // Modals
   const bookModal = document.getElementById("bookModal");
   const openBookBtn = document.getElementById("openBookBtn");
   const closeBookBtn = document.getElementById("closeBookBtn");
@@ -714,7 +725,8 @@
   const copyPayBtn = document.getElementById("copyPayBtn");
   const payText = document.getElementById("payText");
   const payHint = document.getElementById("payHint");
-  const ipsQrImg = document.getElementById("ipsQrImg");
+  const ipsQrCanvas = document.getElementById("ipsQrCanvas");
+  const qrLabel = document.getElementById("qrLabel");
 
   // ===== State =====
   let state = {
@@ -865,11 +877,7 @@
       el.type = "button";
       el.className = "chip" + (state.cat === cat ? " active" : "");
       el.textContent = cat;
-      el.addEventListener("click", ()=>{
-        state.cat = cat;
-        renderChips();
-        renderQuestions();
-      });
+      el.addEventListener("click", ()=>{ state.cat = cat; renderChips(); renderQuestions(); });
       catChips.appendChild(el);
     });
   }
@@ -877,19 +885,15 @@
   function renderQuestions(){
     const need = Number(state.qpack);
     pickedPill.textContent = `Izabrano: ${state.selectedQ.size}/${need}`;
-
     const filtered = QUESTIONS.filter(matchesFilter);
     filteredCount.textContent = String(filtered.length);
-
     qList.innerHTML = "";
     filtered.forEach(q=>{
       const item = document.createElement("label");
       item.className = "qItem";
-
       const cb = document.createElement("input");
       cb.type = "checkbox";
       cb.checked = state.selectedQ.has(q.n);
-
       cb.addEventListener("change", ()=>{
         if(cb.checked){
           if(state.selectedQ.size >= need){
@@ -908,7 +912,6 @@
         modalConfirmBtn.setAttribute("aria-disabled", modalConfirmBtn.disabled ? "true" : "false");
         pickedPill.textContent = `Izabrano: ${state.selectedQ.size}/${need}`;
       });
-
       const wrap = document.createElement("div");
       const title = document.createElement("div");
       title.className = "qText";
@@ -916,14 +919,12 @@
       const hint = document.createElement("div");
       hint.className = "qHint";
       hint.textContent = q.c;
-
       wrap.appendChild(title);
       wrap.appendChild(hint);
       item.appendChild(cb);
       item.appendChild(wrap);
       qList.appendChild(item);
     });
-
     qNumbersInModal.value = Array.from(state.selectedQ).sort((a,b)=>a-b).join(", ");
     modalConfirmBtn.disabled = (state.selectedQ.size !== need);
     modalConfirmBtn.setAttribute("aria-disabled", modalConfirmBtn.disabled ? "true" : "false");
@@ -942,7 +943,6 @@
   }
 
   qSearch.addEventListener("input", ()=>{ state.search = qSearch.value || ""; renderQuestions(); });
-
   qNumbersInModal.addEventListener("input", ()=>{
     const need = Number(state.qpack);
     const nums = Array.from(new Set(parseNumbers(qNumbersInModal.value))).slice(0, need);
@@ -955,7 +955,6 @@
   openBookBtn.addEventListener("click", showModal);
   closeBookBtn.addEventListener("click", hideModal);
   bookModal.addEventListener("click", (e)=>{ if(e.target === bookModal) hideModal(); });
-
   modalClearBtn.addEventListener("click", clearSelected);
   clearQuestionsBtn.addEventListener("click", clearSelected);
 
@@ -970,19 +969,12 @@
     setTimeout(()=> clientOneSection.scrollIntoView({behavior:"smooth", block:"start"}), 80);
   });
 
-  // ===== Service click (ovo vraća cene!) =====
   serviceCards.forEach(card=>{
     card.addEventListener("click", ()=>{
       state.service = card.getAttribute("data-service");
       setActive(serviceCards, "service", state.service);
-
-      // reset filters
-      state.cat = "Sve";
-      state.search = "";
-      qSearch.value = "";
-
+      state.cat = "Sve"; state.search = ""; qSearch.value = "";
       calc();
-
       if(state.service === "custom"){
         stepTo(2);
         setTimeout(()=> customSection.scrollIntoView({behavior:"smooth", block:"start"}), 80);
@@ -993,7 +985,6 @@
         setTimeout(()=> synSection.scrollIntoView({behavior:"smooth", block:"start"}), 80);
         return;
       }
-
       stepTo(3);
       setTimeout(()=> clientOneSection.scrollIntoView({behavior:"smooth", block:"start"}), 80);
     });
@@ -1003,7 +994,6 @@
     card.addEventListener("click", ()=>{
       state.qpack = card.getAttribute("data-qpack");
       setActive(qpackCards, "qpack", state.qpack);
-
       const need = Number(state.qpack);
       if(state.selectedQ.size > need){
         const sorted = Array.from(state.selectedQ).sort((a,b)=>a-b).slice(0, need);
@@ -1035,39 +1025,96 @@
     try{
       await navigator.clipboard.writeText(payText.value);
       copyPayBtn.textContent = "Kopirano ✅";
-      setTimeout(()=> copyPayBtn.textContent = "Kopiraj instrukcije", 1200);
+      setTimeout(()=> copyPayBtn.textContent = "Kopiraj instrukcije", 1400);
     } catch(e){
       alert("Ne mogu da kopiram automatski. Ručno selektuj i kopiraj tekst.");
     }
   });
 
-  // ===== IPS QR (local) =====
-  function normalizeAccountTo18Digits(acc){
-    const digits = (acc || "").replace(/\D/g, "");
-    return digits.length === 18 ? digits : null;
+  // ===== IPS QR generisanje =====
+  function normalizeAccount(acc){
+    return (acc || "").replace(/\D/g, "");
   }
+
   function formatAmountRSD(n){
-    const fixed = (Number(n) || 0).toFixed(2).replace(".", ",");
-    return "RSD" + fixed;
+    return "RSD" + (Number(n) || 0).toFixed(2).replace(".", ",");
   }
-  function buildIpsPayloadString({account18, payeeName, amountRsd, purpose, reference}){
-    return [
+
+  function buildIpsPayload({account, payeeName, amountRsd, purpose, reference}){
+    // NBS IPS QR standard
+    const lines = [
       "K:PR",
       "V:01",
       "C:1",
-      `R:${account18}`,
-      `N:${payeeName}`,
-      `I:${formatAmountRSD(amountRsd)}`,
+      "R:" + account,
+      "N:" + payeeName,
+      "I:" + formatAmountRSD(amountRsd),
       "SF:289",
-      `S:${purpose}`,
-      `RO:${reference}`
-    ].join("|");
+      "S:" + purpose,
+      "RO:97" + reference.replace(/\D/g,"")
+    ];
+    return lines.join("|");
   }
-  async function renderIpsQrLocal({imgEl, account18, payeeName, amountRsd, purpose, reference}){
-    if(!window.QRCode) throw new Error("QRCode lib nije učitana (CDN blokiran / nema interneta).");
-    const payload = buildIpsPayloadString({account18, payeeName, amountRsd, purpose, reference});
-    const dataUrl = await QRCode.toDataURL(payload, { width: 320, margin: 1 });
-    imgEl.src = dataUrl;
+
+  async function generateQR(totalRsd, orderId){
+    qrLabel.textContent = "Generisanje QR koda...";
+
+    // Čekaj da QRCode lib bude dostupna
+    let attempts = 0;
+    while(!window.QRCode && attempts < 20){
+      await new Promise(r => setTimeout(r, 100));
+      attempts++;
+    }
+
+    if(!window.QRCode){
+      qrLabel.textContent = "QR kod nije dostupan (nema interneta ili CDN blokiran).";
+      return;
+    }
+
+    try{
+      const account = normalizeAccount(BANK.account);
+      const payload = buildIpsPayload({
+        account,
+        payeeName: BANK.recipient,
+        amountRsd: totalRsd,
+        purpose: BANK.purpose,
+        reference: orderId
+      });
+
+      // Koristimo QRCode.toCanvas direktno na canvas element
+      await QRCode.toCanvas(ipsQrCanvas, payload, {
+        width: 240,
+        margin: 2,
+        color: {
+          dark: "#000000",
+          light: "#ffffff"
+        },
+        errorCorrectionLevel: "M"
+      });
+
+      qrLabel.textContent = "Skeniraj QR kodom u mBanking aplikaciji";
+    } catch(err){
+      console.error("QR greška:", err);
+      // Fallback: pokušaj sa toDataURL
+      try{
+        const account = normalizeAccount(BANK.account);
+        const payload = buildIpsPayload({
+          account,
+          payeeName: BANK.recipient,
+          amountRsd: totalRsd,
+          purpose: BANK.purpose,
+          reference: orderId
+        });
+        const dataUrl = await QRCode.toDataURL(payload, { width: 240, margin: 2 });
+        const img = document.createElement("img");
+        img.src = dataUrl;
+        img.style.cssText = "width:240px;height:240px;border-radius:8px;display:block";
+        ipsQrCanvas.replaceWith(img);
+        qrLabel.textContent = "Skeniraj QR kodom u mBanking aplikaciji";
+      } catch(err2){
+        qrLabel.textContent = "Greška pri generisanju QR koda. Koristite instrukcije za ručnu uplatu.";
+      }
+    }
   }
 
   function getPaymentInstructions({totalRsd, orderId}){
@@ -1096,43 +1143,26 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
     if(state.service === "custom"){
       const need = Number(state.qpack);
       if(state.selectedQ.size !== need){
-        alert(`Za “Odaberi pitanja” moraš izabrati tačno ${need} pitanja i potvrditi izbor.`);
-        return false;
-      }
-    }
-    if(state.service === "full"){
-      const sit = req(document.getElementById("situation").value);
-      if(!sit){
-        alert("Za “Natal + Predikcije” je obavezan kratak opis situacije (4–6 rečenica).");
+        alert(`Za "Odaberi pitanja" moraš izabrati tačno ${need} pitanja i potvrditi izbor.`);
         return false;
       }
     }
     if(state.service === "syn"){
-      const rt = req(relationType.value);
-      const other = req(relationOther.value);
-      if(!rt) { alert("Izaberi tip odnosa (obavezno)."); return false; }
-      if(rt === "Drugo" && !other){ alert("Upiši tip odnosa u polju “Drugo”."); return false; }
-
-      const email = req(document.getElementById("synEmail").value);
-      if(!email){ alert("Unesi email (kontakt) za sinastriju."); return false; }
-
+      const synEmail = req(document.getElementById("synEmail").value);
       const aName = req(document.getElementById("aName").value);
       const aDate = req(document.getElementById("aDate").value);
       const aTime = req(document.getElementById("aTime").value);
       const aPlace = req(document.getElementById("aPlace").value);
-
       const bName = req(document.getElementById("bName").value);
       const bDate = req(document.getElementById("bDate").value);
       const bTime = req(document.getElementById("bTime").value);
       const bPlace = req(document.getElementById("bPlace").value);
-
-      if(!(aName && aDate && aTime && aPlace && bName && bDate && bTime && bPlace)){
+      if(!(synEmail && aName && aDate && aTime && aPlace && bName && bDate && bTime && bPlace)){
         alert("Za sinastriju su obavezni podaci za obe osobe (ime/inicijali, datum, vreme, mesto).");
         return false;
       }
       return true;
     }
-
     const fullName = req(document.getElementById("fullName").value);
     const email = req(document.getElementById("email").value);
     if(!fullName || !email){
@@ -1142,7 +1172,7 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
     return true;
   }
 
-  // ===== SEND (Formspree) =====
+  // ===== SEND =====
   sendBtn.addEventListener("click", async (e)=>{
     e.preventDefault();
     if(!validate()) return;
@@ -1150,14 +1180,12 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
     const base = basePrice();
     const add = addonPrice();
     const total = base + add;
-
     const orderId = "AA-" + Date.now().toString().slice(-8);
 
     const payload = {
       orderId,
       service: serviceName(state.service),
       totalRsd: total,
-
       fullName: req(document.getElementById("fullName").value),
       email: req(document.getElementById("email").value),
       birthDate: req(document.getElementById("birthDate").value),
@@ -1165,10 +1193,8 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
       birthPlace: req(document.getElementById("birthPlace").value),
       currentPlace: req(document.getElementById("currentPlace").value),
       situation: req(document.getElementById("situation")?.value),
-
       qpack: state.qpack,
       selectedQuestions: (state.service === "custom") ? pickedQuestionsText() : "",
-
       synEmail: req(document.getElementById("synEmail").value),
       synOrderName: req(document.getElementById("synOrderName").value),
       relationType: req(document.getElementById("relationType").value),
@@ -1182,7 +1208,6 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
       bDate: req(document.getElementById("bDate").value),
       bTime: req(document.getElementById("bTime").value),
       bPlace: req(document.getElementById("bPlace").value),
-
       addonOn: !!state.addonOn,
       addonCount: Number(customCount.value || 0),
       addonText: req(customText.value)
@@ -1200,32 +1225,38 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
       });
       if(!res.ok) throw new Error("Formspree submit failed");
 
-      // modal text
+      // Otvori success modal
       openSuccessModal("Uplata na račun (RSD) + IPS QR", getPaymentInstructions({totalRsd: total, orderId}));
 
-      // QR
-      try{
-        const account18 = normalizeAccountTo18Digits(BANK.account);
-        if(!account18) throw new Error("Račun mora imati 18 cifara (bez crtica).");
-        await renderIpsQrLocal({
-          imgEl: ipsQrImg,
-          account18,
-          payeeName: BANK.recipient,
-          amountRsd: total,
-          purpose: BANK.purpose,
-          reference: orderId
-        });
-      } catch(qe){
-        console.log("QR error:", qe);
-      }
+      // Generiši QR NAKON što je modal otvoren (mali delay da se DOM renderuje)
+      setTimeout(() => generateQR(total, orderId), 150);
 
     } catch(err){
-      alert("Greška pri slanju porudžbine. Proveri Formspree i pokušaj ponovo.");
+      console.error(err);
+      alert("Greška pri slanju porudžbine. Proveri internet konekciju i pokušaj ponovo.");
     } finally{
       sendBtn.textContent = oldText;
       sendBtn.style.pointerEvents = "";
     }
   });
+
+  // Hamburger
+  const hamburger = document.getElementById("hamburger");
+  const mobileNav = document.getElementById("mobileNav");
+  hamburger.addEventListener("click", () => {
+    const open = mobileNav.classList.toggle("open");
+    hamburger.classList.toggle("open", open);
+    hamburger.setAttribute("aria-expanded", open);
+  });
+  mobileNav.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+    mobileNav.classList.remove("open"); hamburger.classList.remove("open");
+    hamburger.setAttribute("aria-expanded","false");
+  }));
+
+  // Scroll to top
+  const scrollTopBtn = document.getElementById("scrollTop");
+  window.addEventListener("scroll", () => scrollTopBtn.classList.toggle("visible", window.scrollY > 320));
+  scrollTopBtn.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
 
   // init
   setActive(serviceCards, "service", state.service);
@@ -1234,6 +1265,8 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
   calc();
   stepTo(1);
 </script>
+
+<button class="scrollTop" id="scrollTop" aria-label="Nazad na vrh">↑</button>
 
 </body>
 </html>
