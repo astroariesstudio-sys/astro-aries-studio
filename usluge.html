@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usluge — Astro Aries Studio</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="Astro Aries Studio logo" />
+      <div class="title">ASTRO <span>ARIES</span> STUDIO</div>
+    </a>
+
+    <nav class="navlinks">
+      <a href="index.html">Početna</a>
+      <a href="knjiga.html">Knjiga o Vama</a>
+      <a href="usluge.html">Usluge</a>
+      <a href="metod.html">Metod</a>
+      <a href="primer.html">Primer</a>
+      <a href="poruci.html">Poruči</a>
+    </nav>
+
+    <div class="cta">
+      <a class="btn" href="primer.html">Primer PDF</a>
+      <a class="btn primary" href="poruci.html">Poruči</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="heroCard">
+      <div class="kicker">USLUGE</div>
+      <hr class="hr-astro" />
+      <h1>Izaberite paket.<br/>Mi ga pretvaramo u jasnu mapu života.</h1>
+      <p class="subhead">Sve isporuke su u PDF formatu, čitljivo i profesionalno dizajnirano.</p>
+      <div class="heroActions" style="margin-top:14px">
+        <a class="btn primary" href="poruci.html">Poruči</a>
+        <a class="btn" href="primer.html">Primer</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="pricing">
+      <div class="price">
+        <div class="name">Natalna knjiga</div>
+        <div class="amount">2.000 RSD</div>
+        <div class="desc">Dubinska natalna analiza u formi profesionalne knjige (PDF).</div>
+        <div class="actions"><a class="btn" href="poruci.html">Poruči</a></div>
+      </div>
+
+      <div class="price featured">
+        <div class="name">Natal + Predikcije <span class="tag">Top</span></div>
+        <div class="amount">3.500 RSD</div>
+        <div class="desc">Natal + ključni periodi i aktivacije. Najkompletnija opcija.</div>
+        <div class="actions"><a class="btn primary" href="poruci.html">Poruči</a></div>
+      </div>
+
+      <div class="price">
+        <div class="name">Samo predikcije</div>
+        <div class="amount">1.500 RSD</div>
+        <div class="desc">Fokus na periodima (ako natal već imate).</div>
+        <div class="actions"><a class="btn" href="poruci.html">Poruči</a></div>
+      </div>
+
+      <div class="price">
+        <div class="name">Sinastrija</div>
+        <div class="amount">3.500 RSD</div>
+        <div class="desc">Dinamika odnosa, kompatibilnost, okidači i potencijal veze.</div>
+        <div class="actions"><a class="btn" href="poruci.html">Poruči</a></div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px" class="note">
+      <b>Važno:</b> Kod “Natal + Predikcije” napišite kratko: posao/veza, promene, dileme —
+      da predikcije budu vezane za realan život.
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <div>© <span id="y"></span> Astro Aries Studio</div>
+    <div><a href="mailto:astroariesstudio@gmail.com">astroariesstudio@gmail.com</a></div>
+  </div>
+</footer>
+
+<script>document.getElementById("y").textContent = new Date().getFullYear();</script>
+</body>
+</html>
