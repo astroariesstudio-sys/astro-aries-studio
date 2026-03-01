@@ -34,7 +34,7 @@
 </header>
 
 <main class="container">
-  <!-- HERO -->
+
   <section class="hero">
     <div class="heroCard">
       <svg class="sparkles" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -81,7 +81,6 @@
     </div>
   </section>
 
-  <!-- FORM -->
   <section class="section">
     <div class="formTitle">
       <div>
@@ -174,7 +173,7 @@
           </div>
         </div>
 
-        <!-- STEP 2: CUSTOM PACK + BOOK -->
+        <!-- STEP 2: CUSTOM PACK -->
         <div class="fieldset" id="customSection" style="display:none; margin-top:12px">
           <div class="legend">
             <b>2) Odaberi paket i pitanja</b>
@@ -227,7 +226,7 @@
           </div>
         </div>
 
-        <!-- STEP 2B: SINASTRIJA -->
+        <!-- STEP 2B: SINASTRIJA DETAILS -->
         <div class="fieldset" id="synSection" style="display:none; margin-top:12px">
           <div class="legend">
             <b>2) Sinastrija — tip odnosa</b>
@@ -345,12 +344,16 @@
           </div>
         </div>
 
-        <!-- PAYMENT -->
+        <!-- PAYMENT INFO (Srbija) -->
         <div class="fieldset" id="paySection" style="margin-top:12px">
           <div class="legend">
-            <b>Način plaćanja</b>
-            <span class="hint">instrukcije dobijaš nakon slanja</span>
+            <b>Plaćanje (Srbija)</b>
+            <span class="hint">IPS QR + uplata na račun</span>
           </div>
+          <div class="miniNote" style="margin-top:0">
+            Nakon slanja porudžbine dobijaš instrukcije + IPS QR (Skeniraj i plati).
+          </div>
+        </div>
 
         <!-- ADDON -->
         <div class="fieldset" id="addonsSection" style="margin-top:12px">
@@ -439,7 +442,7 @@
           </div>
 
           <div class="small" style="margin-top:10px">
-            Porudžbina se šalje direktno (bez email aplikacije), a instrukcije za uplatu dobijaš odmah.
+            Porudžbina se šalje direktno (Formspree). Instrukcije + IPS QR dobijaš odmah.
           </div>
         </div>
       </aside>
@@ -508,13 +511,20 @@
     <div class="modalHeader">
       <div>
         <div class="modalTitle">✅ Porudžbina je poslata</div>
-        <div class="small">Instrukcije za plaćanje su ispod. Sačuvaj ili kopiraj podatke.</div>
+        <div class="small">Instrukcije + IPS QR su ispod. Sačuvaj ili kopiraj podatke.</div>
       </div>
       <button class="modalClose" id="closeSuccessBtn" aria-label="Zatvori">✕</button>
     </div>
 
     <div class="modalBody" style="grid-template-columns:1fr; height:auto">
       <div class="bookMain" style="max-height:72vh">
+
+        <div class="sepTitle">IPS QR (Skeniraj i plati)</div>
+        <div class="small" style="margin-bottom:10px;opacity:.9">
+          Otvori mBanking → IPS Skeniraj → skeniraj QR.
+        </div>
+        <img id="ipsQrImg" alt="IPS QR kod" style="max-width:260px;width:100%;border-radius:16px;border:1px solid rgba(255,255,255,.12);background:rgba(255,255,255,.03);padding:10px" />
+
         <div class="sepTitle">Instrukcije za plaćanje</div>
         <div class="small" id="payHint" style="margin-bottom:10px;opacity:.9"></div>
         <textarea id="payText" style="min-height:220px"></textarea>
@@ -533,20 +543,27 @@
 </div>
 
 <script>
-  // ===== Formspree endpoint =====
+  // ====== Formspree ======
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdalvlgg";
+
+  // ====== Bank data (Srbija) ======
+  const BANK = {
+    recipient: "Astro Aries Studio",
+    bank: "OTP banka",
+    account: "325-9300500194214-69",
+    purpose: "Astro Aries Studio — izveštaj",
+  };
 
   // Footer year
   document.getElementById("y").textContent = new Date().getFullYear();
 
-  // Prices
   const PRICES = {
     services: { natal: 2000, full: 3500, pred: 1500, syn: 3500 },
     qpacks: { "3": 900, "5": 1400, "10": 2400 },
     addonQ: 500
   };
 
-  // 84 pitanja (kratki naslovi + kategorija)
+  // (skraćeni naslovi, dovoljno za selekciju)
   const QUESTIONS = [
     {n:1,t:"Sudbinski pečat (suština)",c:"Osnova"},
     {n:2,t:"Šta je retko i snažno u karti",c:"Osnova"},
@@ -677,31 +694,13 @@
 
   const sendBtn = document.getElementById("sendBtn");
 
-  // Payment
-  let payState = { method: "bank" };
-  const payCards = document.querySelectorAll("[data-pay]");
-  function setActivePay(val){
-    payCards.forEach(c=>{
-      const v = c.getAttribute("data-pay");
-      c.classList.toggle("active", v === val);
-      const input = c.querySelector("input");
-      if(input) input.checked = (v === val);
-    });
-  }
-  payCards.forEach(card=>{
-    card.addEventListener("click", ()=>{
-      payState.method = card.getAttribute("data-pay");
-      setActivePay(payState.method);
-    });
-  });
-  setActivePay(payState.method);
-
   // Success modal
   const successModal = document.getElementById("successModal");
   const closeSuccessBtn = document.getElementById("closeSuccessBtn");
   const copyPayBtn = document.getElementById("copyPayBtn");
   const payText = document.getElementById("payText");
   const payHint = document.getElementById("payHint");
+  const ipsQrImg = document.getElementById("ipsQrImg");
 
   function openSuccessModal(hint, text){
     payHint.textContent = hint;
@@ -1064,38 +1063,46 @@
   relationType.addEventListener("change", calc);
   relationOther.addEventListener("input", calc);
 
-  // ===== Payment instructions =====
-  // TODO: POPUNI SVOJ RAČUN / BANKU / PAYPAL
-  function getPaymentInstructions({method, totalRsd, orderId}) {
-    const BANK = {
-      recipient: "ASTRO ARIES STUDIO",
-      bank: "UPIŠI NAZIV BANKE",
-      account: "UPIŠI BROJ RAČUNA",
-      purpose: "Astro Aries Studio — izveštaj",
+  // ===== IPS QR helpers =====
+  function normalizeAccountTo18Digits(acc){
+    const digits = (acc || "").replace(/\D/g, "");
+    if(digits.length !== 18) return null;
+    return digits;
+  }
+
+  function formatAmountRSD(n){
+    const fixed = (Number(n) || 0).toFixed(2).replace(".", ",");
+    return "RSD" + fixed;
+  }
+
+  async function generateIpsQrPng({account18, payeeName, amountRsd, purpose, reference}){
+    const url = "https://nbs.rs/QRcode/api/qr/v1/gen/320?lang=sr_RS_Latn";
+    const body = {
+      K: "PR",
+      V: "01",
+      C: "1",
+      R: account18,
+      N: payeeName,
+      I: formatAmountRSD(amountRsd),
+      SF: "289",
+      S: purpose,
+      RO: reference
     };
-    const PAYPAL = {
-      email: "astroariesstudio@gmail.com",
-      note: "Astro Aries Studio — izveštaj",
-      eurInfo: "Iznos u EUR: po dogovoru / po kursu"
-    };
 
-    if(method === "paypal"){
-      return {
-        hint: "Plaćanje putem PayPal-a (EUR)",
-        text:
-`PAYPAL INSTRUKCIJE
-PayPal: ${PAYPAL.email}
-Napomena: ${PAYPAL.note}
-Šifra porudžbine: ${orderId}
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {"Content-Type":"application/json","Accept":"image/png"},
+      body: JSON.stringify(body)
+    });
 
-${PAYPAL.eurInfo}
+    if(!res.ok) throw new Error("NBS QR API error");
+    const blob = await res.blob();
+    return URL.createObjectURL(blob);
+  }
 
-Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
-      };
-    }
-
+  function getPaymentInstructions({totalRsd, orderId}) {
     return {
-      hint: "Uplata na račun (RSD)",
+      hint: "Uplata na račun (RSD) + IPS QR",
       text:
 `INSTRUKCIJE ZA UPLATU (RSD)
 Primalac: ${BANK.recipient}
@@ -1173,7 +1180,7 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
     }).join("\n");
   }
 
-  // ===== SEND (Formspree) =====
+  // ===== SEND (Formspree + success + QR) =====
   sendBtn.addEventListener("click", async (e)=>{
     e.preventDefault();
     if(!validate()) return;
@@ -1187,10 +1194,9 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
     const payload = {
       orderId,
       service: serviceName(state.service),
-      paymentMethod: payState.method,
       totalRsd: total,
 
-      // Contact (one-person)
+      // one-person
       fullName: req(document.getElementById("fullName").value),
       email: req(document.getElementById("email").value),
       birthDate: req(document.getElementById("birthDate").value),
@@ -1199,11 +1205,11 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
       currentPlace: req(document.getElementById("currentPlace").value),
       situation: req(document.getElementById("situation")?.value),
 
-      // Custom selected questions
+      // custom
       qpack: state.qpack,
       selectedQuestions: (state.service === "custom") ? pickedQuestionsText() : "",
 
-      // Sinastry
+      // sinastry
       synEmail: req(document.getElementById("synEmail").value),
       synOrderName: req(document.getElementById("synOrderName").value),
       relationType: req(document.getElementById("relationType").value),
@@ -1218,7 +1224,7 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
       bTime: req(document.getElementById("bTime").value),
       bPlace: req(document.getElementById("bPlace").value),
 
-      // Addon
+      // addon
       addonOn: !!state.addonOn,
       addonCount: Number(customCount.value || 0),
       addonText: req(customText.value)
@@ -1237,8 +1243,27 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
 
       if(!res.ok) throw new Error("Formspree submit failed");
 
-      const pi = getPaymentInstructions({method: payState.method, totalRsd: total, orderId});
+      // Show instructions modal
+      const pi = getPaymentInstructions({totalRsd: total, orderId});
       openSuccessModal(pi.hint, pi.text);
+
+      // Generate IPS QR
+      try{
+        const account18 = normalizeAccountTo18Digits(BANK.account);
+        if(!account18) throw new Error("Račun mora imati 18 cifara (bez crtica).");
+
+        const qrUrl = await generateIpsQrPng({
+          account18,
+          payeeName: BANK.recipient,
+          amountRsd: total,
+          purpose: BANK.purpose,
+          reference: orderId
+        });
+
+        ipsQrImg.src = qrUrl;
+      } catch(qe){
+        console.log("QR error:", qe);
+      }
 
     } catch(err){
       alert("Greška pri slanju porudžbine. Proveri Formspree i pokušaj ponovo.");
@@ -1248,7 +1273,7 @@ Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
     }
   });
 
-  // Init
+  // init
   setActive(serviceCards, "service", state.service);
   setActive(qpackCards, "qpack", state.qpack);
   toggleAddon(false);
