@@ -172,13 +172,9 @@
               <div class="radioPrice">3.500 RSD</div>
             </label>
           </div>
-
-          <div class="miniNote">
-            <b>Napomena:</b> “Odaberi pitanja” je idealno ako želiš fokus (npr. posao + ljubav + novac), ali želiš da ti odgovori budu strukturisani kao mala knjiga.
-          </div>
         </div>
 
-        <!-- STEP 2: CUSTOM PACK + OPEN BOOK -->
+        <!-- STEP 2: CUSTOM PACK + BOOK -->
         <div class="fieldset" id="customSection" style="display:none; margin-top:12px">
           <div class="legend">
             <b>2) Odaberi paket i pitanja</b>
@@ -231,7 +227,7 @@
           </div>
         </div>
 
-        <!-- STEP 2B: SINASTRIJA DETAILS -->
+        <!-- STEP 2B: SINASTRIJA -->
         <div class="fieldset" id="synSection" style="display:none; margin-top:12px">
           <div class="legend">
             <b>2) Sinastrija — tip odnosa</b>
@@ -263,7 +259,7 @@
           </div>
         </div>
 
-        <!-- STEP 3: DATA (1 person) -->
+        <!-- STEP 3: PODACI (1 osoba) -->
         <div class="fieldset" id="clientOneSection" style="margin-top:12px">
           <div class="legend">
             <b>3) Podaci (kontakt + rođenje)</b>
@@ -309,7 +305,7 @@
           </div>
         </div>
 
-        <!-- STEP 3B: SYN PEOPLE -->
+        <!-- STEP 3B: PODACI (2 osobe) -->
         <div class="fieldset" id="synPeopleSection" style="display:none; margin-top:12px">
           <div class="legend">
             <b>3) Podaci (2 osobe)</b>
@@ -349,7 +345,35 @@
           </div>
         </div>
 
-        <!-- ADDON: concrete questions -->
+        <!-- PAYMENT -->
+        <div class="fieldset" id="paySection" style="margin-top:12px">
+          <div class="legend">
+            <b>Način plaćanja</b>
+            <span class="hint">instrukcije dobijaš nakon slanja</span>
+          </div>
+
+          <div class="radioGrid" id="payGrid">
+            <label class="radioCard active" data-pay="bank">
+              <input type="radio" name="pay" value="bank" checked />
+              <div class="radioTop">
+                <div class="radioName">Uplata na račun (RSD)</div>
+                <span class="badgeGold">preporučeno</span>
+              </div>
+              <div class="radioDesc">Dobijaš podatke za uplatu + poziv na broj.</div>
+            </label>
+
+            <label class="radioCard" data-pay="paypal">
+              <input type="radio" name="pay" value="paypal" />
+              <div class="radioTop">
+                <div class="radioName">PayPal (EUR)</div>
+                <span class="badgeGold">online</span>
+              </div>
+              <div class="radioDesc">Dobijaš PayPal adresu + iznos / napomenu.</div>
+            </label>
+          </div>
+        </div>
+
+        <!-- ADDON -->
         <div class="fieldset" id="addonsSection" style="margin-top:12px">
           <div class="legend">
             <b>+ Dodaj konkretna pitanja (opciono)</b>
@@ -386,34 +410,8 @@
         </div>
 
       </div>
-      <div class="fieldset" id="paySection" style="margin-top:12px">
-  <div class="legend">
-    <b>Način plaćanja</b>
-    <span class="hint">instrukcije dobijaš nakon slanja</span>
-  </div>
 
-  <div class="radioGrid" id="payGrid">
-    <label class="radioCard active" data-pay="bank">
-      <input type="radio" name="pay" value="bank" checked />
-      <div class="radioTop">
-        <div class="radioName">Uplata na račun (RSD)</div>
-        <span class="badgeGold">preporučeno</span>
-      </div>
-      <div class="radioDesc">Dobijaš podatke za uplatu + poziv na broj.</div>
-    </label>
-
-    <label class="radioCard" data-pay="paypal">
-      <input type="radio" name="pay" value="paypal" />
-      <div class="radioTop">
-        <div class="radioName">PayPal (EUR)</div>
-        <span class="badgeGold">online</span>
-      </div>
-      <div class="radioDesc">Dobijaš PayPal adresu + iznos / napomenu.</div>
-    </label>
-  </div>
-</div>
-
-      <!-- RIGHT: SUMMARY -->
+      <!-- RIGHT -->
       <aside class="summary">
         <div class="sumBox">
           <div class="sumTitle">
@@ -462,7 +460,7 @@
           </div>
 
           <div class="small" style="margin-top:10px">
-            Klikom na “Pošalji porudžbinu” otvara se email sa svim podacima spremnim za slanje.
+            Porudžbina se šalje direktno (bez email aplikacije), a instrukcije za uplatu dobijaš odmah.
           </div>
         </div>
       </aside>
@@ -500,7 +498,7 @@
         <div class="sepTitle">Brzi unos brojeva (opciono)</div>
         <textarea id="qNumbersInModal" placeholder="Npr: 1, 7, 12 ..."></textarea>
         <div class="small" style="margin-top:8px">
-          Ako uneseš brojeve, čekiranje se sinhronizuje.
+          Ako uneseš brojeve, čekiranje se sinhronizuje (ograničeno na paket).
         </div>
 
         <div class="sepTitle">Kontrole</div>
@@ -516,21 +514,53 @@
 
       <div class="bookMain">
         <div class="qTopBar">
-          <div class="small">
-            Filtrirano: <b id="filteredCount">0</b>
-          </div>
+          <div class="small">Filtrirano: <b id="filteredCount">0</b></div>
           <div class="qCountPill" id="pickedPill">Izabrano: 0/3</div>
         </div>
-
         <div class="qList" id="qList"></div>
       </div>
     </div>
   </div>
 </div>
 
+<!-- MODAL: SUCCESS + PAYMENT -->
+<div class="modalOverlay" id="successModal">
+  <div class="modal" role="dialog" aria-modal="true" aria-label="Porudžbina poslata">
+    <div class="modalHeader">
+      <div>
+        <div class="modalTitle">✅ Porudžbina je poslata</div>
+        <div class="small">Instrukcije za plaćanje su ispod. Sačuvaj ili kopiraj podatke.</div>
+      </div>
+      <button class="modalClose" id="closeSuccessBtn" aria-label="Zatvori">✕</button>
+    </div>
+
+    <div class="modalBody" style="grid-template-columns:1fr; height:auto">
+      <div class="bookMain" style="max-height:72vh">
+        <div class="sepTitle">Instrukcije za plaćanje</div>
+        <div class="small" id="payHint" style="margin-bottom:10px;opacity:.9"></div>
+        <textarea id="payText" style="min-height:220px"></textarea>
+
+        <div class="actionsRow" style="margin-top:12px">
+          <button class="btn primary" id="copyPayBtn" type="button">Kopiraj instrukcije</button>
+          <a class="btn" href="index.html">Nazad na početnu</a>
+        </div>
+
+        <div class="miniNote" style="margin-top:12px">
+          <b>Napomena:</b> Nakon uplate, pošalji potvrdu (screenshot) u odgovoru na email potvrdu.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
+  // ===== Formspree endpoint =====
+  const FORMSPREE_ENDPOINT = "https://formspree.io/f/xdalvlgg";
+
+  // Footer year
   document.getElementById("y").textContent = new Date().getFullYear();
 
+  // Prices
   const PRICES = {
     services: { natal: 2000, full: 3500, pred: 1500, syn: 3500 },
     qpacks: { "3": 900, "5": 1400, "10": 2400 },
@@ -544,20 +574,17 @@
     {n:3,t:"Energija i prvi utisak",c:"Osnova"},
     {n:4,t:"Psiha, emocije i karakter",c:"Osnova"},
     {n:5,t:"Kako te menja period koji dolazi",c:"Predikcije"},
-
     {n:6,t:"Novac, sigurnost i vrednost",c:"Novac"},
     {n:7,t:"Gde dolazi novac / gde cure resursi",c:"Novac"},
     {n:8,t:"Kod za materijalni uspeh",c:"Novac"},
     {n:9,t:"Finansijske slabosti i greške",c:"Novac"},
     {n:10,t:"Finansijski zaokreti",c:"Novac"},
     {n:11,t:"Najbolji trenuci za ulaganja",c:"Novac"},
-
     {n:12,t:"Ljudi oko tebe i uticaj",c:"Okruženje"},
     {n:13,t:"Braća/sestre i okruženje",c:"Okruženje"},
     {n:14,t:"Kako učiš (znanje)",c:"Okruženje"},
     {n:15,t:"Razmišljanje i komunikacija",c:"Okruženje"},
     {n:16,t:"Greške u komunikaciji",c:"Okruženje"},
-
     {n:17,t:"Priča doma i korena",c:"Dom"},
     {n:18,t:"Dar/teret iz porodice",c:"Dom"},
     {n:19,t:"Šta je tvoj osećaj doma",c:"Dom"},
@@ -566,7 +593,6 @@
     {n:22,t:"Otac/majka i pečat",c:"Dom"},
     {n:23,t:"Nekretnine i stabilnost",c:"Dom"},
     {n:24,t:"Šta uskoro dolazi za dom",c:"Dom"},
-
     {n:25,t:"Talenti i darovi",c:"Ljubav & radost"},
     {n:26,t:"Radost i vitalnost",c:"Ljubav & radost"},
     {n:27,t:"Kako voliš i šta tražiš",c:"Ljubav & radost"},
@@ -576,13 +602,11 @@
     {n:31,t:"Nova ljubavna priča uskoro",c:"Ljubav & radost"},
     {n:32,t:"Razvoj sadašnje veze",c:"Ljubav & radost"},
     {n:33,t:"Gde upoznaješ važnu osobu",c:"Ljubav & radost"},
-
     {n:34,t:"Radne veštine",c:"Zdravlje & rad"},
     {n:35,t:"Osetljivosti zdravlja",c:"Zdravlje & rad"},
     {n:36,t:"Tačke opreza (telo/psiha)",c:"Zdravlje & rad"},
     {n:37,t:"Vitalnost uskoro",c:"Zdravlje & rad"},
     {n:38,t:"Periodi opreza za zdravlje",c:"Zdravlje & rad"},
-
     {n:39,t:"Brak: predispozicije i kada",c:"Brak"},
     {n:40,t:"Kakav je bračni partner",c:"Brak"},
     {n:41,t:"Partner: utisak",c:"Brak"},
@@ -592,9 +616,7 @@
     {n:45,t:"Razlika prvog/drugog braka",c:"Brak"},
     {n:46,t:"Najbolji period za brak",c:"Brak"},
     {n:47,t:"Da li osobu već poznaješ",c:"Brak"},
-
     {n:48,t:"Jedna istina koja ‘pogađa’",c:"Osnova"},
-
     {n:49,t:"Nasledstvo/podrška kroz druge",c:"8. kuća"},
     {n:50,t:"Zajednički novac i pritisci",c:"8. kuća"},
     {n:51,t:"Ko pomaže / kome si oslonac",c:"8. kuća"},
@@ -602,13 +624,11 @@
     {n:53,t:"Rizici dugova/kredita",c:"8. kuća"},
     {n:54,t:"Regeneracija posle kriza",c:"8. kuća"},
     {n:55,t:"Šta donosi naredni period (8.)",c:"8. kuća"},
-
     {n:56,t:"Znanje i širina (domet)",c:"9. kuća"},
     {n:57,t:"Inostranstvo i šta donosi",c:"9. kuća"},
     {n:58,t:"Znanje → status i uspeh",c:"9. kuća"},
     {n:59,t:"Sporovi i pravni problemi",c:"9. kuća"},
     {n:60,t:"Putovanja/škola/pravo uskoro",c:"9. kuća"},
-
     {n:61,t:"Profesionalna namena i maksimum",c:"Karijera"},
     {n:62,t:"Tip posla koji ti leži",c:"Karijera"},
     {n:63,t:"Vrhunci karijere i domet",c:"Karijera"},
@@ -619,10 +639,8 @@
     {n:68,t:"Profesionalni darovi",c:"Karijera"},
     {n:69,t:"Dugoročna stabilnost",c:"Karijera"},
     {n:70,t:"Poslovne promene uskoro",c:"Karijera"},
-
     {n:71,t:"Mreže i prilike (11.)",c:"Mreže"},
     {n:72,t:"Aktivacije prilika preko ljudi",c:"Mreže"},
-
     {n:73,t:"Karmički obrasci i lekcije",c:"Karma"},
     {n:74,t:"Svetla karma i teret",c:"Karma"},
     {n:75,t:"Šta menjaš da rasteretiš karmu",c:"Karma"},
@@ -639,110 +657,161 @@
 
   const CATEGORIES = ["Sve", ...Array.from(new Set(QUESTIONS.map(q=>q.c)))];
 
-  // DOM refs
-  const serviceCards = document.querySelectorAll('[data-service]');
-  const qpackCards = document.querySelectorAll('[data-qpack]');
+  // ===== DOM refs =====
+  const serviceCards = document.querySelectorAll("[data-service]");
+  const qpackCards = document.querySelectorAll("[data-qpack]");
 
-  const customSection = document.getElementById('customSection');
-  const synSection = document.getElementById('synSection');
-  const synPeopleSection = document.getElementById('synPeopleSection');
-  const clientOneSection = document.getElementById('clientOneSection');
-  const situationBox = document.getElementById('situationBox');
+  const customSection = document.getElementById("customSection");
+  const synSection = document.getElementById("synSection");
+  const synPeopleSection = document.getElementById("synPeopleSection");
+  const clientOneSection = document.getElementById("clientOneSection");
+  const situationBox = document.getElementById("situationBox");
 
-  const pickedInline = document.getElementById('pickedInline');
-  const pickedMaxInline = document.getElementById('pickedMaxInline');
+  const pickedInline = document.getElementById("pickedInline");
+  const pickedMaxInline = document.getElementById("pickedMaxInline");
 
-  const serviceBadge = document.getElementById('serviceBadge');
-  const chosenLabel = document.getElementById('chosenLabel');
-  const basePriceEl = document.getElementById('basePrice');
-  const customPriceEl = document.getElementById('customPrice');
-  const totalPriceEl = document.getElementById('totalPrice');
+  const serviceBadge = document.getElementById("serviceBadge");
+  const chosenLabel = document.getElementById("chosenLabel");
+  const basePriceEl = document.getElementById("basePrice");
+  const customPriceEl = document.getElementById("customPrice");
+  const totalPriceEl = document.getElementById("totalPrice");
 
-  const qPackLine = document.getElementById('qPackLine');
-  const qPackLabel = document.getElementById('qPackLabel');
-  const qPickedLine = document.getElementById('qPickedLine');
-  const qPickedLabel = document.getElementById('qPickedLabel');
+  const qPackLine = document.getElementById("qPackLine");
+  const qPackLabel = document.getElementById("qPackLabel");
+  const qPickedLine = document.getElementById("qPickedLine");
+  const qPickedLabel = document.getElementById("qPickedLabel");
 
-  const relTypeLine = document.getElementById('relTypeLine');
-  const relTypeLabel = document.getElementById('relTypeLabel');
+  const relTypeLine = document.getElementById("relTypeLine");
+  const relTypeLabel = document.getElementById("relTypeLabel");
 
-  const customSwitch = document.getElementById('customSwitch');
-  const customBox = document.getElementById('customQuestionsBox');
-  const customCount = document.getElementById('customCount');
-  const customText = document.getElementById('customText');
+  const customSwitch = document.getElementById("customSwitch");
+  const customBox = document.getElementById("customQuestionsBox");
+  const customCount = document.getElementById("customCount");
+  const customText = document.getElementById("customText");
 
-  const pill1 = document.getElementById('pill1');
-  const pill2 = document.getElementById('pill2');
-  const pill3 = document.getElementById('pill3');
+  const pill1 = document.getElementById("pill1");
+  const pill2 = document.getElementById("pill2");
+  const pill3 = document.getElementById("pill3");
 
-  const relationType = document.getElementById('relationType');
-  const relationOther = document.getElementById('relationOther');
+  const relationType = document.getElementById("relationType");
+  const relationOther = document.getElementById("relationOther");
 
-  const sendBtn = document.getElementById('sendBtn');
+  const sendBtn = document.getElementById("sendBtn");
 
-  // Modal refs
-  const bookModal = document.getElementById('bookModal');
-  const openBookBtn = document.getElementById('openBookBtn');
-  const closeBookBtn = document.getElementById('closeBookBtn');
-  const modalClearBtn = document.getElementById('modalClearBtn');
-  const modalConfirmBtn = document.getElementById('modalConfirmBtn');
-  const clearQuestionsBtn = document.getElementById('clearQuestionsBtn');
+  // Payment
+  let payState = { method: "bank" };
+  const payCards = document.querySelectorAll("[data-pay]");
+  function setActivePay(val){
+    payCards.forEach(c=>{
+      const v = c.getAttribute("data-pay");
+      c.classList.toggle("active", v === val);
+      const input = c.querySelector("input");
+      if(input) input.checked = (v === val);
+    });
+  }
+  payCards.forEach(card=>{
+    card.addEventListener("click", ()=>{
+      payState.method = card.getAttribute("data-pay");
+      setActivePay(payState.method);
+    });
+  });
+  setActivePay(payState.method);
 
-  const catChips = document.getElementById('catChips');
-  const qList = document.getElementById('qList');
-  const pickedPill = document.getElementById('pickedPill');
-  const filteredCount = document.getElementById('filteredCount');
+  // Success modal
+  const successModal = document.getElementById("successModal");
+  const closeSuccessBtn = document.getElementById("closeSuccessBtn");
+  const copyPayBtn = document.getElementById("copyPayBtn");
+  const payText = document.getElementById("payText");
+  const payHint = document.getElementById("payHint");
 
-  const modalNeed = document.getElementById('modalNeed');
-  const needInline = document.getElementById('needInline');
+  function openSuccessModal(hint, text){
+    payHint.textContent = hint;
+    payText.value = text;
+    successModal.classList.add("show");
+    document.body.style.overflow = "hidden";
+  }
+  function closeSuccessModal(){
+    successModal.classList.remove("show");
+    document.body.style.overflow = "";
+  }
+  closeSuccessBtn.addEventListener("click", closeSuccessModal);
+  successModal.addEventListener("click", (e)=>{ if(e.target === successModal) closeSuccessModal(); });
 
-  const qSearch = document.getElementById('qSearch');
-  const qNumbersInModal = document.getElementById('qNumbersInModal');
+  copyPayBtn.addEventListener("click", async ()=>{
+    try{
+      await navigator.clipboard.writeText(payText.value);
+      copyPayBtn.textContent = "Kopirano ✅";
+      setTimeout(()=> copyPayBtn.textContent = "Kopiraj instrukcije", 1200);
+    } catch(e){
+      alert("Ne mogu da kopiram automatski. Ručno selektuj i kopiraj tekst.");
+    }
+  });
 
-  // State
+  // Book modal
+  const bookModal = document.getElementById("bookModal");
+  const openBookBtn = document.getElementById("openBookBtn");
+  const closeBookBtn = document.getElementById("closeBookBtn");
+  const modalClearBtn = document.getElementById("modalClearBtn");
+  const modalConfirmBtn = document.getElementById("modalConfirmBtn");
+  const clearQuestionsBtn = document.getElementById("clearQuestionsBtn");
+
+  const catChips = document.getElementById("catChips");
+  const qList = document.getElementById("qList");
+  const pickedPill = document.getElementById("pickedPill");
+  const filteredCount = document.getElementById("filteredCount");
+
+  const modalNeed = document.getElementById("modalNeed");
+  const needInline = document.getElementById("needInline");
+
+  const qSearch = document.getElementById("qSearch");
+  const qNumbersInModal = document.getElementById("qNumbersInModal");
+
+  // ===== State =====
   let state = {
-    service: 'natal',   // natal | full | pred | custom | syn
-    qpack: '3',
+    service: "natal", // natal | full | pred | custom | syn
+    qpack: "3",
     addonOn: false,
     addonCount: 0,
     selectedQ: new Set(),
-    cat: 'Sve',
-    search: ''
+    cat: "Sve",
+    search: ""
   };
 
-  function fmtRSD(n){ return (n||0).toLocaleString('sr-RS') + " RSD"; }
-  function req(v){ return (v || '').trim(); }
+  function req(v){ return (v || "").trim(); }
+  function fmtRSD(n){ return (n||0).toLocaleString("sr-RS") + " RSD"; }
 
   function serviceName(s){
-    if(s==='natal') return "Knjiga o tebi — Natal izdanje";
-    if(s==='full')  return "Knjiga o tebi — Natal + Predikcije";
-    if(s==='pred')  return "Knjiga o tebi — Samo predikcije";
-    if(s==='custom')return "Kreiraj svoju knjigu — Odaberi pitanja (84)";
-    if(s==='syn')   return "Knjiga o vama — Mapa odnosa (Sinastrija)";
+    if(s==="natal") return "Knjiga o tebi — Natal izdanje";
+    if(s==="full")  return "Knjiga o tebi — Natal + Predikcije";
+    if(s==="pred")  return "Knjiga o tebi — Samo predikcije";
+    if(s==="custom")return "Kreiraj svoju knjigu — Odaberi pitanja (84)";
+    if(s==="syn")   return "Knjiga o vama — Mapa odnosa (Sinastrija)";
     return "Usluga";
   }
 
   function setActive(cards, key, val){
     cards.forEach(c=>{
       const v = c.getAttribute(`data-${key}`);
-      c.classList.toggle('active', v === val);
-      const input = c.querySelector('input');
+      c.classList.toggle("active", v === val);
+      const input = c.querySelector("input");
       if(input) input.checked = (v === val);
     });
   }
 
   function stepTo(n){
-    [pill1,pill2,pill3].forEach(p=>p.classList.remove('active'));
-    if(n>=1) pill1.classList.add('active');
-    if(n>=2) pill2.classList.add('active');
-    if(n>=3) pill3.classList.add('active');
+    [pill1,pill2,pill3].forEach(p=>p.classList.remove("active"));
+    if(n>=1) pill1.classList.add("active");
+    if(n>=2) pill2.classList.add("active");
+    if(n>=3) pill3.classList.add("active");
   }
 
   function basePrice(){
-    if(state.service === 'custom') return PRICES.qpacks[state.qpack];
+    if(state.service === "custom") return PRICES.qpacks[state.qpack];
     return PRICES.services[state.service];
   }
-  function addonPrice(){ return state.addonOn ? (Number(state.addonCount) * PRICES.addonQ) : 0; }
+  function addonPrice(){
+    return state.addonOn ? (Number(state.addonCount) * PRICES.addonQ) : 0;
+  }
 
   function updatePickedInline(){
     const max = Number(state.qpack);
@@ -751,37 +820,37 @@
   }
 
   function updateUI(){
-    customSection.style.display = (state.service === 'custom') ? '' : 'none';
-    synSection.style.display = (state.service === 'syn') ? '' : 'none';
-    synPeopleSection.style.display = (state.service === 'syn') ? '' : 'none';
-    clientOneSection.style.display = (state.service === 'syn') ? 'none' : '';
-    situationBox.style.display = (state.service === 'full') ? '' : 'none';
+    customSection.style.display = (state.service === "custom") ? "" : "none";
+    synSection.style.display = (state.service === "syn") ? "" : "none";
+    synPeopleSection.style.display = (state.service === "syn") ? "" : "none";
+    clientOneSection.style.display = (state.service === "syn") ? "none" : "";
+    situationBox.style.display = (state.service === "full") ? "" : "none";
 
     serviceBadge.textContent =
-      (state.service === 'full') ? 'Top' :
-      (state.service === 'custom') ? '3/5/10' :
-      (state.service === 'syn') ? 'Odnosi' : 'PDF';
+      (state.service === "full") ? "Top" :
+      (state.service === "custom") ? "3/5/10" :
+      (state.service === "syn") ? "Odnosi" : "PDF";
 
     chosenLabel.textContent = serviceName(state.service);
 
-    if(state.service === 'custom'){
-      qPackLine.style.display = '';
-      qPickedLine.style.display = '';
+    if(state.service === "custom"){
+      qPackLine.style.display = "";
+      qPickedLine.style.display = "";
       qPackLabel.textContent = `${state.qpack} pitanja`;
       qPickedLabel.textContent = `${state.selectedQ.size}/${state.qpack}`;
       updatePickedInline();
     } else {
-      qPackLine.style.display = 'none';
-      qPickedLine.style.display = 'none';
+      qPackLine.style.display = "none";
+      qPickedLine.style.display = "none";
     }
 
-    if(state.service === 'syn'){
-      relTypeLine.style.display = '';
+    if(state.service === "syn"){
+      relTypeLine.style.display = "";
       const rt = req(relationType.value);
       const other = req(relationOther.value);
-      relTypeLabel.textContent = (rt === 'Drugo') ? (other || 'Drugo') : (rt || '—');
+      relTypeLabel.textContent = (rt === "Drugo") ? (other || "Drugo") : (rt || "—");
     } else {
-      relTypeLine.style.display = 'none';
+      relTypeLine.style.display = "none";
     }
   }
 
@@ -795,12 +864,12 @@
     updateUI();
   }
 
-  // Addon toggle
+  // Addon switch
   function toggleAddon(on){
     state.addonOn = on;
-    customSwitch.classList.toggle('on', on);
-    customSwitch.setAttribute('aria-checked', on ? 'true' : 'false');
-    customBox.style.display = on ? '' : 'none';
+    customSwitch.classList.toggle("on", on);
+    customSwitch.setAttribute("aria-checked", on ? "true" : "false");
+    customBox.style.display = on ? "" : "none";
     if(!on){
       customCount.value = "0";
       state.addonCount = 0;
@@ -808,33 +877,39 @@
     }
     calc();
   }
-  customSwitch.addEventListener('click', ()=> toggleAddon(!state.addonOn));
-  customSwitch.addEventListener('keydown', (e)=>{
-    if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleAddon(!state.addonOn); }
+  customSwitch.addEventListener("click", ()=> toggleAddon(!state.addonOn));
+  customSwitch.addEventListener("keydown", (e)=>{
+    if(e.key === "Enter" || e.key === " "){
+      e.preventDefault();
+      toggleAddon(!state.addonOn);
+    }
   });
-  customCount.addEventListener('change', ()=>{ state.addonCount = Number(customCount.value); calc(); });
+  customCount.addEventListener("change", ()=>{
+    state.addonCount = Number(customCount.value);
+    calc();
+  });
 
-  // Modal helpers
+  // ===== Book modal logic =====
   function showModal(){
     const need = Number(state.qpack);
     modalNeed.textContent = String(need);
     needInline.textContent = String(need);
     pickedPill.textContent = `Izabrano: ${state.selectedQ.size}/${need}`;
     modalConfirmBtn.disabled = (state.selectedQ.size !== need);
-    modalConfirmBtn.setAttribute('aria-disabled', modalConfirmBtn.disabled ? 'true' : 'false');
+    modalConfirmBtn.setAttribute("aria-disabled", modalConfirmBtn.disabled ? "true" : "false");
 
-    bookModal.classList.add('show');
-    document.body.style.overflow = 'hidden';
+    bookModal.classList.add("show");
+    document.body.style.overflow = "hidden";
     renderChips();
     renderQuestions();
   }
   function hideModal(){
-    bookModal.classList.remove('show');
-    document.body.style.overflow = '';
+    bookModal.classList.remove("show");
+    document.body.style.overflow = "";
   }
 
   function matchesFilter(q){
-    const catOk = (state.cat === 'Sve') || (q.c === state.cat);
+    const catOk = (state.cat === "Sve") || (q.c === state.cat);
     const s = state.search.trim().toLowerCase();
     const searchOk = !s || (String(q.n).includes(s) || q.t.toLowerCase().includes(s) || q.c.toLowerCase().includes(s));
     return catOk && searchOk;
@@ -843,11 +918,11 @@
   function renderChips(){
     catChips.innerHTML = "";
     CATEGORIES.forEach(cat=>{
-      const el = document.createElement('button');
-      el.type = 'button';
-      el.className = 'chip' + (state.cat === cat ? ' active' : '');
+      const el = document.createElement("button");
+      el.type = "button";
+      el.className = "chip" + (state.cat === cat ? " active" : "");
       el.textContent = cat;
-      el.addEventListener('click', ()=>{
+      el.addEventListener("click", ()=>{
         state.cat = cat;
         renderChips();
         renderQuestions();
@@ -865,14 +940,14 @@
 
     qList.innerHTML = "";
     filtered.forEach(q=>{
-      const item = document.createElement('label');
-      item.className = 'qItem';
+      const item = document.createElement("label");
+      item.className = "qItem";
 
-      const cb = document.createElement('input');
-      cb.type = 'checkbox';
+      const cb = document.createElement("input");
+      cb.type = "checkbox";
       cb.checked = state.selectedQ.has(q.n);
 
-      cb.addEventListener('change', ()=>{
+      cb.addEventListener("change", ()=>{
         if(cb.checked){
           if(state.selectedQ.size >= need){
             cb.checked = false;
@@ -883,22 +958,22 @@
         } else {
           state.selectedQ.delete(q.n);
         }
-        qNumbersInModal.value = Array.from(state.selectedQ).sort((a,b)=>a-b).join(', ');
+
+        qNumbersInModal.value = Array.from(state.selectedQ).sort((a,b)=>a-b).join(", ");
         updatePickedInline();
         calc();
 
-        // enable confirm only when exact
         modalConfirmBtn.disabled = (state.selectedQ.size !== need);
-        modalConfirmBtn.setAttribute('aria-disabled', modalConfirmBtn.disabled ? 'true' : 'false');
+        modalConfirmBtn.setAttribute("aria-disabled", modalConfirmBtn.disabled ? "true" : "false");
         pickedPill.textContent = `Izabrano: ${state.selectedQ.size}/${need}`;
       });
 
-      const wrap = document.createElement('div');
-      const title = document.createElement('div');
-      title.className = 'qText';
+      const wrap = document.createElement("div");
+      const title = document.createElement("div");
+      title.className = "qText";
       title.innerHTML = `<span class="qNum">${q.n})</span> ${q.t}`;
-      const hint = document.createElement('div');
-      hint.className = 'qHint';
+      const hint = document.createElement("div");
+      hint.className = "qHint";
       hint.textContent = q.c;
 
       wrap.appendChild(title);
@@ -909,10 +984,9 @@
       qList.appendChild(item);
     });
 
-    // keep numbers textarea synced
-    qNumbersInModal.value = Array.from(state.selectedQ).sort((a,b)=>a-b).join(', ');
+    qNumbersInModal.value = Array.from(state.selectedQ).sort((a,b)=>a-b).join(", ");
     modalConfirmBtn.disabled = (state.selectedQ.size !== need);
-    modalConfirmBtn.setAttribute('aria-disabled', modalConfirmBtn.disabled ? 'true' : 'false');
+    modalConfirmBtn.setAttribute("aria-disabled", modalConfirmBtn.disabled ? "true" : "false");
   }
 
   function clearSelected(){
@@ -924,18 +998,18 @@
   }
 
   function parseNumbers(str){
-    return (str || '')
+    return (str || "")
       .split(/[^0-9]+/g)
       .map(x=>Number(x))
       .filter(n=>Number.isFinite(n) && n>=1 && n<=84);
   }
 
-  qSearch.addEventListener('input', ()=>{
-    state.search = qSearch.value || '';
+  qSearch.addEventListener("input", ()=>{
+    state.search = qSearch.value || "";
     renderQuestions();
   });
 
-  qNumbersInModal.addEventListener('input', ()=>{
+  qNumbersInModal.addEventListener("input", ()=>{
     const need = Number(state.qpack);
     const nums = Array.from(new Set(parseNumbers(qNumbersInModal.value))).slice(0, need);
     state.selectedQ = new Set(nums);
@@ -944,69 +1018,61 @@
     renderQuestions();
   });
 
-  openBookBtn.addEventListener('click', ()=>{
-    // otvorimo modal tek nakon izbora paketa (uvek postoji default 3)
-    showModal();
-  });
+  openBookBtn.addEventListener("click", showModal);
+  closeBookBtn.addEventListener("click", hideModal);
+  bookModal.addEventListener("click", (e)=>{ if(e.target === bookModal) hideModal(); });
 
-  closeBookBtn.addEventListener('click', hideModal);
-  bookModal.addEventListener('click', (e)=>{ if(e.target === bookModal) hideModal(); });
+  modalClearBtn.addEventListener("click", clearSelected);
+  clearQuestionsBtn.addEventListener("click", clearSelected);
 
-  modalClearBtn.addEventListener('click', clearSelected);
-  clearQuestionsBtn.addEventListener('click', clearSelected);
-
-  modalConfirmBtn.addEventListener('click', ()=>{
+  modalConfirmBtn.addEventListener("click", ()=>{
     const need = Number(state.qpack);
     if(state.selectedQ.size !== need){
       alert(`Potvrda je moguća tek kad izabereš tačno ${need} pitanja.`);
       return;
     }
     hideModal();
-    // skok na podatke
     stepTo(3);
-    setTimeout(()=> clientOneSection.scrollIntoView({behavior:'smooth', block:'start'}), 80);
+    setTimeout(()=> clientOneSection.scrollIntoView({behavior:"smooth", block:"start"}), 80);
   });
 
-  // Service selection (važan flow!)
+  // Service selection
   serviceCards.forEach(card=>{
-    card.addEventListener('click', ()=>{
-      state.service = card.getAttribute('data-service');
-      setActive(serviceCards, 'service', state.service);
+    card.addEventListener("click", ()=>{
+      state.service = card.getAttribute("data-service");
+      setActive(serviceCards, "service", state.service);
 
-      // reset filters in modal on service change
-      state.cat = 'Sve';
-      state.search = '';
-      qSearch.value = '';
+      // reset modal filters
+      state.cat = "Sve";
+      state.search = "";
+      qSearch.value = "";
 
       calc();
 
-      if(state.service === 'custom'){
-        // ide na korak 2 (paket + otvori knjigu), NE na podatke
+      if(state.service === "custom"){
         stepTo(2);
-        setTimeout(()=> customSection.scrollIntoView({behavior:'smooth', block:'start'}), 80);
+        setTimeout(()=> customSection.scrollIntoView({behavior:"smooth", block:"start"}), 80);
         return;
       }
-
-      if(state.service === 'syn'){
+      if(state.service === "syn"){
         stepTo(2);
-        setTimeout(()=> synSection.scrollIntoView({behavior:'smooth', block:'start'}), 80);
+        setTimeout(()=> synSection.scrollIntoView({behavior:"smooth", block:"start"}), 80);
         return;
       }
 
       stepTo(3);
-      setTimeout(()=> clientOneSection.scrollIntoView({behavior:'smooth', block:'start'}), 80);
+      setTimeout(()=> clientOneSection.scrollIntoView({behavior:"smooth", block:"start"}), 80);
     });
   });
 
-  // QPack selection enforces selection cap (ako smanji paket)
+  // Qpack selection
   qpackCards.forEach(card=>{
-    card.addEventListener('click', ()=>{
-      state.qpack = card.getAttribute('data-qpack');
-      setActive(qpackCards, 'qpack', state.qpack);
+    card.addEventListener("click", ()=>{
+      state.qpack = card.getAttribute("data-qpack");
+      setActive(qpackCards, "qpack", state.qpack);
 
       const need = Number(state.qpack);
       if(state.selectedQ.size > need){
-        // trim (highest numbers removed)
         const sorted = Array.from(state.selectedQ).sort((a,b)=>a-b).slice(0, need);
         state.selectedQ = new Set(sorted);
       }
@@ -1015,14 +1081,59 @@
     });
   });
 
-  // relation type summary updates
-  relationType.addEventListener('change', calc);
-  relationOther.addEventListener('input', calc);
+  // relation summary updates
+  relationType.addEventListener("change", calc);
+  relationOther.addEventListener("input", calc);
 
-  // SEND
+  // ===== Payment instructions =====
+  // TODO: POPUNI SVOJ RAČUN / BANKU / PAYPAL
+  function getPaymentInstructions({method, totalRsd, orderId}) {
+    const BANK = {
+      recipient: "ASTRO ARIES STUDIO",
+      bank: "UPIŠI NAZIV BANKE",
+      account: "UPIŠI BROJ RAČUNA",
+      purpose: "Astro Aries Studio — izveštaj",
+    };
+    const PAYPAL = {
+      email: "astroariesstudio@gmail.com",
+      note: "Astro Aries Studio — izveštaj",
+      eurInfo: "Iznos u EUR: po dogovoru / po kursu"
+    };
+
+    if(method === "paypal"){
+      return {
+        hint: "Plaćanje putem PayPal-a (EUR)",
+        text:
+`PAYPAL INSTRUKCIJE
+PayPal: ${PAYPAL.email}
+Napomena: ${PAYPAL.note}
+Šifra porudžbine: ${orderId}
+
+${PAYPAL.eurInfo}
+
+Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
+      };
+    }
+
+    return {
+      hint: "Uplata na račun (RSD)",
+      text:
+`INSTRUKCIJE ZA UPLATU (RSD)
+Primalac: ${BANK.recipient}
+Banka: ${BANK.bank}
+Račun: ${BANK.account}
+Svrha uplate: ${BANK.purpose}
+Poziv na broj / Šifra porudžbine: ${orderId}
+
+Iznos: ${totalRsd.toLocaleString("sr-RS")} RSD
+
+Nakon uplate: pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`
+    };
+  }
+
+  // ===== Validation =====
   function validate(){
-    // custom: must confirm exact number before sending
-    if(state.service === 'custom'){
+    if(state.service === "custom"){
       const need = Number(state.qpack);
       if(state.selectedQ.size !== need){
         alert(`Za “Odaberi pitanja” moraš izabrati tačno ${need} pitanja i potvrditi izbor.`);
@@ -1030,32 +1141,32 @@
       }
     }
 
-    if(state.service === 'full'){
-      const sit = req(document.getElementById('situation').value);
+    if(state.service === "full"){
+      const sit = req(document.getElementById("situation").value);
       if(!sit){
         alert("Za “Natal + Predikcije” je obavezan kratak opis situacije (4–6 rečenica).");
         return false;
       }
     }
 
-    if(state.service === 'syn'){
+    if(state.service === "syn"){
       const rt = req(relationType.value);
       const other = req(relationOther.value);
       if(!rt) { alert("Izaberi tip odnosa (obavezno)."); return false; }
-      if(rt === 'Drugo' && !other){ alert("Upiši tip odnosa u polju “Drugo”."); return false; }
+      if(rt === "Drugo" && !other){ alert("Upiši tip odnosa u polju “Drugo”."); return false; }
 
-      const email = req(document.getElementById('synEmail').value);
+      const email = req(document.getElementById("synEmail").value);
       if(!email){ alert("Unesi email (kontakt) za sinastriju."); return false; }
 
-      const aName = req(document.getElementById('aName').value);
-      const aDate = req(document.getElementById('aDate').value);
-      const aTime = req(document.getElementById('aTime').value);
-      const aPlace = req(document.getElementById('aPlace').value);
+      const aName = req(document.getElementById("aName").value);
+      const aDate = req(document.getElementById("aDate").value);
+      const aTime = req(document.getElementById("aTime").value);
+      const aPlace = req(document.getElementById("aPlace").value);
 
-      const bName = req(document.getElementById('bName').value);
-      const bDate = req(document.getElementById('bDate').value);
-      const bTime = req(document.getElementById('bTime').value);
-      const bPlace = req(document.getElementById('bPlace').value);
+      const bName = req(document.getElementById("bName").value);
+      const bDate = req(document.getElementById("bDate").value);
+      const bTime = req(document.getElementById("bTime").value);
+      const bPlace = req(document.getElementById("bPlace").value);
 
       if(!(aName && aDate && aTime && aPlace && bName && bDate && bTime && bPlace)){
         alert("Za sinastriju su obavezni podaci za obe osobe (ime/inicijali, datum, vreme, mesto).");
@@ -1064,9 +1175,9 @@
       return true;
     }
 
-    // non-syn: main contact required
-    const fullName = req(document.getElementById('fullName').value);
-    const email = req(document.getElementById('email').value);
+    // non-syn
+    const fullName = req(document.getElementById("fullName").value);
+    const email = req(document.getElementById("email").value);
     if(!fullName || !email){
       alert("Molim te unesi ime i email.");
       return false;
@@ -1083,7 +1194,8 @@
     }).join("\n");
   }
 
-  sendBtn.addEventListener('click', (e)=>{
+  // ===== SEND (Formspree) =====
+  sendBtn.addEventListener("click", async (e)=>{
     e.preventDefault();
     if(!validate()) return;
 
@@ -1091,102 +1203,78 @@
     const add = addonPrice();
     const total = base + add;
 
-    const subject = `${serviceName(state.service)} — ${fmtRSD(total)}`;
-    const lines = [];
-    lines.push("ASTRO ARIES STUDIO — PORUDŽBINA");
-    lines.push("");
-    lines.push(`Usluga: ${serviceName(state.service)}`);
+    const orderId = "AA-" + Date.now().toString().slice(-8);
 
-    if(state.service === 'custom'){
-      lines.push(`Paket: ${state.qpack} pitanja`);
-      lines.push("");
-      lines.push(`Izabrana pitanja (${state.selectedQ.size}/${state.qpack}):`);
-      lines.push(pickedQuestionsText() || "-");
-      lines.push("");
+    const payload = {
+      orderId,
+      service: serviceName(state.service),
+      paymentMethod: payState.method,
+      totalRsd: total,
+
+      // Contact (one-person)
+      fullName: req(document.getElementById("fullName").value),
+      email: req(document.getElementById("email").value),
+      birthDate: req(document.getElementById("birthDate").value),
+      birthTime: req(document.getElementById("birthTime").value),
+      birthPlace: req(document.getElementById("birthPlace").value),
+      currentPlace: req(document.getElementById("currentPlace").value),
+      situation: req(document.getElementById("situation")?.value),
+
+      // Custom selected questions
+      qpack: state.qpack,
+      selectedQuestions: (state.service === "custom") ? pickedQuestionsText() : "",
+
+      // Sinastry
+      synEmail: req(document.getElementById("synEmail").value),
+      synOrderName: req(document.getElementById("synOrderName").value),
+      relationType: req(document.getElementById("relationType").value),
+      relationOther: req(document.getElementById("relationOther").value),
+      relFocus: req(document.getElementById("relFocus").value),
+      aName: req(document.getElementById("aName").value),
+      aDate: req(document.getElementById("aDate").value),
+      aTime: req(document.getElementById("aTime").value),
+      aPlace: req(document.getElementById("aPlace").value),
+      bName: req(document.getElementById("bName").value),
+      bDate: req(document.getElementById("bDate").value),
+      bTime: req(document.getElementById("bTime").value),
+      bPlace: req(document.getElementById("bPlace").value),
+
+      // Addon
+      addonOn: !!state.addonOn,
+      addonCount: Number(customCount.value || 0),
+      addonText: req(customText.value)
+    };
+
+    const oldText = sendBtn.textContent;
+    sendBtn.textContent = "Šaljem...";
+    sendBtn.style.pointerEvents = "none";
+
+    try{
+      const res = await fetch(FORMSPREE_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "Accept": "application/json" },
+        body: JSON.stringify(payload)
+      });
+
+      if(!res.ok) throw new Error("Formspree submit failed");
+
+      const pi = getPaymentInstructions({method: payState.method, totalRsd: total, orderId});
+      openSuccessModal(pi.hint, pi.text);
+
+    } catch(err){
+      alert("Greška pri slanju porudžbine. Proveri Formspree i pokušaj ponovo.");
+    } finally{
+      sendBtn.textContent = oldText;
+      sendBtn.style.pointerEvents = "";
     }
-
-    if(state.service === 'syn'){
-      const rt = req(relationType.value);
-      const other = req(relationOther.value);
-      const rel = (rt === 'Drugo') ? other : rt;
-
-      lines.push(`Tip odnosa: ${rel}`);
-      lines.push("");
-      lines.push("Kontakt:");
-      lines.push(`Email: ${req(document.getElementById('synEmail').value)}`);
-      lines.push(`Ime naručioca: ${req(document.getElementById('synOrderName').value) || "-"}`);
-      lines.push("");
-
-      lines.push("Osoba A:");
-      lines.push(`Ime: ${req(document.getElementById('aName').value)}`);
-      lines.push(`Datum: ${req(document.getElementById('aDate').value)}`);
-      lines.push(`Vreme: ${req(document.getElementById('aTime').value)}`);
-      lines.push(`Mesto: ${req(document.getElementById('aPlace').value)}`);
-      lines.push("");
-
-      lines.push("Osoba B:");
-      lines.push(`Ime: ${req(document.getElementById('bName').value)}`);
-      lines.push(`Datum: ${req(document.getElementById('bDate').value)}`);
-      lines.push(`Vreme: ${req(document.getElementById('bTime').value)}`);
-      lines.push(`Mesto: ${req(document.getElementById('bPlace').value)}`);
-      lines.push("");
-
-      lines.push("Fokus odnosa:");
-      lines.push(req(document.getElementById('relFocus').value) || "-");
-      lines.push("");
-    } else {
-      lines.push("");
-      lines.push("Kontakt:");
-      lines.push(`Ime i prezime: ${req(document.getElementById('fullName').value)}`);
-      lines.push(`Email: ${req(document.getElementById('email').value)}`);
-      lines.push("");
-      lines.push("Podaci rođenja:");
-      lines.push(`Datum: ${req(document.getElementById('birthDate').value) || "-"}`);
-      lines.push(`Vreme: ${req(document.getElementById('birthTime').value) || "-"}`);
-      lines.push(`Mesto: ${req(document.getElementById('birthPlace').value) || "-"}`);
-      lines.push(`Trenutno mesto: ${req(document.getElementById('currentPlace').value) || "-"}`);
-      lines.push("");
-
-      if(state.service === 'full'){
-        lines.push("Opis situacije (obavezno za Predikcije):");
-        lines.push(req(document.getElementById('situation').value) || "-");
-        lines.push("");
-      }
-    }
-
-    if(state.addonOn){
-      const cc = Number(customCount.value || 0);
-      lines.push("Konkretna pitanja (dodatak):");
-      lines.push(`Broj: ${cc}`);
-      lines.push(`Cena dodatka: ${fmtRSD(cc * PRICES.addonQ)}`);
-      lines.push("Tekst pitanja:");
-      lines.push(req(customText.value) || "-");
-      lines.push("");
-    } else {
-      lines.push("Konkretna pitanja (dodatak): Ne");
-      lines.push("");
-    }
-
-    lines.push("CENE:");
-    lines.push(`Osnovno: ${fmtRSD(base)}`);
-    lines.push(`Dodatak: ${fmtRSD(add)}`);
-    lines.push(`UKUPNO: ${fmtRSD(total)}`);
-    lines.push("");
-    lines.push("—");
-    lines.push("Poslato sa sajta Astro Aries Studio.");
-
-    const body = encodeURIComponent(lines.join("\n"));
-    window.location.href = `mailto:astroariesstudio@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
   });
 
-  // init
-  setActive(serviceCards, 'service', state.service);
-  setActive(qpackCards, 'qpack', state.qpack);
+  // Init
+  setActive(serviceCards, "service", state.service);
+  setActive(qpackCards, "qpack", state.qpack);
   toggleAddon(false);
   calc();
-
-  // build chips initially
-  // (chips are rendered in showModal)
+  stepTo(1);
 </script>
 
 </body>
