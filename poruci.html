@@ -12,8 +12,12 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23070711'/><text y='.9em' font-size='80' x='10'>♈</text></svg>" />
   <link rel="stylesheet" href="assets/style.css" />
 
-  <!-- EmailJS — auto-email klijentu (besplatno, 200/mesec) -->
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <!-- EmailJS konfiguracija — REST API (bez CDN zavisnosti) -->
+  <script>
+    window.EMAILJS_PUBLIC_KEY  = "FBVIVb3WRJKwjdxRK";
+    window.EMAILJS_SERVICE_ID  = "service_xo0mo4z";
+    window.EMAILJS_TEMPLATE_ID = "template_e0W7yor";
+  </script>
   <script>
     window.EMAILJS_PUBLIC_KEY  = "FBVIVb3WRJKwjdxRK";
     window.EMAILJS_SERVICE_ID  = "service_xo0mo4z";
@@ -1149,43 +1153,48 @@ Nakon uplate, pošalji potvrdu (screenshot) u odgovoru na email potvrdu.`;
     return true;
   }
 
-  // ===== Auto-email klijentu (EmailJS) =====
+  // ===== Auto-email klijentu (EmailJS REST API — bez CDN) =====
   async function sendClientEmail(data){
     try{
-      // Provjeri da li su EmailJS ključevi podešeni
-      if(!window.emailjs) return;
-      if(window.EMAILJS_PUBLIC_KEY === "OVDE_UNESI_PUBLIC_KEY") return;
-
-      // Inicijalizuj ako nije već
-      emailjs.init({ publicKey: window.EMAILJS_PUBLIC_KEY });
-
       const clientEmail = data.clientEmail || "";
       if(!clientEmail) return;
 
       const templateParams = {
         to_email:    clientEmail,
         to_name:     data.fullName || data.synOrderName || "Klijente",
-        usluga:      data.service,
+        usluga:      data.service  || "—",
         iznos:       fmtRSD(data.totalRsd),
-        datum:       data.birthDate  || (data.aDate ? `A: ${data.aDate} / B: ${data.bDate}` : "—"),
-        vreme:       data.birthTime  || (data.aTime ? `A: ${data.aTime} / B: ${data.bTime}` : "—"),
-        mesto:       data.birthPlace || (data.aPlace ? `A: ${data.aPlace} / B: ${data.bPlace}` : "—"),
+        datum:       data.birthDate  || (data.aDate  ? "A: " + data.aDate  + " / B: " + data.bDate  : "—"),
+        vreme:       data.birthTime  || (data.aTime  ? "A: " + data.aTime  + " / B: " + data.bTime  : "—"),
+        mesto:       data.birthPlace || (data.aPlace ? "A: " + data.aPlace + " / B: " + data.bPlace : "—"),
         pitanja:     data.selectedQuestions || "—",
-        addon:       data.addonText || "—",
+        addon:       data.addonText  || "—",
         primalac:    BANK.recipient,
         banka:       BANK.bank,
         racun:       BANK.account,
         svrha:       BANK.purpose,
       };
 
-      await emailjs.send(
-        window.EMAILJS_SERVICE_ID,
-        window.EMAILJS_TEMPLATE_ID,
-        templateParams
-      );
-      console.log("✅ Email potvrda poslata klijentu:", clientEmail);
+      // EmailJS REST API — ne zahteva SDK ni CDN
+      const res = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          service_id:      window.EMAILJS_SERVICE_ID,
+          template_id:     window.EMAILJS_TEMPLATE_ID,
+          user_id:         window.EMAILJS_PUBLIC_KEY,
+          template_params: templateParams
+        })
+      });
+
+      if(res.ok){
+        console.log("✅ Email potvrda poslata klijentu:", clientEmail);
+      } else {
+        const err = await res.text();
+        console.warn("EmailJS greška:", res.status, err);
+      }
     } catch(err){
-      console.warn("EmailJS (nije kritično):", err);
+      console.warn("EmailJS (nije kritično):", err.message);
     }
   }
 
