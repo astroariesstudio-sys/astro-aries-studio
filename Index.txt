@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Astro Aries Studio</title>
+
+<style>
+body{
+font-family: Arial, sans-serif;
+background:#0b0b12;
+color:white;
+margin:0;
+text-align:center;
+}
+
+.hero{
+padding:80px 20px;
+}
+
+h1{
+font-size:48px;
+}
+
+.btn{
+background:#c6a96b;
+color:black;
+padding:15px 25px;
+text-decoration:none;
+border-radius:8px;
+font-weight:bold;
+display:inline-block;
+margin-top:20px;
+}
+
+.section{
+padding:60px 20px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+<h1>Knjiga o Vama</h1>
+<p>Vi ste glavni glumac u režiji planeta.</p>
+<a class="btn" href="#order">Poruči analizu</a>
+</div>
+
+<div class="section">
+<h2>Astro Aries Studio</h2>
+<p>Personalizovana astrološka analiza u formi profesionalne knjige.</p>
+</div>
+
+<div class="section" id="order">
+<h2>Poručivanje</h2>
+<p>Pošaljite email:</p>
+<p><b>astroariesstudio@gmail.com</b></p>
+</div>
+
+</body>
+</html>
