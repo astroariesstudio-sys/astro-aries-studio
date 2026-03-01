@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Poruči — Astro Aries Studio</title>
+  <link rel="stylesheet" href="assets/style.css" />
+</head>
+<body>
+
+<div class="shooting-star"></div>
+
+<header>
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo.png" alt="Astro Aries Studio logo" />
+      <div class="title">ASTRO <span>ARIES</span> STUDIO</div>
+    </a>
+
+    <nav class="navlinks">
+      <a href="index.html">Početna</a>
+      <a href="usluge.html">Usluge</a>
+      <a href="metod.html">Metod</a>
+      <a href="primer.html">Primer</a>
+      <a href="poruci.html">Poruči</a>
+    </nav>
+
+    <div class="cta">
+      <a class="btn" href="primer.html">Primer PDF</a>
+      <a class="btn primary" href="poruci.html">Poruči</a>
+    </div>
+  </div>
+</header>
+
+<main class="container">
+  <section class="hero">
+    <div class="heroCard">
+      <svg class="sparkles" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <defs>
+          <radialGradient id="sp" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(255,255,255,.9)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+          </radialGradient>
+        </defs>
+        <circle cx="40" cy="30" r="1.4" fill="rgba(255,255,255,.55)"/>
+        <circle cx="90" cy="70" r="1.1" fill="rgba(255,255,255,.45)"/>
+        <circle cx="160" cy="40" r="1.6" fill="rgba(198,169,107,.35)"/>
+        <circle cx="220" cy="90" r="1.2" fill="rgba(255,255,255,.42)"/>
+        <circle cx="310" cy="55" r="1.0" fill="rgba(255,255,255,.38)"/>
+        <circle cx="380" cy="105" r="1.4" fill="rgba(160,120,255,.22)"/>
+        <circle cx="460" cy="60" r="1.1" fill="rgba(255,255,255,.35)"/>
+        <circle cx="520" cy="95" r="1.6" fill="rgba(198,169,107,.28)"/>
+        <circle cx="560" cy="40" r="1.0" fill="rgba(255,255,255,.30)"/>
+        <circle cx="170" cy="160" r="20" fill="url(#sp)" opacity=".25"/>
+        <circle cx="420" cy="170" r="26" fill="url(#sp)" opacity=".18"/>
+      </svg>
+
+      <svg class="zodiacRing" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle class="ringOuter" cx="300" cy="300" r="245" fill="none"/>
+        <circle class="ringMid"   cx="300" cy="300" r="210" fill="none"/>
+        <circle class="ringInner" cx="300" cy="300" r="175" fill="none"/>
+        <circle class="ringInner" cx="300" cy="300" r="140" fill="none" opacity=".65"/>
+
+        <g>
+          <path class="tick" d="M300 48 L300 84"/>
+          <path class="tick" d="M432 84 L410 114"/>
+          <path class="tick" d="M516 168 L486 188"/>
+          <path class="tick" d="M552 300 L516 300"/>
+          <path class="tick" d="M516 432 L486 412"/>
+          <path class="tick" d="M432 516 L410 486"/>
+          <path class="tick" d="M300 552 L300 516"/>
+          <path class="tick" d="M168 516 L190 486"/>
+          <path class="tick" d="M84 432 L114 412"/>
+          <path class="tick" d="M48 300 L84 300"/>
+          <path class="tick" d="M84 168 L114 188"/>
+          <path class="tick" d="M168 84 L190 114"/>
+        </g>
+
+        <g opacity=".9">
+          <path class="tickSmall" d="M365 66 L356 90"/>
+          <path class="tickSmall" d="M468 136 L446 154"/>
+          <path class="tickSmall" d="M536 236 L512 242"/>
+          <path class="tickSmall" d="M536 364 L512 358"/>
+          <path class="tickSmall" d="M468 464 L446 446"/>
+          <path class="tickSmall" d="M365 534 L356 510"/>
+          <path class="tickSmall" d="M235 534 L242 510"/>
+          <path class="tickSmall" d="M136 464 L154 446"/>
+          <path class="tickSmall" d="M66 365 L90 356"/>
+          <path class="tickSmall" d="M66 235 L90 244"/>
+          <path class="tickSmall" d="M136 136 L154 156"/>
+          <path class="tickSmall" d="M235 66 L244 90"/>
+        </g>
+
+        <g>
+          <circle class="dot" cx="300" cy="95" r="2.2"/>
+          <circle class="dot" cx="420" cy="125" r="1.7"/>
+          <circle class="goldDot" cx="505" cy="215" r="2.2"/>
+          <circle class="dot" cx="505" cy="385" r="1.6"/>
+          <circle class="goldDot" cx="420" cy="475" r="2.1"/>
+          <circle class="dot" cx="300" cy="505" r="1.6"/>
+          <circle class="dot" cx="180" cy="475" r="1.8"/>
+          <circle class="goldDot" cx="95" cy="385" r="2.0"/>
+          <circle class="dot" cx="95" cy="215" r="1.6"/>
+          <circle class="dot" cx="180" cy="125" r="1.7"/>
+        </g>
+
+        <g text-anchor="middle" dominant-baseline="middle" font-size="22">
+          <text class="glyph" x="300" y="112">♈</text>
+          <text class="glyph" x="392" y="138">♉</text>
+          <text class="glyph" x="468" y="214">♊</text>
+          <text class="glyph" x="492" y="300">♋</text>
+          <text class="glyph" x="468" y="388">♌</text>
+          <text class="glyph" x="392" y="464">♍</text>
+          <text class="glyph" x="300" y="490">♎</text>
+          <text class="glyph" x="210" y="464">♏</text>
+          <text class="glyph" x="134" y="388">♐</text>
+          <text class="glyph" x="110" y="300">♑</text>
+          <text class="glyph" x="134" y="214">♒</text>
+          <text class="glyph" x="210" y="138">♓</text>
+        </g>
+
+        <!-- central star -->
+        <circle class="pulseStar" cx="300" cy="300" r="6" fill="rgba(245,226,182,.95)"/>
+        <circle cx="300" cy="300" r="22" fill="rgba(198,169,107,.10)"/>
+      </svg>
+
+      <div class="kicker">PORUČIVANJE</div>
+      <hr class="hr-astro" />
+      <h1>Izaberite svoj format knjige.<br/>Mi je pretvaramo u jasnu životnu mapu.</h1>
+      <p class="subhead">
+        Dva režima: <b>Kompletna knjiga</b> (full analiza) ili <b>Kreiraj svoju knjigu</b> (izaberite teme).
+        Cena se računa automatski, a porudžbina se šalje na email.
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="formTitle">
+      <div>
+        <div class="kicker">KONFIGURATOR</div>
+        <h2 style="margin:8px 0 0">Porudžbina — PRO verzija</h2>
+        <p class="small" style="margin:8px 0 0">
+          Popunite osnovne podatke, izaberite režim i opcije. Na kraju kliknite “Pošalji porudžbinu”.
+        </p>
+      </div>
+
+      <div class="steps" aria-hidden="true">
+        <div class="stepPill active">1) Režim</div>
+        <div class="stepPill active">2) Podaci</div>
+        <div class="stepPill active">3) Pregled</div>
+      </div>
+    </div>
+
+    <div class="formWrap">
+
+      <!-- LEFT: FORM -->
+      <div>
+
+        <!-- MODE -->
+        <div class="fieldset">
+          <div class="legend">
+            <b>1) Izaberite režim</b>
+            <span class="hint">Full knjiga ili izbor tema</span>
+          </div>
+
+          <div class="radioGrid" id="modeGrid">
+
+            <label class="radioCard active" data-mode="full">
+              <input type="radio" name="mode" value="full" checked />
+              <div class="radioTop">
+                <div class="radioName">Kompletna knjiga</div>
+                <span class="badgeGold">Preporučeno</span>
+              </div>
+              <div class="radioDesc">
+                Vi dobijate komplet: natal + struktura + periodi (zavisno od paketa). Bez biranja 84 teme —
+                to je već obuhvaćeno u full analizi.
+              </div>
+              <div class="radioPrice">Birate paket (2.000 / 3.500 / 1.500 / 3.500)</div>
+            </label>
+
+            <label class="radioCard" data-mode="customBook">
+              <input type="radio" name="mode" value="customBook" />
+              <div class="radioTop">
+                <div class="radioName">Kreiraj svoju knjigu</div>
+                <span class="badgeGold">Vi birate teme</span>
+              </div>
+              <div class="radioDesc">
+                Idealno ako želite fokus: izaberite paket pitanja (3/5/10) i upišite teme ili brojeve iz liste.
+              </div>
+              <div class="radioPrice">Paketi: 3 / 5 / 10 pitanja</div>
+            </label>
+
+          </div>
+        </div>
+
+        <!-- FULL PACKAGES -->
+        <div class="fieldset" id="fullSection">
+          <div class="legend">
+            <b>2) Paket (Kompletna knjiga)</b>
+            <span class="hint">Odaberite jednu uslugu</span>
+          </div>
+
+          <div class="radioGrid" id="serviceGrid">
+            <label class="radioCard active" data-service="natal">
+              <input type="radio" name="service" value="natal" checked />
+              <div class="radioTop">
+                <div class="radioName">Natalna knjiga</div>
+                <span class="badgeGold">PDF</span>
+              </div>
+              <div class="radioDesc">Dubinska natalna analiza u formi profesionalne knjige.</div>
+              <div class="radioPrice">2.000 RSD</div>
+            </label>
+
+            <label class="radioCard" data-service="full">
+              <input type="radio" name="service" value="full" />
+              <div class="radioTop">
+                <div class="radioName">Natal + Predikcije</div>
+                <span class="badgeGold">Top</span>
+              </div>
+              <div class="radioDesc">Najkompletnija opcija: natal + ključni periodi i aktivacije.</div>
+              <div class="radioPrice">3.500 RSD</div>
+            </label>
+
+            <label class="radioCard" data-service="pred">
+              <input type="radio" name="service" value="pred" />
+              <div class="radioTop">
+                <div class="radioName">Samo predikcije</div>
+                <span class="badgeGold">Periodi</span>
+              </div>
+              <div class="radioDesc">Fokus na vremenskim periodima (ako natal već imate).</div>
+              <div class="radioPrice">1.500 RSD</div>
+            </label>
+
+            <label class="radioCard" data-service="syn">
+              <input type="radio" name="service" value="syn" />
+              <div class="radioTop">
+                <div class="radioName">Sinastrija</div>
+                <span class="badgeGold">Odnos</span>
+              </div>
+              <div class="radioDesc">Uporedni horoskop: dinamika, potencijal i okidači odnosa.</div>
+              <div class="radioPrice">3.500 RSD</div>
+            </label>
+          </div>
+
+          <div class="inlineNote">
+            <b>Napomena za kvalitet:</b> Kod paketa <b>Natal + Predikcije</b> potreban je kratak opis vaše trenutne situacije
+            (veza/brak, posao, promene, dileme), da bi predikcije bile precizne i vezane za realan život.
+          </div>
+        </div>
+
+        <!-- CUSTOM BOOK (choose themes) -->
+        <div class="fieldset" id="customBookSection" style="display:none">
+          <div class="legend">
+            <b>2) Paket pitanja (Kreiraj svoju knjigu)</b>
+            <span class="hint">Birate fokus i dubinu</span>
+          </div>
+
+          <div class="radioGrid" id="qPackGrid">
+            <label class="radioCard active" data-qpack="3">
+              <input type="radio" name="qpack" value="3" checked />
+              <div class="radioTop">
+                <div class="radioName">3 pitanja</div>
+                <span class="badgeGold">brzi uvid</span>
+              </div>
+              <div class="radioDesc">Za jednu temu / jednu dilemu — fokusirano i jasno.</div>
+              <div class="radioPrice">900 RSD</div>
+            </label>
+
+            <label class="radioCard" data-qpack="5">
+              <input type="radio" name="qpack" value="5" />
+              <div class="radioTop">
+                <div class="radioName">5 pitanja</div>
+                <span class="badgeGold">najtraženije</span>
+              </div>
+              <div class="radioDesc">Najbolji balans: dobijate mini-knjigu po vašem izboru.</div>
+              <div class="radioPrice">1.400 RSD</div>
+            </label>
+
+            <label class="radioCard" data-qpack="10">
+              <input type="radio" name="qpack" value="10" />
+              <div class="radioTop">
+                <div class="radioName">10 pitanja</div>
+                <span class="badgeGold">dubinski</span>
+              </div>
+              <div class="radioDesc">Širi obuhvat: više životnih oblasti i detaljniji uvid.</div>
+              <div class="radioPrice">2.400 RSD</div>
+            </label>
+
+            <label class="radioCard" data-qpack="custom">
+              <input type="radio" name="qpack" value="custom" />
+              <div class="radioTop">
+                <div class="radioName">Po dogovoru</div>
+                <span class="badgeGold">flex</span>
+              </div>
+              <div class="radioDesc">Ako želite specifičan broj pitanja (npr. 7), napišite u napomeni.</div>
+              <div class="radioPrice">Cena po dogovoru</div>
+            </label>
+          </div>
+
+          <div class="row" style="margin-top:10px">
+            <div>
+              <label>Teme koje birate (opisno)</label>
+              <textarea id="themesText" placeholder="Npr: ljubav/brak, posao i promene, finansije, preseljenje, zdravlje..."></textarea>
+            </div>
+            <div>
+              <label>Brojevi pitanja (ako koristite listu 84)</label>
+              <textarea id="qNumbers" placeholder="Npr: 3, 7, 12, 25, 41 ..."></textarea>
+              <div class="small" style="margin-top:8px">
+                Ako ne znate brojeve — samo opišite teme, ja ću ih mapirati na vašu knjigu.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ADD: Specific custom questions -->
+        <div class="fieldset">
+          <div class="legend">
+            <b>3) Specifična pitanja za vašu situaciju</b>
+            <span class="hint">opciono (custom)</span>
+          </div>
+
+          <div class="toggleRow">
+            <div>
+              <div style="font-weight:900">Dodaj “moja pitanja” (custom)</div>
+              <div class="small">Za konkretne dileme koje želite da obradimo direktno (500 RSD po pitanju).</div>
+            </div>
+            <div class="switch" id="customSwitch" role="switch" aria-checked="false" tabindex="0"></div>
+          </div>
+
+          <div id="customQuestionsBox" style="display:none; margin-top:10px">
+            <div class="row">
+              <div>
+                <label>Broj custom pitanja</label>
+                <select id="customCount">
+                  <option value="0">0</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div>
+                <label>Vaša pitanja (upišite jasno)</label>
+                <textarea id="customText" placeholder="1) ...&#10;2) ...&#10;3) ..."></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CLIENT DATA -->
+        <div class="fieldset">
+          <div class="legend">
+            <b>4) Podaci za izradu</b>
+            <span class="hint">osnovno + situacija</span>
+          </div>
+
+          <div class="row">
+            <div>
+              <label>Ime i prezime</label>
+              <input id="fullName" type="text" placeholder="Npr: Ana Petrović" />
+            </div>
+            <div>
+              <label>Email (kontakt)</label>
+              <input id="email" type="email" placeholder="Npr: ana@gmail.com" />
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:10px">
+            <div>
+              <label>Datum rođenja</label>
+              <input id="birthDate" type="text" placeholder="DD.MM.GGGG" />
+            </div>
+            <div>
+              <label>Vreme rođenja</label>
+              <input id="birthTime" type="text" placeholder="HH:MM (npr 06:30)" />
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:10px">
+            <div>
+              <label>Mesto rođenja</label>
+              <input id="birthPlace" type="text" placeholder="Grad, država (npr Stuttgart, DE)" />
+            </div>
+            <div>
+              <label>Trenutno mesto (opciono)</label>
+              <input id="currentPlace" type="text" placeholder="Npr: Novi Sad, RS" />
+            </div>
+          </div>
+
+          <div style="margin-top:10px">
+            <label>Kratak opis situacije (važan za kvalitet)</label>
+            <textarea id="situation" placeholder="Npr: veza/brak, posao, promene, šta vas najviše zanima trenutno..."></textarea>
+            <div class="small" style="margin-top:8px">
+              Ovo nije “dodatna usluga” — ovo je smernica da analiza bude precizna i realno korisna.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: SUMMARY -->
+      <aside class="summary">
+        <div class="sumBox">
+          <div class="sumTitle">
+            <b>Pregled porudžbine</b>
+            <span class="badgeGold" id="modeBadge">Kompletna knjiga</span>
+          </div>
+
+          <div class="sumLine">
+            <span>Izabrano</span>
+            <span id="chosenLabel">Natalna knjiga</span>
+          </div>
+
+          <div class="sumLine">
+            <span>Osnovna cena</span>
+            <span id="basePrice">2.000 RSD</span>
+          </div>
+
+          <div class="sumLine">
+            <span>Custom pitanja</span>
+            <span id="customPrice">0 RSD</span>
+          </div>
+
+          <div class="total">
+            <div class="small">Ukupno</div>
+            <div class="big" id="totalPrice">2.000 RSD</div>
+          </div>
+
+          <div class="actionsRow">
+            <a class="btn primary" href="#" id="sendBtn">Pošalji porudžbinu</a>
+            <a class="btn" href="index.html">Nazad</a>
+          </div>
+
+          <div class="small" style="margin-top:10px">
+            Klikom na “Pošalji porudžbinu” otvara se email sa svim podacima spremnim za slanje.
+          </div>
+        </div>
+      </aside>
+
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="container" style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap">
+    <div>© <span id="y"></span> Astro Aries Studio</div>
+    <div><a href="mailto:astroariesstudio@gmail.com">astroariesstudio@gmail.com</a></div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById("y").textContent = new Date().getFullYear();
+
+  const PRICES = {
+    services: { natal: 2000, full: 3500, pred: 1500, syn: 3500 },
+    qpacks: { "3": 900, "5": 1400, "10": 2400, "custom": 0 },
+    customQ: 500
+  };
+
+  const modeCards = document.querySelectorAll('[data-mode]');
+  const serviceCards = document.querySelectorAll('[data-service]');
+  const qpackCards = document.querySelectorAll('[data-qpack]');
+
+  const fullSection = document.getElementById('fullSection');
+  const customBookSection = document.getElementById('customBookSection');
+
+  const modeBadge = document.getElementById('modeBadge');
+  const chosenLabel = document.getElementById('chosenLabel');
+  const basePriceEl = document.getElementById('basePrice');
+  const customPriceEl = document.getElementById('customPrice');
+  const totalPriceEl = document.getElementById('totalPrice');
+
+  const customSwitch = document.getElementById('customSwitch');
+  const customBox = document.getElementById('customQuestionsBox');
+  const customCount = document.getElementById('customCount');
+  const customText = document.getElementById('customText');
+
+  const themesText = document.getElementById('themesText');
+  const qNumbers = document.getElementById('qNumbers');
+
+  const sendBtn = document.getElementById('sendBtn');
+
+  let state = {
+    mode: 'full',
+    service: 'natal',
+    qpack: '3',
+    customOn: false,
+    customCount: 0
+  };
+
+  function fmtRSD(n){
+    if(!n) return "0 RSD";
+    return n.toLocaleString('sr-RS') + " RSD";
+  }
+
+  function setActive(cards, key, val){
+    cards.forEach(c=>{
+      const v = c.getAttribute(`data-${key}`);
+      c.classList.toggle('active', v === val);
+      const input = c.querySelector('input');
+      if(input) input.checked = (v === val);
+    });
+  }
+
+  function updateModeUI(){
+    if(state.mode === 'full'){
+      modeBadge.textContent = 'Kompletna knjiga';
+      fullSection.style.display = '';
+      customBookSection.style.display = 'none';
+      chosenLabel.textContent = serviceLabel(state.service);
+    } else {
+      modeBadge.textContent = 'Kreiraj svoju knjigu';
+      fullSection.style.display = 'none';
+      customBookSection.style.display = '';
+      chosenLabel.textContent = qpackLabel(state.qpack);
+    }
+  }
+
+  function serviceLabel(s){
+    if(s==='natal') return 'Natalna knjiga';
+    if(s==='full') return 'Natal + Predikcije';
+    if(s==='pred') return 'Samo predikcije';
+    if(s==='syn') return 'Sinastrija';
+    return 'Usluga';
+  }
+
+  function qpackLabel(q){
+    if(q==='3') return 'Kreiraj knjigu — 3 pitanja';
+    if(q==='5') return 'Kreiraj knjigu — 5 pitanja';
+    if(q==='10') return 'Kreiraj knjigu — 10 pitanja';
+    return 'Kreiraj knjigu — po dogovoru';
+  }
+
+  function calc(){
+    const base =
+      state.mode === 'full'
+        ? PRICES.services[state.service]
+        : PRICES.qpacks[state.qpack];
+
+    const cust = state.customOn ? (Number(state.customCount) * PRICES.customQ) : 0;
+    const total = base + cust;
+
+    basePriceEl.textContent = fmtRSD(base);
+    customPriceEl.textContent = fmtRSD(cust);
+    totalPriceEl.textContent = fmtRSD(total);
+
+    updateModeUI();
+  }
+
+  // Mode click
+  modeCards.forEach(card=>{
+    card.addEventListener('click', ()=>{
+      state.mode = card.getAttribute('data-mode');
+      setActive(modeCards, 'mode', state.mode);
+      calc();
+    });
+  });
+
+  // Service click
+  serviceCards.forEach(card=>{
+    card.addEventListener('click', ()=>{
+      state.service = card.getAttribute('data-service');
+      setActive(serviceCards, 'service', state.service);
+      calc();
+    });
+  });
+
+  // QPack click
+  qpackCards.forEach(card=>{
+    card.addEventListener('click', ()=>{
+      state.qpack = card.getAttribute('data-qpack');
+      setActive(qpackCards, 'qpack', state.qpack);
+      calc();
+    });
+  });
+
+  // Custom switch
+  function toggleCustom(on){
+    state.customOn = on;
+    customSwitch.classList.toggle('on', on);
+    customSwitch.setAttribute('aria-checked', on ? 'true' : 'false');
+    customBox.style.display = on ? '' : 'none';
+    if(!on){
+      customCount.value = "0";
+      state.customCount = 0;
+      customText.value = "";
+    }
+    calc();
+  }
+
+  customSwitch.addEventListener('click', ()=> toggleCustom(!state.customOn));
+  customSwitch.addEventListener('keydown', (e)=>{
+    if(e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleCustom(!state.customOn);
+    }
+  });
+
+  customCount.addEventListener('change', ()=>{
+    state.customCount = Number(customCount.value);
+    calc();
+  });
+
+  // Mailto send
+  sendBtn.addEventListener('click', (e)=>{
+    e.preventDefault();
+
+    const fullName = (document.getElementById('fullName').value || '').trim();
+    const email = (document.getElementById('email').value || '').trim();
+
+    const birthDate = (document.getElementById('birthDate').value || '').trim();
+    const birthTime = (document.getElementById('birthTime').value || '').trim();
+    const birthPlace = (document.getElementById('birthPlace').value || '').trim();
+    const currentPlace = (document.getElementById('currentPlace').value || '').trim();
+    const situation = (document.getElementById('situation').value || '').trim();
+
+    if(!fullName || !email){
+      alert("Molim vas unesite ime i email.");
+      return;
+    }
+
+    let subject = "Porudžbina — Astro Aries Studio";
+    let lines = [];
+
+    lines.push("ASTRO ARIES STUDIO — PORUDŽBINA");
+    lines.push("");
+    lines.push("Kontakt:");
+    lines.push(`Ime i prezime: ${fullName}`);
+    lines.push(`Email: ${email}`);
+    lines.push("");
+    lines.push("Podaci rođenja:");
+    lines.push(`Datum: ${birthDate || "-"}`);
+    lines.push(`Vreme: ${birthTime || "-"}`);
+    lines.push(`Mesto: ${birthPlace || "-"}`);
+    lines.push(`Trenutno mesto: ${currentPlace || "-"}`);
+    lines.push("");
+
+    if(state.mode === "full"){
+      lines.push("Režim: KOMPLETNA KNJIGA");
+      lines.push(`Paket: ${serviceLabel(state.service)}`);
+      lines.push(`Osnovna cena: ${fmtRSD(PRICES.services[state.service])}`);
+      lines.push("");
+      lines.push("Napomena (situacija / fokus):");
+      lines.push(situation || "-");
+    } else {
+      lines.push("Režim: KREIRAJ SVOJU KNJIGU");
+      lines.push(`Paket pitanja: ${qpackLabel(state.qpack)}`);
+      lines.push(`Osnovna cena: ${fmtRSD(PRICES.qpacks[state.qpack])}`);
+      lines.push("");
+      lines.push("Tеме (opisno):");
+      lines.push((themesText.value || "").trim() || "-");
+      lines.push("");
+      lines.push("Brojevi pitanja (ako imate listu 84):");
+      lines.push((qNumbers.value || "").trim() || "-");
+      lines.push("");
+      lines.push("Napomena (situacija / fokus):");
+      lines.push(situation || "-");
+    }
+
+    lines.push("");
+    if(state.customOn){
+      const cc = Number(customCount.value || 0);
+      lines.push("Specifična custom pitanja:");
+      lines.push(`Broj: ${cc}`);
+      lines.push(`Cena: ${fmtRSD(cc * PRICES.customQ)}`);
+      lines.push("");
+      lines.push("Tekst pitanja:");
+      lines.push((customText.value || "").trim() || "-");
+      lines.push("");
+    } else {
+      lines.push("Specifična custom pitanja: Ne");
+      lines.push("");
+    }
+
+    // totals
+    const base = state.mode === 'full' ? PRICES.services[state.service] : PRICES.qpacks[state.qpack];
+    const cust = state.customOn ? (Number(customCount.value) * PRICES.customQ) : 0;
+    const total = base + cust;
+
+    lines.push("UKUPNO:");
+    lines.push(`Osnovno: ${fmtRSD(base)}`);
+    lines.push(`Custom: ${fmtRSD(cust)}`);
+    lines.push(`Ukupno: ${fmtRSD(total)}`);
+    lines.push("");
+    lines.push("—");
+    lines.push("Poslato sa sajta Astro Aries Studio.");
+
+    const body = encodeURIComponent(lines.join("\n"));
+    const mailto = `mailto:astroariesstudio@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+    window.location.href = mailto;
+  });
+
+  // init
+  setActive(modeCards, 'mode', state.mode);
+  setActive(serviceCards, 'service', state.service);
+  setActive(qpackCards, 'qpack', state.qpack);
+  toggleCustom(false);
+  calc();
+</script>
+
+</body>
+</html>
